@@ -3,6 +3,7 @@
 基于Webpack的vue的脚手架
 
 ### 文档结构
+
  ![image](http://www.umetrip.com/gitImg/tree.png)
  
 * build    ...........................webpack配置值
