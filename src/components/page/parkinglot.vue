@@ -109,16 +109,16 @@
                   </div>
 
                   <div class="payContentBlock">
-                    <div class="payContentBlockItem payContentBlockLeft textMiddle">每30分钟</div>
+                    <div class="payContentBlockItem payContentBlockLeft textMiddle">每15分钟</div>
                     <div class="payContentBlockItem">小型车19座以下（含）<div>2.5元</div></div>
                     <div class="payContentBlockItem payContentBlockRight">大型车19座以上<div>5元</div></div>
                   </div>
 
                   <div class="payContentBlock  payContentBlockColumn">
                     <div>备注：</div>
-                    <div>1、停车不足半小时按半小时计；</div>
+                    <div>1、停车不足15分钟不收取费用。</div>
                     <div>2、物价监督电话：12358；</div>
-                    <div>3、服务单位监督电话：64535811。</div>
+                    <div>3、服务监督电话：64535811。</div>
                   </div>
                 </div>
               </div>
@@ -143,7 +143,7 @@
 
                   <div class="payContentBlock  payContentBlockColumn">
                     <div>备注：</div>
-                    <div>1、长期停车为连续停放16小时以上车辆；</div>
+                    <div>1、长期停车为连续停放8小时以上车辆；</div>
                     <div>2、首都机场保留优惠价格的解释权和调整权。</div>
                   </div>
                 </div>
@@ -170,11 +170,6 @@
                   </div>
 
                   <div class="payContentItem">
-                    <span class="payLabel">首次</span>
-                    <v-select :on-change="calc2" class="payInput" :value.sync="firsttype2" :options="firstTypeList2" ></v-select>
-                  </div>
-
-                  <div class="payContentItem">
                     <span class="payLabel">天数</span>
                     <Input class="payInput" v-model="days2" @on-change="calc2" placeholder="" number></Input>
                   </div>
@@ -197,46 +192,24 @@
 
                   <div class="payContentBlock">
                     <div class="payContentBlockItem payContentBlockLeft">停车时间</div>
-                    <div class="payContentBlockItem " style="text-align:left;border-right:0;"></div>
-                    <div class="payContentBlockItem payContentBlockRight" style="text-align:center;border-right:0;border-left:0;">车型</div>
-                    <div class="payContentBlockItem " style="text-align:left;border-left:0;"></div>
-                  </div>
-
-
-                  <div class="payContentBlock">
-                    <div class="payContentBlockItem payContentBlockLeft textMiddle"></div>
-                    <div class="payContentBlockItem">小型车19座以下（含）<div>首次</div></div>
-                    <div class="payContentBlockItem">小型车19座以下（含）<div>非首次</div></div>
-                    <div class="payContentBlockItem payContentBlockRight">大型车19座以上</div>
+                    <div class="payContentBlockItem payContentBlockRight" style="text-align:right;border-right:0;">车</div>
+                    <div class="payContentBlockItem " style="text-align:left;border-left:0;">型</div>
                   </div>
 
                   <div class="payContentBlock">
-                    <div class="payContentBlockItem payContentBlockLeft">30分钟以内</div>
-                    <div class="payContentBlockItem ">0元</div>
-                    <div class="payContentBlockItem">5元</div>
-                    <div class="payContentBlockItem payContentBlockRight">5元</div>
-                  </div>
-
-                  <div class="payContentBlock">
-                    <div class="payContentBlockItem payContentBlockLeft">30-60分钟</div>
-                    <div class="payContentBlockItem">6元</div>
-                    <div class="payContentBlockItem">5元</div>
-                    <div class="payContentBlockItem payContentBlockRight">5元</div>
-                  </div>
-
-                  <div class="payContentBlock">
-                    <div class="payContentBlockItem payContentBlockLeft">以后每30分钟</div>
-                    <div class="payContentBlockItem">5元</div>
-                    <div class="payContentBlockItem">5元</div>
-                    <div class="payContentBlockItem payContentBlockRight">10元</div>
+                    <div class="payContentBlockItem payContentBlockLeft textMiddle">每15分钟</div>
+                    <div class="payContentBlockItem">小型车19座以下（含）<div>2.5元</div></div>
+                    <div class="payContentBlockItem payContentBlockRight">大型车19座以上<div>5元</div></div>
                   </div>
 
 
                   <div class="payContentBlock  payContentBlockColumn">
                     <div>备注：</div>
-                    <div>1、停车不足半小时按半小时计；</div>
-                    <div>2、物价监督电话：12358；</div>
-                    <div>3、服务单位监督电话：64535811。</div>
+                    <div>1、停车时间不足15分钟不收取费用。</div>
+                    <div>2、24小时内首次入场小型车，额外享受停车前16分钟免费优惠。</div>
+                    <div>3、物价监督电话：12358。</div>
+                    <div>4、服务监督电话：64535811。</div>
+                    <div>5、首都机场保留优惠价格的解释权和调整权。</div>
                   </div>
                 </div>
               </div>
@@ -256,7 +229,7 @@
                   <div class="payContentBlock">
                     <div class="payContentBlockItem payContentBlockLeft textMiddle">每天</div>
                     <div class="payContentBlockItem">小型车19座以下（含）<div>80元</div></div>
-                    <div class="payContentBlockItem payContentBlockRight">大型车19座以上<div>160元</div></div>
+                    <div class="payContentBlockItem payContentBlockRight">大型车19座以上<div>160元</div><div>（仅限F1、F2）</div></div>
                   </div>
 
                   <div class="payContentBlock  payContentBlockColumn">
@@ -289,11 +262,6 @@
                   </div>
 
                   <div class="payContentItem">
-                    <span class="payLabel">首次</span>
-                      <v-select :on-change="calc3" class="payInput"  :value.sync="firsttype3" :options="firstTypeList3" ></v-select>
-                  </div>
-
-                  <div class="payContentItem">
                     <span class="payLabel">天数</span>
                     <Input class="payInput" v-model="days3" @on-change="calc3" placeholder="" number></Input>
                   </div>
@@ -316,46 +284,24 @@
 
                   <div class="payContentBlock">
                     <div class="payContentBlockItem payContentBlockLeft">停车时间</div>
-                    <div class="payContentBlockItem " style="text-align:left;border-right:0;"></div>
-                    <div class="payContentBlockItem payContentBlockRight" style="text-align:center;border-right:0;border-left:0;">车型</div>
-                    <div class="payContentBlockItem " style="text-align:left;border-left:0;"></div>
+                    <div class="payContentBlockItem payContentBlockRight" style="text-align:right;border-right:0;">车</div>
+                    <div class="payContentBlockItem " style="text-align:left;border-left:0;">型</div>
                   </div>
 
 
                   <div class="payContentBlock">
-                    <div class="payContentBlockItem payContentBlockLeft textMiddle"></div>
-                    <div class="payContentBlockItem">小型车19座以下（含）<div>首次</div></div>
-                    <div class="payContentBlockItem">小型车19座以下（含）<div>非首次</div></div>
-                    <div class="payContentBlockItem payContentBlockRight">大型车19座以上</div>
+                    <div class="payContentBlockItem payContentBlockLeft textMiddle">每15分钟</div>
+                    <div class="payContentBlockItem">小型车19座以下（含）<div>2.5元</div></div>
+                    <div class="payContentBlockItem payContentBlockRight">大型车19座以上<div>5元</div></div>
                   </div>
-
-                  <div class="payContentBlock">
-                    <div class="payContentBlockItem payContentBlockLeft">30分钟以内</div>
-                    <div class="payContentBlockItem ">0元</div>
-                    <div class="payContentBlockItem">5元</div>
-                    <div class="payContentBlockItem payContentBlockRight">5元</div>
-                  </div>
-
-                  <div class="payContentBlock">
-                    <div class="payContentBlockItem payContentBlockLeft">30-60分钟</div>
-                    <div class="payContentBlockItem">6元</div>
-                    <div class="payContentBlockItem">5元</div>
-                    <div class="payContentBlockItem payContentBlockRight">5元</div>
-                  </div>
-
-                  <div class="payContentBlock">
-                    <div class="payContentBlockItem payContentBlockLeft">以后每30分钟</div>
-                    <div class="payContentBlockItem">5元</div>
-                    <div class="payContentBlockItem">5元</div>
-                    <div class="payContentBlockItem payContentBlockRight">10元</div>
-                  </div>
-
 
                   <div class="payContentBlock  payContentBlockColumn">
                     <div>备注：</div>
-                    <div>1、停车不足半小时按半小时计；</div>
-                    <div>2、物价监督电话：12358；</div>
-                    <div>3、服务单位监督电话：64535811。</div>
+                    <div>1、停车时间不足15分钟不收取费用。</div>
+                    <div>2、24小时内首次入场小型车，额外享受停车前16分钟免费优惠。</div>
+                    <div>3、物价监督电话：12358。</div>
+                    <div>4、服务监督电话：64535811。</div>
+                    <div>5、首都机场保留优惠价格的解释权和调整权。</div>
                   </div>
                 </div>
               </div>
@@ -374,8 +320,8 @@
 
                   <div class="payContentBlock">
                     <div class="payContentBlockItem payContentBlockLeft textMiddle">每天</div>
-                    <div class="payContentBlockItem">小型车19座以下（含）<div>80元</div></div>
-                    <div class="payContentBlockItem payContentBlockRight">大型车19座以上<div>160元</div></div>
+                    <div class="payContentBlockItem">小型车19座以下（含）<div>80元</div><div>（仅限长期停车区）</div></div>
+                    <div class="payContentBlockItem payContentBlockRight">大型车19座以上<div>160元</div><div>（仅限中巴车区）</div></div>
                   </div>
 
                   <div class="payContentBlock  payContentBlockColumn">
@@ -458,13 +404,12 @@ export default {
         methods: {
           formateHour:function (h) {
             // let h = h.toString();
-            let result = h;
+            let result = h * 4;
             if(h.toString().indexOf(".")>-1){
-               if(h.toString().split(".")[1]>5){
-                 result = Math.ceil(new Number(h));
-               }else{
-                 result = parseInt(new Number(h))+0.5;
-               }
+              let minite = h.toString().split(".")[1].length > 1 ?  h.toString().split(".")[1] :  h.toString().split(".")[1]+"0"
+              let hour = parseInt( h.toString().split(".")[0])
+              let interval = Math.ceil(parseInt(minite)/25)
+              result = hour * 4 + interval
             }
             return result
           },
@@ -477,36 +422,34 @@ export default {
               this.days1 = parseInt(this.days1)+parseInt(this.hours1/24)
               this.hours1 = this.hours1%24
             }
-              let type = this.cartype1;
-              let day = this.days1;
-              let hour = this.hours1;
-              let result = '';
 
-              if(hour<=16){
-                if(type=="大型车"){
-                   result = (day*160)+(this.formateHour(hour)*2*5);
-                }else{
-                   result = (day*80)+(this.formateHour(hour)*2*2.5);
-                }
+            let type = this.cartype1; //车辆类型
+            let day = this.days1; //停车天数
+            let hour = this.hours1; //停车小时数
+            let result = '';
+
+            if(hour<=8){
+              if(type=="大型车"){
+                  result = (day*160)+(this.formateHour(hour)*5);
               }else{
-                this.hours1 = 0;
-                this.days1 = parseInt(this.days1)+1;
-                if(type=="大型车"){
-                  result = (this.days1+1)*160;
-                }else{
-                   result = (this.days1+1)*80;
-                }
+                  result = (day*80)+(this.formateHour(hour)*2.5);
               }
-              if(result>0){
-                this.result1 = result;
+            }else{
+              this.hours1 = 0;
+              this.days1 = parseInt(this.days1)+1;
+              if(type=="大型车"){
+                result = (this.days1+1)*160;
               }else{
-                this.result1 = 0;
+                  result = (this.days1+1)*80;
               }
-            },
-            calc2: function (val) {
-              if(val.value==="非首次"||val.value==="首次"){
-                this.firsttype2 = val.value
-              }
+            }
+            if(result>0){
+              this.result1 = result;
+            }else{
+              this.result1 = 0;
+            }
+          },
+          calc2: function (val) {
               if(val.value==="小型车"||val.value==="大型车"){
                 this.cartype2 = val.value
               }
@@ -514,177 +457,67 @@ export default {
                 this.days2 = parseInt(this.days2)+parseInt(this.hours2/24)
                 this.hours2 = this.hours2%24
               }
-                let type = this.cartype2;
-                let firsttype = this.firsttype2;
-                let day = this.days2;
-                let hour = this.hours2;
-                let result = '';
-                if(day==0&&hour<=8){
-                  if(type=="大型车"){
-                    if(hour<1&&hour>=0.5){
-                      result =10;
-                    }else if(hour<0.5&&hour>0){
-                      result =5;
-                    }else{
-                      result = (day*160)+((this.formateHour(hour)-1)*2*10+10);
+              let type = this.cartype2; //车辆类型
+              let day = this.days2; //停车天数
+              let hour = this.hours2; //停车小时数
+              let result = '';
 
-                    }
-                  }else{
-                    if(firsttype=="非首次"){
-                      if(hour<1&&hour>=0.5){
-                        result =10;
-                      }else if(hour<0.5&&hour>0){
-                        result =5
-                      }else if(hour==0){
-                        result=0;
-                      }else{
-                      result = (day*80)+((this.formateHour(hour))*2*5);
-                     }
-                    }else{
-                      if(hour<1&&hour>=0.5){
-                        result = 6;
-                      }else if(hour<0.5&&hour>0){
-                        result = 0;
-                      }else{
-                        result = (day*80)+((this.formateHour(hour)-1)*2*5+6);
-                      }
-                    }
-                  }
-                }else if(day>0&&hour<=8){
-                  if(type=="大型车"){
-                    if(hour<1&&hour>=0.5){
-                      result =(day*160)+10;
-                    }else if(hour<0.5&&hour>0){
-                      result =(day*160)+5;
-                    }else{
-                     result = (day*160)+(this.formateHour(hour)*2*10);
-                   }
-                  }else{
-                    if(firsttype=="非首次"){
-                      if(hour<1&&hour>=0.5){
-                        result =(day*80)+10;
-                      }else if(hour<0.5&&hour>0){
-                        result =(day*80)+5;
-                      }else{
-                      result = (day*80)+(this.formateHour(hour)*2*5);
-                     }
-                    }else{
-                      if(hour<1&&hour>=0.5){
-                        result =(day*80)+6;
-                      }else if(hour<0.5&&hour>0){
-                        result =(day*80);
-                      }else{
-                        result = (day*80)+(this.formateHour(hour)*2*5);
-                      }
-                    }
-                  }
+              if(hour<=8){
+                if(type=="大型车"){
+                  result = (day*160)+(this.formateHour(hour)*5);
                 }else{
-                  this.hours2 = 0;
-                  this.days2 = parseInt(this.days2)+1;
-                  if(type=="大型车"){
-                    result = (this.days2)*160;
-                  }else{
-                     result = (this.days2)*80;
-                  }
+                  result = (day*80)+(this.formateHour(hour)*2.5);
                 }
-                if(result>=0){
-                  this.result2 = result;
+              }else{
+                this.hours2 = 0;
+                this.days2 = parseInt(this.days2)+1;
+                if(type=="大型车"){
+                  result = (this.days2+1)*160;
                 }else{
-                  this.result2 = 0;
+                  result = (this.days2+1)*80;
                 }
-              },
-              calc3: function (val) {
-                if(val.value==="非首次"||val.value==="首次"){
-                  this.firsttype3 = val.value
+              }
+              if(result>0){
+                this.result2 = result;
+              }else{
+                this.result2 = 0;
+              }
+            },
+            calc3: function (val) {
+              if(val.value==="小型车"||val.value==="大型车"){
+                this.cartype3 = val.value
+              }
+              if( this.hours3>=24){
+                this.days3 = parseInt(this.days3)+parseInt(this.hours3/24)
+                this.hours3 = this.hours3%24
+              }
+              let type = this.cartype3; //车辆类型
+              let day = this.days3; //停车天数
+              let hour = this.hours3; //停车小时数
+              let result = '';
+
+              if(hour<=8){
+                if(type=="大型车"){
+                  result = (day*160)+(this.formateHour(hour)*5);
+                }else{
+                  result = (day*80)+(this.formateHour(hour)*2.5);
                 }
-                if(val.value==="小型车"||val.value==="大型车"){
-                  this.cartype3 = val.value
+              }else{
+                this.hours3 = 0;
+                this.days3 = parseInt(this.days3)+1;
+                if(type=="大型车"){
+                  result = (this.days3+1)*160;
+                }else{
+                  result = (this.days3+1)*80;
                 }
-                if( this.hours3>=24){
-                  this.days3 = parseInt(this.days3)+parseInt(this.hours3/24)
-                  this.hours3 = this.hours3%24
-                }
-                  let type = this.cartype3;
-                  let firsttype = this.firsttype3;
-                  let day = this.days3;
-                  let hour = this.hours3;
-                  let result = '';
-                  console.log(type,firsttype,day,hour)
-                  if(day==0&&hour<=8){
-                    if(type=="大型车"){
-                      if(hour<1&&hour>=0.5){
-                        result =10;
-                      }else if(hour<0.5&&hour>0){
-                        result =5;
-                      }else if(hour==0){
-                        result=0;
-                      }else{
-                        result = (day*160)+((this.formateHour(hour)-1)*2*10+10);
-                      }
-                    }else{
-                      if(firsttype=="非首次"){
-                        if(hour<1&&hour>=0.5){
-                          result =10;
-                        }else if(hour<0.5&&hour>0){
-                          result =5
-                        }else if(hour==0){
-                          result=0;
-                        }else{
-                        result = (day*80)+((this.formateHour(hour))*2*5);
-                       }
-                      }else{
-                        if(hour<1&&hour>=0.5){
-                          result = 6;
-                        }else if(hour<0.5&&hour>0){
-                          result = 0;
-                        }else{
-                          result = (day*80)+((this.formateHour(hour)-1)*2*5+6);
-                        }
-                      }
-                    }
-                  }else if(day>0&&hour<=8){
-                    if(type=="大型车"){
-                      if(hour<1&&hour>=0.5){
-                        result =(day*160)+10;
-                      }else if(hour<0.5&&hour>0){
-                        result =(day*160)+5;
-                      }else{
-                       result = (day*160)+(this.formateHour(hour)*2*10);
-                     }
-                    }else{
-                      if(firsttype=="非首次"){
-                        if(hour<1&&hour>=0.5){
-                          result =(day*80)+10;
-                        }else if(hour<0.5&&hour>0){
-                          result =(day*80)+5;
-                        }else{
-                        result = (day*80)+(this.formateHour(hour)*2*5);
-                       }
-                      }else{
-                        if(hour<1&&hour>=0.5){
-                          result =(day*80)+6;
-                        }else if(hour<0.5&&hour>0){
-                          result =(day*80);
-                        }else{
-                          result = (day*80)+(this.formateHour(hour)*2*5);
-                        }
-                      }
-                    }
-                  }else{
-                    this.hours3 = 0;
-                    this.days3 = parseInt(this.days3)+1;
-                    if(type=="大型车"){
-                      result = (this.days3)*160;
-                    }else{
-                       result = (this.days3)*80;
-                    }
-                  }
-                  if(result>=0){
-                    this.result3 = result;
-                  }else{
-                    this.result3 = 0;
-                  }
-                }
+              }
+              if(result>0){
+                this.result3 = result;
+              }else{
+                this.result3 = 0;
+              }
+            }
+
           }
 }
 

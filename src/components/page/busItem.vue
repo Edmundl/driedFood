@@ -10,20 +10,20 @@
           <span v-show="lineInfo.toDesFirstTime">首班车：{{lineInfo.toDesFirstTime}}&nbsp;&nbsp;&nbsp;</span>
           <span v-show="lineInfo.toDesLastTime">末班车：{{lineInfo.toDesLastTime}}</span>
           <div v-show="lineInfo.toDesRunTime">
-            <div v-for="time in lineInfo.toDesRunTime">{{time}}</div>
-          </div>      
+            <div v-for="time in lineInfo.toDesRunTime" :key="time.id">{{time}}</div>
+          </div>
         </div>
       </Container>
       <Container :iconUrl="clockpng" title="发车间隔" v-if="lineInfo.intervalTime">
         <div slot='container-slot' class="page pageTime">
-          <div>{{lineInfo.intervalTime}}</div>     
+          <div>{{lineInfo.intervalTime}}</div>
         </div>
       </Container>
       <Container :iconUrl="iconRoute" title="行驶路线">
         <div slot='container-slot' class="page line">
           <timelineUme :lineRoute="lineInfo.toDesArr"></timelineUme>
         </div>
-      </Container>     
+      </Container>
     </div>
     <div v-show="flag === 1">
       <Container :iconUrl="timepng" title="运行时间">
@@ -31,15 +31,15 @@
           <span v-show="lineInfo.toAirportFirstTime">首班车：{{lineInfo.toAirportFirstTime}}&nbsp;&nbsp;&nbsp;</span>
           <span v-show="lineInfo.toAirportLastTime">末班车：{{lineInfo.toAirportLastTime}}</span>
           <div v-show="lineInfo.toAirRunTime">
-            <div v-for="time in lineInfo.toAirRunTime">{{time}}</div>
-          </div>      
+            <div v-for="time in lineInfo.toAirRunTime" :key="time.id">{{time}}</div>
+          </div>
         </div>
       </Container>
       <Container :iconUrl="clockpng" title="发车间隔" v-if="lineInfo.intervalTime">
         <div slot='container-slot' class="page pageTime">
-          <div>{{lineInfo.intervalTime}}</div>     
+          <div>{{lineInfo.intervalTime}}</div>
         </div>
-      </Container>  
+      </Container>
       <Container :iconUrl="iconRoute" title="行驶路线">
         <div slot='container-slot' class="page line">
           <timelineUme :lineRoute="lineInfo.toAirportArr"></timelineUme>
@@ -77,7 +77,6 @@ export default {
   },
   mounted () {
     var theme = this.$route.query.theme
-    console.log(this.$route)
     this.lineInfo = numList[theme]
   },
   methods: {

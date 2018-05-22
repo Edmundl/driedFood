@@ -1,7 +1,7 @@
 <template>
   <div class="timelineUme">
     <ul class="ume-timeline">
-      <li v-for="(item,index) in lineRoute" class="ume-timeline-item">
+      <li v-for="(item,index) in lineRoute" :key="item.id" class="ume-timeline-item">
         <div v-show="index < lineRoute.length - 1" class="ume-timeline-item-tail"></div>
         <div class="ume-timeline-item-head" :class="cal(index)"></div>
         <div class="ume-timeline-item-content">
@@ -31,7 +31,6 @@ export default {
   methods: {
     cal (index) {
       let len = this.lineRoute.length;
-      console.log(len)
       if (index === 0) {
         return 'greenCircle'
       } else if (index === len - 1) {
@@ -60,7 +59,7 @@ export default {
   margin: 0 !important;
   padding: 0 0 0.75rem 0;
   list-style: none;
-  position: relative; 
+  position: relative;
 }
 .ume-timeline-item-tail {
   height: 100%;
@@ -80,7 +79,7 @@ export default {
 .greenCircle {
   border-color: #19be6b;
   color: #19be6b;
-  background-color: #fff;  
+  background-color: #fff;
 }
 .green {
   border-color: #19be6b;
@@ -89,7 +88,7 @@ export default {
 }
 .redCircle {
   border-color: #ff8686;
-  background-color: #fff;   
+  background-color: #fff;
 }
 .ume-timeline-item-content {
   padding: 1px 1px 0 3.75rem;

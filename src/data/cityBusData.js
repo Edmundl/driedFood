@@ -82,7 +82,7 @@ var cityBusList = [
 ]
 
 var line1 = {
-    "lineName": "方庄线", 
+    "lineName": "方庄线",
     "toDesDirec": "方庄",
     "toAirportDirec": "首都机场",
     "toDesArr": [
@@ -161,7 +161,7 @@ var line1 = {
 };
 
 var line2 = {
-    "lineName": "西单线", 
+    "lineName": "西单线",
     "toDesDirec": "西单",
     "toAirportDirec": "首都机场",
     "toDesArr": [
@@ -236,7 +236,7 @@ var line2 = {
 };
 
 var line3 = {
-    "lineName": "北京站线", 
+    "lineName": "北京站线",
     "toDesDirec": "北京站",
     "toAirportDirec": "首都机场",
     "toDesArr": [
@@ -315,7 +315,7 @@ var line3 = {
 };
 
 var line4 = {
-    "lineName": "公主坟线", 
+    "lineName": "公主坟线",
     "toDesDirec": "公主坟",
     "toAirportDirec": "首都机场",
     "toDesArr": [
@@ -416,7 +416,7 @@ var line4 = {
 };
 
 var line5 = {
-    "lineName": "中关村线", 
+    "lineName": "中关村线",
     "toDesDirec": "中关村",
     "toAirportDirec": "首都机场",
     "toDesArr": [
@@ -488,7 +488,7 @@ var line5 = {
 };
 
 var line6 = {
-    "lineName": "上地、奥运村线", 
+    "lineName": "上地、奥运村线",
     "toDesDirec": "奥运村",
     "toAirportDirec": "首都机场",
     "toDesArr": [
@@ -567,7 +567,7 @@ var line6 = {
 };
 
 var line7 = {
-    "lineName": "北京西站线", 
+    "lineName": "北京西站线",
     "toDesDirec": "北京西站",
     "toAirportDirec": "首都机场",
     "toDesArr": [
@@ -646,7 +646,7 @@ var line7 = {
 };
 
 var line8 = {
-    "lineName": "回龙观线", 
+    "lineName": "回龙观线",
     "toDesDirec": "回龙观",
     "toAirportDirec": "首都机场",
     "toDesArr": [
@@ -729,7 +729,7 @@ var line8 = {
 };
 
 var line9 = {
-    "lineName": "通州线", 
+    "lineName": "通州线",
     "toDesDirec": "通州",
     "toAirportDirec": "首都机场",
     "toDesArr": [
@@ -812,7 +812,7 @@ var line9 = {
 };
 
 var line10 = {
-    "lineName": "北京南站线", 
+    "lineName": "北京南站线",
     "toDesDirec": "北京南站",
     "toAirportDirec": "首都机场",
     "toDesArr": [
@@ -879,7 +879,7 @@ var line10 = {
 };
 
 var line11 = {
-    "lineName": "亦庄线", 
+    "lineName": "亦庄线",
     "toDesDirec": "亦庄",
     "toAirportDirec": "首都机场",
     "toDesArr": [
@@ -942,7 +942,7 @@ var line11 = {
 };
 
 var line12 = {
-    "lineName": "四惠线", 
+    "lineName": "四惠线",
     "toDesDirec": "四惠",
     "toAirportDirec": "首都机场",
     "toDesArr": [
@@ -960,33 +960,33 @@ var line12 = {
         },
         {
             "platform":"管庄路（常营）",
-            "price":"18元"
+            "price":"25元"
         },
         {
             "platform":"青年路（大悦城）",
-            "price":"21元"
+            "price":"25元"
         },
         {
             "platform":"八里庄（石佛营）",
-            "price":"21元"
+            "price":"25元"
         },
         {
             "platform":"四惠交通枢纽",
-            "price":"24元"
+            "price":"25元"
         },
     ],
     "toAirportArr": [
         {
             "platform":"四惠交通枢纽",
-            "price":"24元"
+            "price":"25元"
         },
         {
             "platform":"青年路（大悦城）",
-            "price":"21元"
+            "price":"25元"
         },
         {
             "platform":"管庄路（常营）",
-            "price":"18元"
+            "price":"25元"
         },
         {
             "platform":"T2航站楼",
@@ -1005,11 +1005,11 @@ var line12 = {
     "toDesLastTime":"20:30",
     "toAirportFirstTime":"7:30",
     "toAirportLastTime":"18:30",
-    "intervalTime":"不超过60分钟",
+    "intervalTime": "不超过60分钟（客满发车）",
 };
 
 var line13 = {
-    "lineName": "王府井、金宝街线", 
+    "lineName": "王府井、金宝街线",
     "toDesDirec": "王府井",
     "toAirportDirec": "首都机场",
     "toDesArr": [
@@ -1080,7 +1080,7 @@ var line13 = {
 };
 
 var line14 = {
-    "lineName": "望京线", 
+    "lineName": "望京线",
     "toDesDirec": "望京",
     "toAirportDirec": "首都机场",
     "toDesArr": [
@@ -1167,7 +1167,7 @@ var line14 = {
 };
 
 var line15 = {
-    "lineName": "南苑机场线", 
+    "lineName": "南苑机场线",
     "toDesDirec": "南苑机场",
     "toAirportDirec": "首都机场",
     "toDesArr": [
@@ -1214,7 +1214,7 @@ var line15 = {
 };
 
 var line16 = {
-    "lineName": "石景山线", 
+    "lineName": "石景山线",
     "toDesDirec": "石景山",
     "toAirportDirec": "首都机场",
     "toDesArr": [
@@ -1281,7 +1281,7 @@ var line16 = {
 };
 
 var line17 = {
-    "lineName": "燕郊线", 
+    "lineName": "燕郊线",
     "toDesDirec": "燕郊",
     "toAirportDirec": "首都机场",
     "toDesArr": [
@@ -1368,7 +1368,7 @@ var line17 = {
 };
 
 var line18 = {
-    "lineName": "昌平线", 
+    "lineName": "昌平线",
     "toDesDirec": "昌平",
     "toAirportDirec": "首都机场",
     "toDesArr": [
@@ -1439,7 +1439,7 @@ var line18 = {
 };
 
 var line19 = {
-    "lineName": "西单线（夜间）", 
+    "lineName": "西单线（夜间）",
     "toDesDirec": "积水潭",
     // "toAirportDirec": "首都机场",
     "toDesArr": [
@@ -1506,7 +1506,7 @@ var line19 = {
 };
 
 var line20 = {
-    "lineName": "公主坟线（夜间）", 
+    "lineName": "公主坟线（夜间）",
     "toDesDirec": "公主坟",
     //"toAirportDirec": "首都机场",
     "toDesArr": [

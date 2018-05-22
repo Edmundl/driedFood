@@ -1,7 +1,7 @@
 var airportBusList = [
   {
-		lineName: '空港1路',
-		name: 'airLine1'
+	lineName: '空港1路',
+	name: 'airLine1'
   },
   {
     lineName: '空港2路(可换乘15号线)',
@@ -36,6 +36,10 @@ var airportBusList = [
   {
     lineName: '空港9路',
     name: 'airLine9'
+  },
+  {
+     lineName: '空港10路',
+     name: 'airLine10'
   },
   {
     lineName: '空港1路(中转摆渡车)',
@@ -210,7 +214,7 @@ var airLine2 = {
   		platform: '金汉绿港'
   	},
   	{
-  		platform: '金汉绿港四区'     
+  		platform: '金汉绿港四区'
   	},
   	{
   		platform: '地铁俸伯站'
@@ -275,9 +279,6 @@ var airLine2 = {
   		platform: 'BGS站坪'
   	},
   	{
-  		platform: '塔台'
-  	},
-  	{
   		platform: 'T2航站楼'
   	}
   ]
@@ -301,7 +302,7 @@ var airLine3 = {
   		platform: '塔台'
   	},
   	{
-  		platform: 'BGS'
+  		platform: 'BGS货运站'
   	},
   	{
   		platform: '国航货运'
@@ -316,16 +317,16 @@ var airLine3 = {
   		platform: '天竺花园'
   	},
   	{
-  		platform: '临空假日酒店'
+  		platform: '马连店'
   	},
   	{
-  		platform: '新国展'
+  		platform: '地铁国展站'
   	},
   	{
   		platform: '花梨坎'
   	},
   	{
-  		platform: '花梨坎地铁'
+  		platform: '地铁花梨坎站'
   	},
   	{
   		platform: '空港B区'
@@ -337,19 +338,16 @@ var airLine3 = {
   		platform: '万科城市花园'
   	},
   	{
-  		platform: '裕祥花园'
-  	},
-  	{
   		platform: '东庄'
   	},
   	{
   		platform: '后沙峪政府'
   	},
   	{
-  		platform: '农行'
+  		platform: '万科花园北'
   	},
   	{
-  		platform: '华润超市'
+  		platform: '双裕小区'
   	},
   	{
   		platform: '火神营'
@@ -366,19 +364,16 @@ var airLine3 = {
   		platform: '火神营'
   	},
   	{
-  		platform: '华润超市'
+  		platform: '双裕小区'
   	},
   	{
-  		platform: '农行'
+  		platform: '万科花园北'
   	},
   	{
   		platform: '后沙峪政府'
   	},
   	{
   		platform: '东庄'
-  	},
-  	{
-  		platform: '裕祥花园'
   	},
   	{
   		platform: '万科城市花园'
@@ -390,16 +385,16 @@ var airLine3 = {
   		platform: '空港B区'
   	},
   	{
-  		platform: '花梨坎地铁'
+  		platform: '地铁花梨坎站'
   	},
   	{
   		platform: '花梨坎'
   	},
   	{
-  		platform: '新国展'
+  		platform: '地铁国展站'
   	},
   	{
-  		platform: '临空假日酒店'
+  		platform: '马连店'
   	},
   	{
   		platform: '天竺花园'
@@ -414,7 +409,7 @@ var airLine3 = {
   		platform: '国航货运'
   	},
   	{
-  		platform: 'BGS'
+  		platform: 'BGS货运站'
   	},
   	{
   		platform: 'T2航站楼'
@@ -436,10 +431,10 @@ var airLine5 = {
   		platform: 'T3航站楼'
   	},
   	{
-  		platform: '机场集团公司'
+  		platform: '首都机场集团公司'
   	},
   	{
-  		platform: '机场股份公司'
+  		platform: '首都机场股份公司'
   	},
   	{
   		platform: '绿港国际'
@@ -502,7 +497,7 @@ var airLine5 = {
   		platform: '减河北路'
   	},
   	{
-  		platform: '一中分校'
+  		platform: '牛山实验学校'
   	},
   	{
   		platform: '龙苑别墅'
@@ -550,8 +545,8 @@ var airLine5 = {
   		platform: '牛栏山路口'
   	},
     {
-      platform: '西陈各庄'
-    },    
+        platform: '西陈各庄'
+    },
   	{
   		platform: '赵全营'
   	},
@@ -559,7 +554,7 @@ var airLine5 = {
   		platform: '北郎中'
   	},
   	{
-  		platform: '北郎中西口'
+  		platform: '北郎中西'
   	},
   	{
   		platform: '电木厂'
@@ -576,7 +571,7 @@ var airLine5 = {
   		platform: '电木厂'
   	},
   	{
-  		platform: '北郎中西口'
+  		platform: '北郎中西'
   	},
   	{
   		platform: '北郎中'
@@ -633,7 +628,7 @@ var airLine5 = {
   		platform: '龙苑别墅'
   	},
   	{
-  		platform: '一中分校'
+  		platform: '牛山实验学校'
   	},
   	{
   		platform: '减河北路'
@@ -696,10 +691,10 @@ var airLine5 = {
   		platform: '绿港国际'
   	},
   	{
-  		platform: '机场股份公司'
+  		platform: '首都机场股份公司'
   	},
   	{
-  		platform: '机场集团公司'
+  		platform: '首都机场集团公司'
   	},
   	{
   		platform: 'T3航站楼'
@@ -728,7 +723,7 @@ var airLine6 = {
   		platform: '天竺花园'
   	},
   	{
-  		platform: '空港A区'
+  		platform: '蓝天大厦'
   	},
   	{
   		platform: '地铁花梨坎站'
@@ -738,18 +733,18 @@ var airLine6 = {
   	},
     {
       platform: '空港医院'
-    },    
+    },
   	{
-  		platform: '清岚小镇'
+  		platform: '清岚小镇南'
   	},
   	{
   		platform: '西马各庄'
   	},
   	{
-  		platform: '张喜庄路口'
+  		platform: '张喜庄'
   	},
   	{
-  		platform: '万万树小区'
+  		platform: '万万树'
   	},
   	{
   		platform: '前渠河'
@@ -764,19 +759,19 @@ var airLine6 = {
   		platform: '西水泉'
   	},
   	{
-  		platform: '河庄营'
+  		platform: '河庄'
   	},
   	{
   		platform: '后营'
   	},
   	{
-  		platform: '下西市村'
+  		platform: '下西市'
   	},
   	{
-  		platform: '范各庄'
+  		platform: '西范各庄'
   	},
   	{
-  		platform: '良善庄'
+  		platform: '西范各庄东'
   	},
   	{
   		platform: '南石槽'
@@ -785,24 +780,24 @@ var airLine6 = {
   		platform: '北石槽'
   	},
   	{
-  		platform: '北石槽镇政府'
+  		platform: '北石槽东'
   	},
   	{
   		platform: '寺上'
   	},
   	{
-  		platform: '李家史山'
+  		platform: '李家史山西'
   	}
   ],
   'toAirportArr': [
   	{
-  		platform: '李家史山'
+  		platform: '李家史山西'
   	},
   	{
   		platform: '寺上'
   	},
   	{
-  		platform: '北石槽镇政府'
+  		platform: '北石槽东'
   	},
   	{
   		platform: '北石槽'
@@ -811,19 +806,19 @@ var airLine6 = {
   		platform: '南石槽'
   	},
   	{
-  		platform: '良善庄'
+  		platform: '西范各庄东'
   	},
   	{
-  		platform: '范各庄'
+  		platform: '西范各庄'
   	},
   	{
-  		platform: '下西市村'
+  		platform: '下西市'
   	},
   	{
   		platform: '后营'
   	},
   	{
-  		platform: '河庄营'
+  		platform: '河庄'
   	},
   	{
   		platform: '西水泉'
@@ -838,16 +833,16 @@ var airLine6 = {
   		platform: '前渠河'
   	},
   	{
-  		platform: '万万树小区'
+  		platform: '万万树'
   	},
   	{
-  		platform: '张喜庄路口'
+  		platform: '张喜庄'
   	},
   	{
   		platform: '西马各庄'
   	},
   	{
-  		platform: '清岚小镇'
+  		platform: '清岚小镇南'
   	},
   	{
   		platform: '空港医院'
@@ -859,7 +854,7 @@ var airLine6 = {
   		platform: '地铁花梨坎站'
   	},
   	{
-  		platform: '空港A区'
+  		platform: '蓝天大厦'
   	},
   	{
   		platform: '天竺花园'
@@ -892,12 +887,12 @@ var airLine7 = {
   	},
   	{
   		platform: '综合保税区'
+	},
+	{
+  		platform: '回民营'
   	},
   	{
   		platform: '物流园'
-  	},
-  	{
-  		platform: '检测场'
   	},
   	{
   		platform: '南法信'
@@ -915,7 +910,7 @@ var airLine7 = {
   		platform: '地铁顺义站'
   	},
   	{
-  		platform: '东大桥环岛'
+  		platform: '公路局'
   	},
   	{
   		platform: '地铁俸伯站'
@@ -948,16 +943,16 @@ var airLine7 = {
   		platform: '杨镇三街'
   	},
   	{
-  		platform: '双阳小区'
+  		platform: '杨镇车站'
   	},
     {
-      platform: '现代三厂'
-    },    
+      platform: '杨镇工业园'
+    },
   	{
   		platform: '杜庄'
   	},
   	{
-  		platform: '焦各庄'
+  		platform: '东焦各庄'
   	},
   	{
   		platform: '沙岭'
@@ -986,16 +981,16 @@ var airLine7 = {
   		platform: '沙岭'
   	},
   	{
-  		platform: '焦各庄'
+  		platform: '东焦各庄'
   	},
   	{
   		platform: '杜庄'
   	},
   	{
-  		platform: '现代三厂'
+  		platform: '杨镇工业园'
   	},
   	{
-  		platform: '双阳小区'
+  		platform: '杨镇车站'
   	},
   	{
   		platform: '杨镇三街'
@@ -1028,7 +1023,7 @@ var airLine7 = {
   		platform: '地铁俸伯站'
   	},
   	{
-  		platform: '东大桥环岛'
+  		platform: '公路局'
   	},
   	{
   		platform: '地铁顺义站'
@@ -1046,10 +1041,10 @@ var airLine7 = {
   		platform: '南法信'
   	},
   	{
-  		platform: '检测场'
+  		platform: '物流园'
   	},
   	{
-  		platform: '物流园'
+  		platform: '回民营'
   	},
   	{
   		platform: '综合保税区'
@@ -1093,7 +1088,7 @@ var airLine8 = {
   		platform: '吴家营'
   	},
   	{
-  		platform: '林河路口'
+  		platform: '林河开发区'
   	},
   	{
   		platform: '石园南大街'
@@ -1105,7 +1100,7 @@ var airLine8 = {
   		platform: '顺义区医院'
   	},
   	{
-  		platform: '东大桥'
+  		platform: '公路局'
   	},
   	{
   		platform: '地铁俸伯站'
@@ -1126,10 +1121,10 @@ var airLine8 = {
   		platform: '马辛庄'
   	},
   	{
-  		platform: '前礼务'
+  		platform: '后礼务'
   	},
   	{
-  		platform: '北小营'
+  		platform: '北小营小区'
   	},
   	{
   		platform: '上辇'
@@ -1141,19 +1136,19 @@ var airLine8 = {
   		platform: '东沿头'
   	},
   	{
-  		platform: '木林'
-  	},
-  	{
-  		platform: '龙湾屯镇政府'
-  	},
-  	{
-  		platform: '焦庄户地道战遗址纪念馆'
+  		platform: '孝德路口'
   	},
   	{
   		platform: '龙湾屯'
   	},
   	{
-  		platform: '柳庄户'
+  		platform: '焦庄户西'
+  	},
+  	{
+  		platform: '龙湾屯东'
+  	},
+  	{
+  		platform: '柳庄户北'
   	},
   	{
   		platform: '七连庄村'
@@ -1170,19 +1165,19 @@ var airLine8 = {
   		platform: '七连庄村'
   	},
   	{
-  		platform: '柳庄户'
+  		platform: '柳庄户北'
+  	},
+  	{
+  		platform: '龙湾屯东'
+  	},
+  	{
+  		platform: '焦庄户西'
   	},
   	{
   		platform: '龙湾屯'
   	},
   	{
-  		platform: '焦庄户地道战遗址纪念馆'
-  	},
-  	{
-  		platform: '龙湾屯镇政府'
-  	},
-  	{
-  		platform: '木林'
+  		platform: '孝德路口'
   	},
   	{
   		platform: '东沿头'
@@ -1194,10 +1189,10 @@ var airLine8 = {
   		platform: '上辇'
   	},
   	{
-  		platform: '北小营'
+  		platform: '北小营小区'
   	},
   	{
-  		platform: '前礼务'
+  		platform: '后礼务'
   	},
   	{
   		platform: '马辛庄'
@@ -1218,7 +1213,7 @@ var airLine8 = {
   		platform: '地铁俸伯站'
   	},
   	{
-  		platform: '东大桥'
+  		platform: '公路局'
   	},
   	{
   		platform: '顺义区医院'
@@ -1230,13 +1225,13 @@ var airLine8 = {
   		platform: '石园南大街'
   	},
   	{
-  		platform: '林河路口'
+  		platform: '林河路口开发区'
   	},
   	{
   		platform: '吴家营'
   	},
   	{
-  		platform: '苏活小区'
+  		platform: '苏活'
   	},
   	{
   		platform: '三四营'
@@ -1316,7 +1311,7 @@ var airLine9 = {
   		platform: '王各庄'
   	},
   	{
-  		platform: '道口'
+  		platform: '北务路口'
   	},
   	{
   		platform: '陈辛庄'
@@ -1381,7 +1376,7 @@ var airLine9 = {
   		platform: '陈辛庄'
   	},
   	{
-  		platform: '道口'
+  		platform: '北务路口'
   	},
   	{
   		platform: '王各庄'
@@ -1437,14 +1432,116 @@ var airLine9 = {
   ]
 }
 
+var airLine10 = {
+  'lineName': '空港10路',
+  'toDesDirec': '顺义国际学校',
+  'toAirportDirec': 'T3',
+  'toDesRunTime': ['首班：5:30，末班：20:00'],
+  'toAirRunTime': ['首班：6:30，末班：21:00'],
+  'intervalTime': '发车间隔为15分钟，高峰时段为10分钟',
+  'toDesArr': [{
+      platform: 'T3航站楼'
+    },
+    {
+      platform: '国泰广场'
+    },
+    {
+      platform: '南平里'
+    },
+    {
+      platform: '花园路口'
+    },
+    {
+      platform: '北平里'
+    },
+    {
+      platform: '机场道口'
+    },
+    {
+      platform: '天竺供销社'
+    },
+    {
+      platform: '天竺卫生院'
+    },
+    {
+      platform: '国航东门'
+    },
+    {
+      platform: '中航材'
+    },
+    {
+      platform: '空港A区北'
+    },
+    {
+      platform: '花梨坎'
+    },
+    {
+      platform: '地铁国展站'
+    },
+    {
+      platform: '新国展'
+    },
+    {
+      platform: '顺义国际学校'
+    }
+  ],
+  'toAirportArr': [{
+      platform: '顺义国际学校'
+    },
+    {
+      platform: '新国展'
+    },
+    {
+      platform: '地铁国展站'
+    },
+    {
+      platform: '花梨坎'
+    },
+    {
+      platform: '空港A区北'
+    },
+    {
+      platform: '中航材'
+    },
+    {
+      platform: '国航东门'
+    },
+    {
+      platform: '天竺卫生院'
+    },
+    {
+      platform: '天竺供销社'
+    },
+    {
+      platform: '机场道口'
+    },
+    {
+      platform: '北平里'
+    },
+    {
+      platform: '花园路口'
+    },
+    {
+      platform: '南平里'
+    },
+    {
+      platform: '国泰广场'
+    },
+    {
+      platform: 'T3航站楼'
+    }
+  ]
+}
+
+
 var airLine1trans = {
-  'lineName': '空港9路',
+  'lineName': '空港1路(中转摆渡车)',
   'toDesDirec': '吴雄寺',
   'toAirportDirec': 'T3',
   'toDesFirstTime': '4:40',
   'toDesLastTime': '次日1:00',
   'toAirportFirstTime': '4:20',
-  'toAirportLastTime': '0:30',
+  'toAirportLastTime': '0:45',
   'intervalTime': '不超过20分钟',
   'location': ['T2一层1-3号门外', 'T3一层1号门外'],
   'toDesArr': [
@@ -1494,5 +1591,6 @@ module.exports = {
   airLine7: airLine7,
   airLine8: airLine8,
   airLine9: airLine9,
+  airLine10: airLine10,
   airLine1trans: airLine1trans
 }
