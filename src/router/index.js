@@ -1,56 +1,47 @@
-import Vue from 'vue';
-import Router from 'vue-router';
-
-Vue.use(Router);
-
-export default new Router({
-    routes: [{
-            path: '/',
-            redirect: '/index'
-        },
-        {
-            path: '/index',
-            component: resolve => require(['../components/common/index.vue'], resolve),
-        },
-        {
-            path: '/taxi',
-            component: resolve => require(['../components/page/taxi.vue'], resolve)
-        },
-        {
-            path: '/bus',
-            component: resolve => require(['../components/page/bus.vue'], resolve)
-        },
-        {
-            path: '/subway',
-            component: resolve => require(['../components/page/subway.vue'], resolve)
-        },
-        {
-            path: '/parkinglot',
-            component: resolve => require(['../components/page/parkinglot.vue'], resolve)
-        },
-        {
-            path: '/shuttleBus',
-            component: resolve => require(['../components/page/shuttleBus.vue'], resolve)
-        },
-        {
-            path: '/carRental',
-            component: resolve => require(['../components/page/carRental.vue'], resolve)
-        },
-        {
-            path: '/airportBus',
-            component: resolve => require(['../components/page/airportBus.vue'], resolve)
-        },
-        {
-            path: '/airportItem',
-            component: resolve => require(['../components/page/airportItem.vue'], resolve)
-        },       
-        {
-            path: '/busItem',
-            component: resolve => require(['../components/page/busItem.vue'], resolve)
-        },
-        {
-            path: '/provinBusItem',
-            component: resolve => require(['../components/page/provinBusItem.vue'], resolve)
-        }   
-    ]
+import Vue from 'vue'
+import VueRouter from 'vue-router'
+Vue.use(VueRouter)
+export default new VueRouter({
+	// mode: 'history',
+	routes: [
+		{
+			path: '/',
+			redirect: '/counterUpgrade'
+		},
+		{
+			path: '/counterUpgrade',
+			component: resolve => require(['../components/container/counterUpgrade.vue'], resolve),
+			meta: {
+				title: '柜台升舱'
+			}
+    },
+    {
+			path: '/protoRule',
+			component: resolve => require(['../components/container/protoRule.vue'], resolve),
+			meta: {
+				title: '值机柜台升舱服务须知'
+			}
+    },
+    {
+			path: '/orderDetail',
+			component: resolve => require(['../components/container/orderDetail.vue'], resolve),
+			meta: {
+				title: '订单详情'
+			}
+    },
+    {
+			path: '/success',
+			component: resolve => require(['../components/container/success.vue'], resolve),
+			meta: {
+				title: '支付完成'
+			}
+    },
+    {
+			path: '/orderList',
+			component: resolve => require(['../components/container/orderList.vue'], resolve),
+			meta: {
+				title: '四川航空订单'
+			}
+    }
+	]
 })

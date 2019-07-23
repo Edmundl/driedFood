@@ -9,6 +9,23 @@
     <title>机场交通</title>
   </head>
   <body>
-    <div id="app"></div>
+    <div id='container'>
+      <app></app>
+    </div>
+    <script type="text/javascript">
+      function setFontSize() {
+        var deviceWidth = document.documentElement.clientWidth;
+        if (deviceWidth === 0) {
+          setTimeout(function () {
+            setFontSize();
+          },100)
+        }
+        if(deviceWidth > 750) deviceWidth = 750;
+        document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+      }
+      function shareInfo() {
+      }
+      setFontSize();
+    </script>
   </body>
 </html>
