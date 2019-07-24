@@ -1,4 +1,5 @@
-<style scoped>
+<style lang="less" scoped>
+  @import "../../assets/css/base.less";
   .mask {
     position: fixed;
     left: 0;
@@ -20,7 +21,7 @@
     width: 0.426rem;
     height: 0.426rem;
     border-radius: 50%;
-    background: #41b24e;
+    background: @green-base;
     position: absolute;
     animation: load 1.04s ease infinite;
   }

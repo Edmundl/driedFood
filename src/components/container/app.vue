@@ -1,0 +1,49 @@
+<style lang="less">
+  @import "../../assets/css/base.less";
+  .contain {
+    width: 100%;
+    height: 100%;
+    font-size: 0.32rem;
+    .title {
+      color: @green-base;
+    }
+    .item {
+      border: 0.02rem solid @black-c;
+      width: 100%;
+      height: 1rem;
+      line-height: 0.96rem;
+      color: @black-6;
+      margin: 0.3rem 0;
+    }
+  }
+</style>
+<template>
+  <div class="contain">
+    <div class="title">
+      单页面框架
+    </div>
+    <router-link to="/example">
+      <div class="item">
+        to组件化实例
+      </div>
+    </router-link>
+    <div class="item" @click="toFlexible">
+      to适配实例
+    </div>
+  </div>
+</template>
+<script>
+	export default {
+		data () {
+			return {}
+		},
+		created: function () {},
+    methods: {
+      toFlexible: function() {
+        this.$router.push({
+          path: 'flexible'
+        })
+      }
+    }
+	}
+</script>

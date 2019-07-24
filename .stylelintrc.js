@@ -8,6 +8,7 @@ module.exports = {
         "indentation": null,
         "comment-whitespace-inside": "always",
         "selector-list-comma-newline-after": "always-multi-line",
-        "no-descending-specificity": null
+        "no-descending-specificity": null,
+        "rule-empty-line-before": null
     }
 }

@@ -6,41 +6,27 @@ export default new VueRouter({
 	routes: [
 		{
 			path: '/',
-			redirect: '/counterUpgrade'
+			redirect: '/app'
 		},
 		{
-			path: '/counterUpgrade',
-			component: resolve => require(['../components/container/counterUpgrade.vue'], resolve),
+			path: '/app',
+			component: resolve => require(['../components/container/app.vue'], resolve),
 			meta: {
-				title: '柜台升舱'
+				title: '首页'
 			}
     },
     {
-			path: '/protoRule',
-			component: resolve => require(['../components/container/protoRule.vue'], resolve),
+			path: '/example',
+			component: resolve => require(['../components/container/example.vue'], resolve),
 			meta: {
-				title: '值机柜台升舱服务须知'
+				title: '公用组件示例'
 			}
     },
     {
-			path: '/orderDetail',
-			component: resolve => require(['../components/container/orderDetail.vue'], resolve),
+			path: '/flexible',
+			component: resolve => require(['../components/container/flexible.vue'], resolve),
 			meta: {
-				title: '订单详情'
-			}
-    },
-    {
-			path: '/success',
-			component: resolve => require(['../components/container/success.vue'], resolve),
-			meta: {
-				title: '支付完成'
-			}
-    },
-    {
-			path: '/orderList',
-			component: resolve => require(['../components/container/orderList.vue'], resolve),
-			meta: {
-				title: '四川航空订单'
+				title: '适配示例'
 			}
     }
 	]

@@ -1,77 +1,136 @@
-<style lang="less" scoped>
-.modalWrapper {
-  position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 100;
-  font-family: "PingFangSC-Regular", "Microsoft YaHei", Arial, sans-serif;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  .contentWrapper {
-    width: 5.6rem;
-    background: #fff;
-    border-radius: 6px;
-    .content {
-      padding: 0.48rem;
-      border-bottom: 1px solid #eee;
-      font-size: 0.36rem;
-      color: #333;
-      .contentText {
-        text-align: center;
-      }
-    }
-    .modalBtn {
-      flex-grow: 1;
-      text-align: center;
-      color: #666;
-      font-size: 0.34rem;
-      &.primary {
-        color: #41b24e;
-      }
-    }
-    .modalBtnWrapper {
-      display: flex;
-      justify-content: center;
-      padding: 0.26rem 0;
-    }
-  }
-}
-</style>
-
+<!-- 最常用的提示框 -->
 <template>
-  <div class="modalWrapper">
-    <div class="contentWrapper">
-      <div class="content">
-        <p class="contentText">{{ content }}</p>
-        <slot name="content"></slot>
+  <div v-show="visible" class="mask">
+    <div class="modal-wrapper allCenter">
+      <div class="modal-content">
+        <div v-if="title.length > 0" class="modal-title">{{ title }}</div>
+        <div class="modal-word">{{ modalWord }}</div>
       </div>
-      <div class="modalBtnWrapper">
-        <button class="primary modalBtn" @click="$emit('primaryFn')">{{ primaryText }}</button>
-        <button v-show="subText" class="sub modalBtn" @click="$emit('subFn')">{{ subText }}</button>
+      <div class="modal-btnWrapper flex_flex">
+        <div v-if="cancelWord.length > 0" @click="toCancel" class="modal-btn1 modal-no">{{ cancelWord }}</div>
+        <div @click="toOk" class="modal-btn1">{{ okWord }}</div>
       </div>
-      <slot name="footer"></slot>
     </div>
   </div>
 </template>
+
 <script>
-export default {
-  props: {
-    content: {
-      type: String,
-      default: ''
+  export default {
+    components: {},
+    props: {
+      value: {
+        type: Boolean,
+        default: false
+      },
+      title: {
+        type: String,
+        default: ''
+      },
+      cancelWord: {
+        type: String,
+        default: ''
+      },
+      okWord: {
+        type: String,
+        default: '确定'
+      },
+      modalWord: {
+        type: String,
+        default: ''
+      }
     },
-    primaryText: {
-      type: String,
-      default: '我知道了'
+    data() {
+      return {
+        visible: this.value
+      };
     },
-    subText: {
-      type: String,
-      default: ''
+    watch: {
+      value (val) {
+        this.visible = val;
+      }
+    },
+    created() {},
+    mounted() {
+      console.log(this.visible)
+      console.log(this.isShow)
+    },
+    methods: {
+      toCancel: function() {
+        this.$emit('onCancel')
+      },
+      toOk: function() {
+        this.$emit('onOk')
+      }
     }
   }
-}
 </script>
+
+<style lang="less" scoped>
+  @import "../../assets/css/base.less";
+  .mask {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    top: 0;
+    left: 0;
+    z-index: 200;
+  }
+  .modal-wrapper {
+    width: 5.6rem;
+    background: #fff;
+    box-sizing: border-box;
+    border-radius: 0.06rem;
+    z-index: 250;
+  }
+  .modal-close {
+    position: absolute;
+    width: 0.9rem;
+    height: 0.7rem;
+    line-height: 0.55rem;
+    text-align: center;
+    top: 0;
+    right: 0;
+    font-size: 0.5rem;
+    color: @black-9;
+  }
+  .modal-content {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 0.48rem;
+    text-align: center;
+    font-size: 0.36rem;
+    color: @black-3;
+    line-height: 0.58rem;
+  }
+  .modal-title {
+    line-height: 0.58rem;
+    color: @black-3;
+    padding-bottom: 0.24rem;
+  }
+  .modal-word {
+    color: @black-6;
+    line-height: 0.4rem;
+  }
+  .modal-btnWrapper {
+    height: 1rem;
+    width: 100%;
+    justify-content: space-around;
+    border-top: 1px solid @black-e;
+    overflow: hidden;
+  }
+  .modal-btn1 {
+    width: 100%;
+    height: 1rem;
+    line-height: 0.99rem;
+    text-align: center;
+    color: @green-base;
+    font-size: 0.34rem;
+    background: #fff;
+    border-radius: 0.06rem;
+  }
+  .modal-no {
+    border-right: 1px solid @black-e;
+    color: @black-6;
+  }
+</style>

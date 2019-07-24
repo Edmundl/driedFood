@@ -5,7 +5,8 @@ import Vue from 'vue';
 import App from './App.vue';
 import router from './router/index.js';
 import FastClick from 'fastclick'
-import './assets/css/index.css'
+import './assets/js/umeH5Flexible.js';
+import './assets/css/umeH5Flexible.css';
 
 FastClick.attach(document.body)
 router.beforeEach((to, from, next) => {
