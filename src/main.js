@@ -8,6 +8,9 @@ import FastClick from 'fastclick'
 import './assets/js/umeH5Flexible.js';
 import './assets/css/umeH5Flexible.css';
 
+var VConsole = require('../node_modules/vconsole/dist/vconsole.min.js');
+var vConsole = new VConsole();
+
 FastClick.attach(document.body)
 router.beforeEach((to, from, next) => {
   /* 路由发生变化修改页面title */

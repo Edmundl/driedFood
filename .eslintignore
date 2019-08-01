@@ -3,3 +3,4 @@ node_modules/*.js
 demo/*.js
 webpack.*.js
 src/assets/js/*.js
+src/main.js

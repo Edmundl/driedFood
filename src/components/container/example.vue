@@ -17,6 +17,15 @@
     padding: 0.1rem 0;
     margin: 0.1rem 0;
   }
+  .item2 {
+    padding-top: 0.1rem;
+    padding-bottom: 0.5rem;
+  }
+  .areaTest {
+    width: 100%;
+    height: 100%;
+    padding: 0.15rem;
+  }
 </style>
 <template>
   <div>
@@ -49,6 +58,12 @@
       <loading v-show="loading"></loading>
       <button class="appBtn" @click="toLoading">显示loading 3s</button>
     </div>
+    <div class="item item2">
+      <div>多文本输入交互示例：</div>
+      <div class="areaTest">
+        <autoTextarea placeholder="请写下您对本机场的评审报告" :value="reportWord" @onChange="getText2" :maxLength="maxLength"></autoTextarea>
+      </div>
+    </div>
   </div>
 </template>
 <script>
@@ -57,13 +72,15 @@
   import modal from '../common/modal.vue';
   import tips from '../common/tips.vue';
   import loading from '../common/loading.vue';
-import { setTimeout } from 'timers';
+  import autoTextarea from '../common/autoTextarea.vue';
+  import { setTimeout } from 'timers';
 	export default {
     components: {
       greenBtn,
       modal,
       tips,
-      loading
+      loading,
+      autoTextarea
     },
 		data () {
 			return {
@@ -72,6 +89,8 @@ import { setTimeout } from 'timers';
         modal1: false,
         modal2: false,
         loading: false,
+        reportWord: '',
+        maxLength: 400,
 				headers: {
 					appid: 'UmetripTicketBaseServices',
 					methodName: 'getAvaliableList',
@@ -125,6 +144,9 @@ import { setTimeout } from 'timers';
         setTimeout(() => {
           this.loading = false
         }, 3000)
+      },
+      getText2: function(item, word) {
+        this.reportWord = word
       }
     }
 	}

@@ -12,6 +12,7 @@
     "fastclick": "^1.0.6",
     "glob-all": "^3.1.0",
     "iview": "^3.2.1",
+    "vconsole": "^3.3.2",
     "vue": "^2.6.10"
   },
   "devDependencies": {
