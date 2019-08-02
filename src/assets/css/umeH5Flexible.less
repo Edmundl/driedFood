@@ -26,13 +26,52 @@ body {
 }
 
 /* 内外边距通常让各个浏览器样式的表现位置不同，统一初始化 */
-body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, pre, code, form, fieldset, legend, input, textarea, p, blockquote, th, td, hr, button, article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+body,
+div,
+dl,
+dt,
+dd,
+ul,
+ol,
+li,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+pre,
+code,
+form,
+fieldset,
+legend,
+input,
+textarea,
+p,
+blockquote,
+th,
+td,
+hr,
+button,
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
   margin: 0;
   padding: 0;
 }
 
 /* 通过父元素控制表单标签的字体 */
-input, select, textarea {
+input,
+select,
+textarea {
   font-size: 100%;
 }
 
@@ -43,18 +82,29 @@ table {
 }
 
 /* 去掉列表前的标识, li 会继承 */
-ol, ul {
+ol,
+ul {
   list-style: none;
 }
 
 /* 去除某些区域点击的时候会出现的阴影 */
-a, button, input, img, select, textarea, div {
+a,
+button,
+input,
+img,
+select,
+textarea,
+div {
   -webkit-tap-highlight-color: transparent;
 }
 
 /* 盒子模型，规定width = border+padding+content */
 div {
   box-sizing: border-box;
+}
+
+.relative {
+  position: relative;
 }
 
 /* input输入框取消默认样式 */
@@ -141,17 +191,87 @@ input {
   visibility: hidden;
 }
 
-/* H5监听屏幕横屏竖屏的旋转事件并处理相应样式 */
+/* 1px全边框 */
+.border-1px-before {
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 200%;
+    height: 200%;
+    border: 1px solid #eee;
+    transform: scale(0.5);
+    transform-origin: left top;
+    box-sizing: border-box;
+    z-index: -1; // 如果父元素没有z-index: 0，该子元素将在祖先元素的背景颜色之后导致无法正常显示
+  }
+}
 
-/* 横屏时干啥干啥 */
+/* 1px上边框 */
+.border-top-1px-before {
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #eee;
+    transform: scaleY(0.5);
+    box-sizing: border-box;
+  }
+}
 
-/* @media (orientation: landscape) {} */
+/* 1px下边框 */
+.border-bottom-1px-after {
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: #eee;
+    transform: scaleY(0.5);
+  }
+}
 
-/* 竖屏时干啥干啥 */
+/* 1px右边框 */
+.border-right-1px-after {
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 1px;
+    height: 100%;
+    background-color: #eee;
+    transform: scaleX(0.5);
+  }
+}
 
-/* @media (orientation: portrait) {}  */
+/* 1px左边框 */
+.border-left-1px-after {
+  &::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1px;
+    height: 100%;
+    background-color: #eee;
+    transform: scaleX(0.5);
+  }
+}
 
-/* 1px经典问题 */
+/* 宽为1px的div(无定位情况) */
+.width-1px-line {
+  height: 100%;
+  width: 1px;
+  background-color: #eee;
+  transform: scaleX(0.5);
+}
 
 /* .类名::after{
   content: '';
@@ -165,3 +285,13 @@ input {
   -webkit-transform: scaleY(0.5);
   transform: scaleY(0.5);
 } */
+
+/* H5监听屏幕横屏竖屏的旋转事件并处理相应样式 */
+
+/* 横屏时干啥干啥 */
+
+/* @media (orientation: landscape) {} */
+
+/* 竖屏时干啥干啥 */
+
+/* @media (orientation: portrait) {}  */
