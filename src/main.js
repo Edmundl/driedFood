@@ -6,7 +6,7 @@ import App from './App.vue';
 import router from './router/index.js';
 import FastClick from 'fastclick'
 import './assets/js/umeH5Flexible.js';
-import './assets/css/umeH5Flexible.css';
+import './assets/css/umeH5Flexible.less';
 
 // var VConsole = require('../node_modules/vconsole/dist/vconsole.min.js');
 // var vConsole = new VConsole();
@@ -22,6 +22,8 @@ router.beforeEach((to, from, next) => {
 new Vue({
   el: '#container',
   router,
-  components: {App},
+  components: {
+    App
+  },
   template: '<App/>'
 })
