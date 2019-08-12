@@ -5,7 +5,12 @@
     height: 100%;
   }
   .title {
-    color: @green-base;
+    color: @UIColor9;
+  }
+  .changeBtn {
+    margin-top: 0.1rem;
+    display: flex;
+    justify-content: space-evenly;
   }
   .appBtn {
     margin: 0.2rem 0.5rem;
@@ -13,7 +18,7 @@
   }
   .item {
     width: 100%;
-    border: 1px solid @black-c;
+    border: 1px solid @UIColor5;
     padding: 0.1rem 0;
     margin: 0.1rem 0;
   }
@@ -44,8 +49,14 @@
     </div>
     <div class="item">
       <div>常用按钮示例：</div>
-      <greenBtn :isGray="isGray" @hasBtn="btnCallback">{{ btnWord }}</greenBtn>
-      <button class="appBtn" @click="changeBtn">改变按钮状态</button>
+      <Btn :bgType="bgType" @hasBtn="btnCallback">{{ btnWord }}</Btn>
+      <div class="changeBtn">
+        <span @click="changeBtn(0)">bgType传0</span>
+        <span @click="changeBtn(1)">bgType传1</span>
+        <span @click="changeBtn(2)">bgType传2</span>
+        <span @click="changeBtn(3)">bgType传3</span>
+        <span @click="changeBtn(4)">bgType传4</span>
+      </div>
     </div>
     <div class="item">
       <div>常用弹窗示例：</div>
@@ -64,55 +75,123 @@
         <autoTextarea placeholder="请写下您对本机场的评审报告" :value="reportWord" @onChange="getText2" :maxLength="maxLength"></autoTextarea>
       </div>
     </div>
+    <div class="item item2">
+      <div>列表示例：
+        <span @click="changeList(1)">L1 不带icon单行条目</span>
+        <span @click="changeList(2)">L2 带icon单行条目（一级页面）</span>
+        <span @click="changeList(3)">L3 带icon两行条目（一二级页面）</span>
+      </div>
+      <List :list-type="listType" :list="list"></List>
+    </div>
   </div>
 </template>
 <script>
   import { reqGet } from '../../utils/web.js'
-  import greenBtn from '../common/greenBtn.vue';
+  import Btn from '../common/Btn.vue';
   import modal from '../common/modal.vue';
   import tips from '../common/tips.vue';
   import loading from '../common/loading.vue';
   import autoTextarea from '../common/autoTextarea.vue';
+  import List from '../common/List.vue';
   import { setTimeout } from 'timers';
+  var iconMessage = require('../../assets/img/icon-message.png');
+  var iconDelay = require('../../assets/img/icon-delay.png');
 	export default {
     components: {
-      greenBtn,
+      Btn,
       modal,
       tips,
       loading,
-      autoTextarea
+      autoTextarea,
+      List
     },
 		data () {
 			return {
-        isGray: 1,
+        bgType: 0,
         btnWord: '尚未开放抢购',
         modal1: false,
         modal2: false,
         loading: false,
         reportWord: '',
         maxLength: 400,
-				headers: {
-					appid: 'UmetripTicketBaseServices',
-					methodName: 'getAvaliableList',
-					pageUrl: location.pathname,
-					serviceName: 'ticketChangeSVC'
-				}
+        list: [],
+        listType: 1,
+        noIconList: [
+          {
+            title: '主标题文案'
+          },
+          {
+            title: '主标题文案',
+            subTitle: '可变色副文案',
+            subType: 0
+          },
+          {
+            title: '主标题文案',
+            subTitle: '可变色较弱文案',
+            subType: 1
+          }
+        ],
+        iconList: [
+          {
+            icon: iconMessage,
+            iconWidth: '0.6rem',
+            title: '主标题文案'
+          },
+          {
+            icon: iconMessage,
+            iconWidth: '0.6rem',
+            title: '主标题文案',
+            subTitle: '可变色副文案',
+            subType: 0
+          },
+          {
+            icon: iconMessage,
+            iconWidth: '0.6rem',
+            title: '主标题文案',
+            subTitle: '可变色较弱文案',
+            subType: 1
+          }
+        ],
+        iconListWithTwo: [
+          {
+            icon: iconDelay,
+            iconWidth: '0.82rem',
+            title: '主标题文案',
+            content: '说明文案说明文案说明文案说明文案说明'
+          },
+          {
+            icon: iconDelay,
+            iconWidth: '0.82rem',
+            title: '主标题文案',
+            subTitle: '可变色副文案',
+            subType: 0,
+            content: '说明文案说明文案说明文案说明文案说明说明文案说明文案说明文案说明文案说明'
+          },
+          {
+            icon: iconDelay,
+            iconWidth: '0.82rem',
+            title: '主标题文案',
+            subTitle: '可变色较弱文案',
+            subType: 1
+          }
+        ]
 			}
 		},
-		created: function () {},
+		created: function () {
+      this.list = this.noIconList
+    },
     methods: {
       getMethod: function (url, params) {
         reqGet(url, params).then(res => {
         }).catch(() => {
         })
       },
-      changeBtn: function () {
-        if (this.isGray == 0) {
-          this.isGray = 1;
-          this.btnWord = '尚未开放抢购';
-        } else {
-          this.isGray = 0;
+      changeBtn: function (index) {
+        this.bgType = Number(index)
+        if (this.bgType === 1 || this.bgType === 2) {
           this.btnWord = '立即抢购';
+        } else {
+          this.btnWord = '尚未开放抢购';
         }
       },
       btnCallback: function () {
@@ -147,6 +226,17 @@
       },
       getText2: function(item, word) {
         this.reportWord = word
+      },
+      changeList(type) {
+        this.listType = type
+        if (type === 1) {
+          this.list = this.noIconList
+        } else if (type === 2) {
+          this.list = this.iconList
+        } else {
+          this.list = this.iconListWithTwo
+        }
+        console.log(this.list)
       }
     }
 	}

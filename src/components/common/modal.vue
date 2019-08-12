@@ -71,7 +71,7 @@
     position: fixed;
     height: 100%;
     width: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, @Alpha3);
     top: 0;
     left: 0;
     z-index: 200;
@@ -80,7 +80,7 @@
     width: 5.6rem;
     background: #fff;
     box-sizing: border-box;
-    border-radius: 0.06rem;
+    border-radius: @Corner2;
     z-index: 250;
   }
   .modal-close {
@@ -92,31 +92,31 @@
     top: 0;
     right: 0;
     font-size: 0.5rem;
-    color: @black-9;
+    color: @UIColor4;
   }
   .modal-content {
     box-sizing: border-box;
     width: 100%;
     padding: 0.48rem;
     text-align: center;
-    font-size: 0.36rem;
-    color: @black-3;
+    font-size: @UIFontSize1;
+    color: @UIColor1;
     line-height: 0.58rem;
   }
   .modal-title {
     line-height: 0.58rem;
-    color: @black-3;
+    color: @UIColor1;
     padding-bottom: 0.24rem;
   }
   .modal-word {
-    color: @black-6;
+    color: @UIColor3;
     line-height: 0.4rem;
   }
   .modal-btnWrapper {
     height: 1rem;
     width: 100%;
     justify-content: space-around;
-    border-top: 1px solid @black-e;
+    border-top: 1px solid @UIColor6;
     overflow: hidden;
   }
   .modal-btn1 {
@@ -124,13 +124,13 @@
     height: 1rem;
     line-height: 0.99rem;
     text-align: center;
-    color: @green-base;
-    font-size: 0.34rem;
+    color: @UIColor9;
+    font-size: @UIFontSize2;
     background: #fff;
-    border-radius: 0.06rem;
+    border-radius: @Corner2;
   }
   .modal-no {
-    border-right: 1px solid @black-e;
-    color: @black-6;
+    border-right: 1px solid @UIColor6;
+    color: @UIColor3;
   }
 </style>

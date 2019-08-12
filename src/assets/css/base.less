@@ -1,19 +1,181 @@
-// 主题绿
-@green-base: #41B24E;
-// 常用字体或边框颜色
-@black-0: #000;
-@black-3: #333;
-@black-4: #444;
-@black-6: #666;
-@black-9: #999;
-@black-c: #CCC;
-@black-e: #EEE;
-@black-f5: #f5f5f5;
-@black-f8f9fa: #F8F9FA;
-// 提示，警告等常用色
-@yellow-warning: #FF9C00;
-@yellow-arrive: #FF801A;
-@yellow-bk: #FFF7EA;
-@yellow-word: #FFB540;
-@red-delay: #F74F51;
-@blue-base: #41B4FE;
+// 转rem
+@rem: 100;
+// 字体
+@UIFontFamilyCN: "PingFang SC";
+@UIFontFamilyEN: "San Fran";
+
+// 字号 转为rem
+@UIFontSize1: 36/@rem*1rem;
+@UIFontSize2: 34/@rem*1rem;
+@UIFontSize3: 32/@rem*1rem;
+@UIFontSize4: 30/@rem*1rem;
+@UIFontSize5: 28/@rem*1rem;
+@UIFontSize6: 26/@rem*1rem;
+@UIFontSize7: 24/@rem*1rem;
+@UIFontTitleSize1: @UIFontSize1;
+@UIFontTitleSize2: @UIFontSize2;
+@UIFontBodySize1: @UIFontSize3;
+@UIFontBodySize2: @UIFontSize4;
+
+// 粗细
+@UIFontWeight1: lighter;
+@UIFontWeight2: normal;
+@UIFontWeight3: medium;
+@UIFontWeight4: bold;
+
+// 颜色
+@UIColor1: #333333;
+@UIColor2: #444444;
+@UIColor3: #666666;
+@UIColor4: #999999;
+@UIColor5: #cccccc;
+@UIColor6: #eeeeee;
+@UIColor7: #f5f5f5;
+@UIColor8: #f8f9fa;
+@UIColor9: #41b24e;
+@UIColor10: #ff9c00;
+@UIColor11: #ff801a;
+@UIColor12: #f74f51;
+@UIColor13: #41b4fe;
+@UIColor14: #f2f2f2;
+@UIColor15: #3da84a;
+@UIColor16: #fff7ea;
+@UIColor17: #ffb540;
+
+// 文字颜色
+@UIColorSeparator: @UIColor6; // 分隔线颜色
+@UIColorBackground: @UIColor7; // 全局统一的背景色
+@UIColorBase: @UIColor8; // 基础颜色
+@UIColorBrand: @UIColor9; // 品牌颜色
+
+// 航班动态
+@UIColorWarning: @UIColor10;
+@UIColorPlan: @UIColor11;
+@UIColorArrive: @UIColor11;
+@UIColorTakeOff: @UIColor11;
+@UIColorDelay: @UIColor12;
+@UIColorCancel: @UIColor12;
+@UIColorReserve: @UIColor12;
+@UIColorReturn: @UIColor12;
+
+// 状态颜色
+@ColorSuccess1: @UIColor1;
+@ColorWarning1: @UIColor5;
+@ColorNotice1: @UIColor2;
+@ColorError1: @UIColor3;
+@ColorHelp1: @UIColor4;
+
+// icon大小
+.size-mixin(@width, @height) {
+  width: @width/@rem*1rem;
+  height: @height/@rem*1rem;
+}
+.IconSizeXXS {
+  .size-mixin(16, 16);
+}
+.IconSizeXS {
+  .size-mixin(24, 24);
+}
+.IconSizeS {
+  .size-mixin(32, 32);
+}
+.IconSizeM {
+  .size-mixin(48, 48);
+}
+.IconSizeL {
+  .size-mixin(50, 50);
+}
+.IconSizeXL {
+  .size-mixin(64, 64);
+}
+.IconSizeXXL {
+  .size-mixin(88, 88);
+}
+.IconSizeXXXL {
+  .size-mixin(112, 112);
+}
+.IconSizeTips {
+  .size-mixin(26, 26);
+}
+// 图片资源
+@baseUrl: '../img';
+.IconHelp {
+  background-image: url('@{baseUrl}/icon-help.png');
+  background-size: 100% 100%;
+}
+.IconArrow {
+  background-image: url('@{baseUrl}/icon-rightArrow.png');
+  background-size: 100% 100%;
+}
+.IconTip {
+  background-image: url('@{baseUrl}/icon-tip.png');
+  background-size: 100% 100%;
+}
+.IconClose {
+  background-image: url('@{baseUrl}/icon-close.png');
+  background-size: 100% 100%;
+}
+.IconMessage {
+  background-image: url('@{baseUrl}/icon-message.png');
+  background-size: 100% 100%;
+}
+
+// 间距
+@Space1: 32/@rem*1rem;
+@Space2: 20/@rem*1rem;
+@Space3: 16/@rem*1rem;
+@Space4: 15/@rem*1rem;
+@Space5: 10/@rem*1rem;
+@Space6: 5/@rem*1rem;
+@Space7: 1/@rem*1rem;
+@Space8: 0.5/@rem*1rem;
+// 全局边距
+@Margin1: @Space1;
+@Margin2: @Space2;
+@Margin3: @Space3;
+// 水平间距
+@Width1: @Space5;
+@Width2: @Space6;
+// 垂直间距
+@Height1: @Space2;
+// 线条
+@LineColor1: @UIColor6; // 线条
+@LineHeight1: 0.5; // 细线
+@LineHeight2: 1; // 常规
+@LineHeight3: 2; // 粗线
+// 圆角
+@Corner1: 2/@rem*1rem; // 常规圆角
+@Corner2: 6/@rem*1rem; // 大圆角
+@Corner3: 10/@rem*1rem; // 超大圆角
+@CornerCircle: 0.5/@rem*1rem; // 圆形圆角
+// 边框
+@BorderColor1: @UIColor6;
+@BorderWith1: 1;
+@BorderWith2: 2;
+// 阴影
+@ShadowColor1: @UIColor6;
+// alpha
+@Alpha1: 0.1; // 透明度
+@Alpha2: 0.05; // 点击
+@Alpha3: 0.6; // 蒙层
+@Alpha2: 0.05; // 引导
+
+// 超出几行...
+.ellipsis-mixin(@num) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: @num;
+  overflow: hidden;
+}
+.line-clamp-1 {
+  .ellipsis-mixin(1);
+}
+.line-clamp-2 {
+  .ellipsis-mixin(2);
+}
+.line-clamp-3 {
+  .ellipsis-mixin(3);
+}
+.line-clamp-4 {
+  .ellipsis-mixin(4);
+}

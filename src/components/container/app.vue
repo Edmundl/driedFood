@@ -5,14 +5,14 @@
     height: 100%;
     font-size: 0.32rem;
     .title {
-      color: @green-base;
+      color: @UIColor9;
     }
     .item {
-      border: 0.02rem solid @black-c;
+      border: 0.02rem solid @UIColor5;
       width: 100%;
       height: 1rem;
       line-height: 0.96rem;
-      color: @black-6;
+      color: @UIColor3;
       margin: 0.3rem 0;
     }
   }

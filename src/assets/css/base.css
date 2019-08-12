@@ -1,0 +1,80 @@
+.IconSizeXXS {
+  width: 0.16rem;
+  height: 0.16rem;
+}
+.IconSizeXS {
+  width: 0.24rem;
+  height: 0.24rem;
+}
+.IconSizeS {
+  width: 0.32rem;
+  height: 0.32rem;
+}
+.IconSizeM {
+  width: 0.48rem;
+  height: 0.48rem;
+}
+.IconSizeL {
+  width: 0.5rem;
+  height: 0.5rem;
+}
+.IconSizeXL {
+  width: 0.64rem;
+  height: 0.64rem;
+}
+.IconSizeXXL {
+  width: 0.88rem;
+  height: 0.88rem;
+}
+.IconSizeXXXL {
+  width: 1.12rem;
+  height: 1.12rem;
+}
+.IconSizeTips {
+  width: 0.26rem;
+  height: 0.26rem;
+}
+.IconHelp {
+  background-image: url('../img/icon-help.png');
+  background-size: 100% 100%;
+}
+.IconArrow {
+  background-image: url('../img/icon-rightArrow.png');
+  background-size: 100% 100%;
+}
+.IconTip {
+  background-image: url('../img/icon-tip.png');
+  background-size: 100% 100%;
+}
+.IconClose {
+  background-image: url('../img/icon-close.png');
+  background-size: 100% 100%;
+}
+.IconMessage {
+  background-image: url('../img/icon-message.png');
+  background-size: 100% 100%;
+}
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+}
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+.line-clamp-4 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  overflow: hidden;
+}

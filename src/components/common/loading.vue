@@ -21,7 +21,7 @@
     width: 0.426rem;
     height: 0.426rem;
     border-radius: 50%;
-    background: @green-base;
+    background: @UIColor9;
     position: absolute;
     animation: load 1.04s ease infinite;
   }

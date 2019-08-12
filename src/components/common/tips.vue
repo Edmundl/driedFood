@@ -1,19 +1,16 @@
 <!-- 提示导航栏 -->
 <template>
   <div v-if="show" class="tipsWrapper" @click="toArrow">
-    <img :src="tips" alt="" class="tipImg">
-    <img v-if="close" :src="closeimg" alt="" class="closeImg" @click="toClose">
-    <img v-if="rightarrow" :src="arrowimg" alt="" class="rightarrow">
-    <div class="tipsWord" :style="close || rightarrow ? 'padding-right:0.52rem' : ''">
+    <span class="IconTip"></span>
+    <span v-if="close" class="IconClose IconSizeTips" @click="toClose"></span>
+    <span v-if="rightarrow" class="IconArrow IconSizeXS"></span>
+    <div class="tipsWord">
       <slot></slot>
     </div>
   </div>
 </template>
 
 <script>
-  import tips from '../../assets/img/tips.png'
-  import closeimg from '../../assets/img/close.png'
-  import arrowimg from '../../assets/img/rightarrow.png'
   export default {
     components: {},
     props: {
@@ -28,9 +25,6 @@
     },
     data() {
       return {
-        tips: tips,
-        closeimg: closeimg,
-        arrowimg: arrowimg,
         show: true
       };
     },
@@ -50,35 +44,24 @@
 <style lang="less" scoped>
   @import "../../assets/css/base.less";
   .tipsWrapper {
-    position: relative;
+    display: flex;
+    align-items: center;
     width: 100%;
-    background: @yellow-bk;
-    padding: 0.16rem 0.28rem 0.2rem 0.72rem;
+    background: @UIColor16;
+    padding: 0.16rem 0.2rem 0.16rem 0.32rem;
   }
   .tipsWord {
     font-size: 0.28rem;
     line-height: 0.38rem;
-    color: @yellow-word;
+    color: @UIColor17;
   }
-  .tipImg {
-    position: absolute;
-    width: 0.26rem;
-    height: 0.26rem;
-    top: 0.23rem;
-    left: 0.32rem;
+  .IconTip:extend(.IconSizeTips) {
+    margin-right: 0.14rem;
   }
-  .closeImg {
-    position: absolute;
-    width: 0.4rem;
-    height: 0.4rem;
-    top: 0.2rem;
-    right: 0.2rem;
+  .IconClose:extend(.IconSizeTips) {
+    margin-left: 0.18rem;
   }
-  .rightarrow {
-    position: absolute;
-    width: 0.4rem;
-    height: 0.4rem;
-    top: 0.2rem;
-    right: 0.2rem;
+  .IconArrow:extend(.IconSizeXS) {
+    margin-left: 0.18rem;
   }
 </style>
