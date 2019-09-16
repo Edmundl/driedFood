@@ -2,11 +2,11 @@
 <template>
   <div v-if="show" class="tipsWrapper" @click="toArrow">
     <span class="IconTip"></span>
-    <span v-if="close" class="IconClose IconSizeTips" @click="toClose"></span>
-    <span v-if="rightarrow" class="IconArrow IconSizeXS"></span>
     <div class="tipsWord">
       <slot></slot>
     </div>
+    <span v-if="close" class="IconClose" @click="toClose"></span>
+    <span v-if="rightarrow" class="IconArrow IconSizeXS"></span>
   </div>
 </template>
 
@@ -51,14 +51,15 @@
     padding: 0.16rem 0.2rem 0.16rem 0.32rem;
   }
   .tipsWord {
+    flex-grow: 1;
     font-size: 0.28rem;
-    line-height: 0.38rem;
+    line-height: 0.4rem;
     color: @UIColor17;
   }
   .IconTip:extend(.IconSizeTips) {
     margin-right: 0.14rem;
   }
-  .IconClose:extend(.IconSizeTips) {
+  .IconClose:extend(.IconSizeClose) {
     margin-left: 0.18rem;
   }
   .IconArrow:extend(.IconSizeXS) {

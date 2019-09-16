@@ -28,10 +28,6 @@
             maxLength: {
               type: Number,
               default: 20000
-            },
-            item: {
-              type: Number,
-              default: 20000
             }
         },
         data() {
@@ -54,11 +50,11 @@
         methods: {
           change() {
             if (this.temp_value.length <= this.maxLength) {
-              this.$emit('onChange', this.item, this.temp_value)
+              this.$emit('onChange', this.temp_value)
             }
           },
           onfocus() {
-            this.$emit('onfocus', this.item)
+            this.$emit('onfocus')
           },
           onblur() {
             this.$emit('onblur')
@@ -73,6 +69,7 @@
     margin: 0;
     padding: 0;
     line-height: normal;
+    min-height: 0.8rem;
   }
   .auto-textarea-block {
     display: block;
@@ -109,7 +106,7 @@
   .wordRule {
     position: absolute;
     right: 0;
-    bottom: -0.3rem;
+    bottom: 0;
     font-size: 0.24rem;
     color: #ccc;
   }

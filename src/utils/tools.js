@@ -53,3 +53,12 @@ export function getTime(minutes, seconds) {
     formatTime: minutes + ':' + seconds
   }
 }
+
+export function findIndex(array, key, value) {
+  for (let i = 0; i < array.length; i++) {
+    const obj = array[i]
+    if (obj[key] === value) {
+      return i
+    }
+  }
+}

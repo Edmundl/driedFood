@@ -8,8 +8,8 @@ import FastClick from 'fastclick'
 import './assets/js/umeH5Flexible.js';
 import './assets/css/umeH5Flexible.less';
 
-// var VConsole = require('../node_modules/vconsole/dist/vconsole.min.js');
-// var vConsole = new VConsole();
+var VConsole = require('vconsole/dist/vconsole.min.js');
+var vConsole = new VConsole();
 
 FastClick.attach(document.body)
 router.beforeEach((to, from, next) => {
@@ -20,7 +20,7 @@ router.beforeEach((to, from, next) => {
   next()
 })
 new Vue({
-  el: '#container',
+  el: '#app',
   router,
   components: {
     App

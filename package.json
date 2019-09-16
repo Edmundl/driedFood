@@ -12,7 +12,6 @@
     "fastclick": "^1.0.6",
     "glob-all": "^3.1.0",
     "iview": "^3.2.1",
-    "vconsole": "^3.3.2",
     "vue": "^2.6.10"
   },
   "devDependencies": {
@@ -53,6 +52,7 @@
     "stylelint-webpack-plugin": "^0.10.5",
     "uglifyjs-webpack-plugin": "^1.2.7",
     "url-loader": "^1.0.1",
+    "vconsole": "^3.3.4",
     "vue-loader": "^15.2.6",
     "vue-router": "^3.0.7",
     "vue-style-loader": "^4.1.1",

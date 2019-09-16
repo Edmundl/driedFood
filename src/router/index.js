@@ -17,7 +17,17 @@ export default new VueRouter({
     },
     {
 			path: '/example',
-			component: resolve => require(['../components/container/example.vue'], resolve),
+      component: resolve => require(['../components/container/example.vue'], resolve),
+      children: [
+        {
+          path: 'feedback',
+          component: resolve => require(['../components/container/feedback.vue'], resolve)
+        },
+        {
+          path: 'form',
+          component: resolve => require(['../components/container/form.vue'], resolve)
+        }
+      ],
 			meta: {
 				title: '公用组件示例'
 			}

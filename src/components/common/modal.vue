@@ -2,13 +2,13 @@
 <template>
   <div v-show="visible" class="mask">
     <div class="modal-wrapper allCenter">
-      <div class="modal-content">
+      <div class="modal-body">
         <div v-if="title.length > 0" class="modal-title">{{ title }}</div>
-        <div class="modal-word">{{ modalWord }}</div>
+        <div :class="title.length > 0 ? 'modal-content second' : 'modal-content primary'">{{ content }}</div>
       </div>
       <div class="modal-btnWrapper flex_flex">
-        <div v-if="cancelWord.length > 0" @click="toCancel" class="modal-btn1 modal-no">{{ cancelWord }}</div>
-        <div @click="toOk" class="modal-btn1">{{ okWord }}</div>
+        <div v-if="cancelText.length > 0" @click="toCancel" class="modal-btn1 modal-no">{{ cancelText }}</div>
+        <div @click="toOk" class="modal-btn1">{{ okText }}</div>
       </div>
     </div>
   </div>
@@ -26,15 +26,15 @@
         type: String,
         default: ''
       },
-      cancelWord: {
+      cancelText: {
         type: String,
         default: ''
       },
-      okWord: {
+      okText: {
         type: String,
         default: '确定'
       },
-      modalWord: {
+      content: {
         type: String,
         default: ''
       }
@@ -50,10 +50,6 @@
       }
     },
     created() {},
-    mounted() {
-      console.log(this.visible)
-      console.log(this.isShow)
-    },
     methods: {
       toCancel: function() {
         this.$emit('onCancel')
@@ -94,23 +90,29 @@
     font-size: 0.5rem;
     color: @UIColor4;
   }
-  .modal-content {
+  .modal-body {
     box-sizing: border-box;
     width: 100%;
     padding: 0.48rem;
     text-align: center;
-    font-size: @UIFontSize1;
-    color: @UIColor1;
-    line-height: 0.58rem;
+  }
+  .modal-content {
+    &.primary {
+      font-size: @UIFontSize1;
+      color: @UIColor1;
+      line-height: 0.58rem;
+    }
+    &.second {
+      font-size: @UIFontSize4;
+      color: @UIColor3;
+      line-height: 0.48rem;
+    }
   }
   .modal-title {
+    font-size: @UIFontSize1;
     line-height: 0.58rem;
     color: @UIColor1;
     padding-bottom: 0.24rem;
-  }
-  .modal-word {
-    color: @UIColor3;
-    line-height: 0.4rem;
   }
   .modal-btnWrapper {
     height: 1rem;
