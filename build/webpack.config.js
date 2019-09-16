@@ -13,6 +13,7 @@ module.exports = {
   },
   output: {
     filename: '[name].js',
+    chunkFilename: '[name].js',
     path: path.resolve(__dirname, '../dist')
   },
 	resolve: {
@@ -78,7 +79,14 @@ module.exports = {
         test: /\.js$/,
         use: [
           {
-            loader: 'babel-loader'
+            loader: 'babel-loader',
+            options: {
+              'presets': [
+                ['env', { 'modules': false }],
+                'stage-2'
+              ],
+              'plugins': ['transform-runtime', 'syntax-dynamic-import'],
+            }
           }
         ],
         exclude: file => (
@@ -110,7 +118,7 @@ module.exports = {
     new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
       title: '',
-      filename: 'smartQA.html',
+      filename: 'index.html',
       template: './index.html',
       chunks: ['commons', 'app'], // webpack不会自动注入splitChunks里面提取的公共包
       inject: true
