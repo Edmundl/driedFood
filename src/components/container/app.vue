@@ -30,15 +30,27 @@
     <div class="item" @click="toFlexible">
       to适配实例
     </div>
+    <div class="item" @click="getData">
+      网络catch示例
+    </div>
   </div>
 </template>
 <script>
+  import { reqGet } from '../../utils/web'
 	export default {
 		data () {
 			return {}
 		},
-		created: function () {},
+		created: function () {
+      this.getData()
+    },
     methods: {
+      getData() {
+        let url = 'test'
+        reqGet(url).then(res => {
+          console.log(res)
+        })
+      },
       toFlexible: function() {
         this.$router.push({
           path: 'flexible'

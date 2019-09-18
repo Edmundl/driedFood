@@ -1,5 +1,6 @@
 import axios from 'axios';
 import urlBase from '../../config/config.js';
+import Message from './Message'
 axios.defaults.timeout = 50000;
 
 export function reqGet(path, params = {}, isWhole) {
@@ -13,8 +14,11 @@ export function reqGet(path, params = {}, isWhole) {
     }).then((response) => {
       resovle(response.data)
     }
-    ).catch((error) => {
-        reject(error)
+    ).catch(() => {
+        Message.info({
+          content: '网络错误，请稍后再试！',
+          duration: 2
+        })
       }
     );
   })
@@ -34,8 +38,11 @@ export function reqPost(path, params = {}, ContentType) {
       }).then((response) => {
          resovle(response)
         }
-      ).catch((error) => {
-           reject(error)
+      ).catch(() => {
+          Message.info({
+            content: '网络错误，请稍后再试！',
+            duration: 2
+          })
         }
       );
   })

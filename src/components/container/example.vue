@@ -44,6 +44,7 @@
       <div :class="pageIndex === 2 ? 'ume-navbar_item active': 'ume-navbar_item'" @click="routeTo(2)">上传<span class="after"></span></div>
       <div :class="pageIndex === 3 ? 'ume-navbar_item active': 'ume-navbar_item'" @click="routeTo(3)">其他</div>
     </div>
+    <div @click="toast">toast</div>
     <div class="ume-tab_panel">
       <router-view></router-view>
     </div>
@@ -64,6 +65,12 @@
         } else if (index === 1) {
           this.$router.push('/example/form')
         }
+      },
+      toast() {
+        this.$Message.info({
+          content: 'test',
+          duration: 2
+        })
       }
     }
 	}

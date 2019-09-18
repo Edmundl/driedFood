@@ -1,51 +1,89 @@
 <style lang="less">
 @import "../../assets/css/base.less";
-.toast {
-  padding: 0.24rem 0.42rem;
-  background: #000;
-  border-radius: @Corner2;
-  color: #fff;
-  font-size: @UIFontSize3;
+.ume-message {
   position: fixed;
-  left: 50%;
+  left: 0;
+  width: 100%;
   top: 50%;
-  transform: translate(-50%, -50%);
 }
 </style>
 
 <template>
-  <div v-show="visible" class="toast">{{ text }}</div>
+  <div class="ume-message" :style="wrapStyles">
+    <Notice v-for="notice in notices"
+    :key="notice.name"
+    :prefix-cls="prefixCls"
+    :content="notice.content"
+    :duration="notice.duration"
+    :type="notice.type"
+    :name="notice.name"
+    :styles="notice.styles"
+    :transition-name="notice.transitionName"
+    :on-close="notice.onClose">
+    </Notice>
+  </div>
 </template>
 <script>
+import Notice from './Notice.vue'
+const prefixCls = 'ume-notification';
 export default {
+  components: {
+    Notice
+  },
   props: {
-    showToast: {
-      type: Boolean,
-      default: false
-    },
-    text: {
+    prefixCls: {
       type: String,
-      default: ''
+      default: prefixCls
     },
-    timeout: {
-      type: Number,
-      default: 1000
+    styles: {
+      type: Object,
+      default: function () {
+        return {
+          top: '65px',
+          left: '50%'
+        };
+      }
     }
   },
   data () {
     return {
-      visible: false
+      tIndex: 1,
+      notices: []
     }
   },
-  watch: {
-    showToast: function(newVal) {
-      this.visible = newVal
-      if (this.visible) {
-        setTimeout(() => {
-          this.visible = false
-          this.$emit('close')
-        }, this.timeout);
+  computed: {
+    wrapStyles () {
+      let styles = Object.assign({}, this.styles);
+      styles['z-index'] = 1010 + this.tIndex;
+      return styles;
+    }
+  },
+  mounted() {},
+  methods: {
+    add (notice) {
+      const name = notice.name
+      let _notice = Object.assign({
+          styles: {
+              right: '50%'
+          },
+          content: '',
+          duration: 1.5,
+          closable: false,
+          name: name
+      }, notice);
+      this.notices.push(_notice);
+    },
+    close(name) {
+      const notices = this.notices;
+      for (let i = 0; i < notices.length; i++) {
+        if (notices[i].name === name) {
+          this.notices.splice(i, 1);
+          break;
+        }
       }
+    },
+    closeAll () {
+      this.notices = [];
     }
   }
 }
