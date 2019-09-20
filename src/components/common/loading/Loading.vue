@@ -1,6 +1,6 @@
 <style lang="less" scoped>
-  @import "../../assets/css/base.less";
-  .mask {
+  @import "../../../assets/css/base.less";
+  .ume-loading {
     position: fixed;
     left: 0;
     right: 0;
@@ -81,16 +81,33 @@
 </style>
 
 <template>
-  <div class="mask">
-    <div class="loadEffect">
-      <span class="loadingItem"></span>
-      <span class="loadingItem"></span>
-      <span class="loadingItem"></span>
-      <span class="loadingItem"></span>
-      <span class="loadingItem"></span>
-      <span class="loadingItem"></span>
-      <span class="loadingItem"></span>
-      <span class="loadingItem"></span>
+  <transition name="fade">
+    <div class="ume-loading">
+      <div class="loadEffect">
+        <span class="loadingItem"></span>
+        <span class="loadingItem"></span>
+        <span class="loadingItem"></span>
+        <span class="loadingItem"></span>
+        <span class="loadingItem"></span>
+        <span class="loadingItem"></span>
+        <span class="loadingItem"></span>
+        <span class="loadingItem"></span>
+      </div>
     </div>
-  </div>
+  </transition>
 </template>
+<script>
+export default {
+  props: {
+    fix: {
+      type: Boolean,
+      default: true
+    }
+  },
+  data () {
+    return {
+      visible: false
+    }
+  }
+}
+</script>

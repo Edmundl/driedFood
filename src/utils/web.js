@@ -1,9 +1,13 @@
 import axios from 'axios';
 import urlBase from '../../config/config.js';
+import Message from '../components/common/message/index'
+import Loading from '../components/common/loading/index'
 axios.defaults.timeout = 50000;
 
 export function reqGet(path, params = {}, isWhole) {
+  Loading.show()
   return new Promise((resovle, reject) => {
+    Loading.hide()
     let url = urlBase.urlBase + path;
     if (isWhole) {
       url = path
@@ -13,8 +17,11 @@ export function reqGet(path, params = {}, isWhole) {
     }).then((response) => {
       resovle(response.data)
     }
-    ).catch((error) => {
-        reject(error)
+    ).catch(() => {
+        Message.info({
+          content: '网络错误，请稍后再试！',
+          duration: 2
+        })
       }
     );
   })
@@ -34,8 +41,11 @@ export function reqPost(path, params = {}, ContentType) {
       }).then((response) => {
          resovle(response)
         }
-      ).catch((error) => {
-           reject(error)
+      ).catch(() => {
+          Message.info({
+            content: '网络错误，请稍后再试！',
+            duration: 2
+          })
         }
       );
   })

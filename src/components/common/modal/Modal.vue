@@ -62,7 +62,7 @@
 </script>
 
 <style lang="less" scoped>
-  @import "../../assets/css/base.less";
+  @import "../../../assets/css/base.less";
   .mask {
     position: fixed;
     height: 100%;
