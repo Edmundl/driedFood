@@ -22,7 +22,6 @@ Loading.newInstance = properties => {
   const component = instance.$mount()
   document.body.appendChild(component.$el)
   const loading = instance.$children[0]
-  console.log(loading)
   return {
     show() {
       loading.visible = true
@@ -35,7 +34,7 @@ Loading.newInstance = properties => {
           document.body.removeChild(document.getElementsByClassName('ume-loading-fullscreen')[0]);
         }
         cb();
-      }, 500);
+      }, 100);
     },
     component: loading
   }

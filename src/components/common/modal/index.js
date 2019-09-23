@@ -4,8 +4,7 @@ let modalInstance
 function getModalInstance() {
   modalInstance = modalInstance || Modal.newInstance({
     closable: false,
-    maskClosable: false,
-    footerHide: true
+    maskClosable: false
   })
   return modalInstance
 }
@@ -20,7 +19,14 @@ function confirm(options) {
 
 Modal.info = function (props = {}) {
   props.icon = 'info';
-  props.showCancel = false;
   return confirm(props);
 };
+
+Modal.remove = function() {
+  if (!modalInstance) { // at loading status, remove after Cancel
+    return false;
+  }
+  const instance = getModalInstance();
+  instance.remove();
+}
 export default Modal

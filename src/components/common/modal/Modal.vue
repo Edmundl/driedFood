@@ -1,14 +1,16 @@
 <!-- 最常用的提示框 -->
 <template>
   <div v-show="visible" class="mask">
-    <div class="modal-wrapper allCenter">
+    <div class="ume-modal-wrapper allCenter">
       <div class="modal-body">
-        <div v-if="title.length > 0" class="modal-title">{{ title }}</div>
-        <div :class="title.length > 0 ? 'modal-content second' : 'modal-content primary'">{{ content }}</div>
+        <slot name="title"><div v-if="title.length > 0" class="modal-title">{{ title }}</div></slot>
+        <slot name="content"><div :class="title.length > 0 ? 'modal-content second' : 'modal-content primary'" v-html="content"></div></slot>
       </div>
       <div class="modal-btnWrapper flex_flex">
-        <div v-if="cancelText.length > 0" @click="toCancel" class="modal-btn1 modal-no">{{ cancelText }}</div>
-        <div @click="toOk" class="modal-btn1">{{ okText }}</div>
+        <slot name="footer">
+          <div v-if="cancelText.length > 0" @click="toCancel" class="modal-btn1 modal-no">{{ cancelText }}</div>
+          <div @click="toOk" class="modal-btn1">{{ okText }}</div>
+        </slot>
       </div>
     </div>
   </div>
@@ -52,10 +54,12 @@
     created() {},
     methods: {
       toCancel: function() {
-        this.$emit('onCancel')
+        this.visible = false
+        this.$emit('on-cancel')
       },
       toOk: function() {
-        this.$emit('onOk')
+        this.visible = false
+        this.$emit('on-ok')
       }
     }
   }
@@ -72,7 +76,7 @@
     left: 0;
     z-index: 200;
   }
-  .modal-wrapper {
+  .ume-modal-wrapper {
     width: 5.6rem;
     background: #fff;
     box-sizing: border-box;

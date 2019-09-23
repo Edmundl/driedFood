@@ -27,6 +27,13 @@ export default new VueRouter({
             /* webpackChunkName: "form" */
             /* webpackPrefetch: true */
            '../components/container/form.vue')
+        },
+        {
+          path: 'upload',
+          component: () => import(
+            /* webpackChunkName: "upload" */
+            /* webpackPrefetch: true */
+           '../components/container/upload.vue')
         }
       ],
 			meta: {

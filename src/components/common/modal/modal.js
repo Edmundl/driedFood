@@ -1,19 +1,49 @@
 import Modal from './Modal.vue'
 import Vue from 'vue'
 
+// const prefixCls = 'ume-modal-confirm';
 Modal.newInstance = properties => {
   const _props = properties || {}
   const instance = new Vue({
     data: Object.assign({}, _props, {
       visible: false,
       title: '',
+      content: '',
       okText: undefined,
-      cancelText: undefined,
+      cancelText: undefined
     }),
+    methods: {
+      cancel() {
+        this.$children[0].visible = false;
+        this.remove()
+        this.onCancel();
+      },
+      ok() {
+        this.$children[0].visible = false;
+        this.remove()
+        this.onOk();
+      },
+      onCancel() {},
+      onOk() {},
+      onRemove() {},
+      remove () {
+        setTimeout(() => {
+          this.destroy();
+        }, 300);
+      },
+      destroy () {
+        this.$destroy();
+        document.body.removeChild(this.$el);
+        this.onRemove();
+      }
+    },
     render(h) {
       return h(Modal, {
         props: Object.assign({}, _props, {
-          width: this.width
+          content: this.content,
+          title: this.title,
+          okText: this.okText,
+          cancelText: this.cancelText
         }),
         domProps: {
           value: this.visible
@@ -23,18 +53,6 @@ Modal.newInstance = properties => {
           'on-ok': this.ok
         }
       })
-    },
-    methods: {
-      cancel() {
-        this.$children[0].visible = false;
-        this.onCancel();
-      },
-      ok() {
-        this.$children[0].visible = false;
-        this.$emit('on-ok');
-      },
-      onCancel() {},
-      onOk() {}
     }
   })
   const component = instance.$mount()
@@ -47,7 +65,7 @@ Modal.newInstance = properties => {
       }
 
       if ('content' in props) {
-          modal.$parent.body = props.content;
+          modal.$parent.content = props.content;
       }
 
       if ('okText' in props) {
@@ -65,6 +83,16 @@ Modal.newInstance = properties => {
       if ('onOk' in props) {
           modal.$parent.onOk = props.onOk;
       }
+
+      if ('onRemove' in props) {
+        modal.$parent.onRemove = props.onRemove;
+    }
+      modal.visible = true;
+    },
+    remove() {
+      modal.visible = false;
+      modal.$parent.remove();
     }
   }
 }
+export default Modal

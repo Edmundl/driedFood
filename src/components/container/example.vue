@@ -44,15 +44,12 @@
       <div :class="pageIndex === 2 ? 'ume-navbar_item active': 'ume-navbar_item'" @click="routeTo(2)">上传<span class="after"></span></div>
       <div :class="pageIndex === 3 ? 'ume-navbar_item active': 'ume-navbar_item'" @click="routeTo(3)">其他</div>
     </div>
-    <div @click="toast">toast</div>
-    <div @click="loading">loading</div>
     <div class="ume-tab_panel">
       <router-view></router-view>
     </div>
   </div>
 </template>
 <script>
-import { reqGet } from '../../utils/web'
 	export default {
 		data () {
 			return {
@@ -68,21 +65,8 @@ import { reqGet } from '../../utils/web'
         } else if (index === 1) {
           this.$router.push('/example/form')
         } else if (index === 2) {
-          import(/* webpackChunkName: "moment" */ 'moment').then(({default: moment}) => {
-            this.test = moment().format('YYYY-MM-DD HH:mm')
-          })
+          this.$router.push('/example/upload')
         }
-      },
-      toast() {
-        this.$Message.info({
-          content: 'test',
-          duration: 2
-        })
-      },
-      loading() {
-        reqGet('flightupgrade-gate/getupgradedetail').then(res => {
-          console.log(res)
-        })
       }
     }
 	}

@@ -82,7 +82,7 @@
 
 <template>
   <transition name="fade">
-    <div class="ume-loading">
+    <div class="ume-loading" v-show="visible">
       <div class="loadEffect">
         <span class="loadingItem"></span>
         <span class="loadingItem"></span>

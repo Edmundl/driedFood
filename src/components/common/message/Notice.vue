@@ -63,7 +63,8 @@ export default {
         default: ''
     },
     type: {
-      type: String
+      type: String,
+      default: ''
     },
     duration: {
       type: Number,
@@ -78,7 +79,8 @@ export default {
         default: ''
     },
     onClose: {
-      type: Function
+      type: Function,
+      default: function() {}
     },
     styles: {
       type: Object,
@@ -89,10 +91,12 @@ export default {
       }
     },
     className: {
-      type: String
+      type: String,
+      default: ''
     },
     transitionName: {
-      type: String
+      type: String,
+      default: ''
     }
   },
   computed: {
