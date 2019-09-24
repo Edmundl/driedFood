@@ -41,11 +41,11 @@ export function fetchGet(path, params) {
         reject(response.statusText)
       }
     }).then(data => {
-      if (data && data.errorCode === 0) {
+      if (data.errCode === 0 || data.errorCode === 0) {
         resolve(data)
       } else {
         Modal.info({
-          content: data.errorMsg || data.errMsg // errMsg兼容gateway错误
+          content: data.errMsg || data.errorMsg // errMsg兼容gateway错误
         })
       }
     }).catch(error => {
@@ -85,11 +85,11 @@ export function fetchPost(path, params = {}) {
         reject(response.statusText)
       }
     }).then(data => {
-      if (data && data.errorCode === 0) {
+      if (data.errCode === 0 || data.errorCode === 0) {
         resolve(data)
       } else {
         Modal.info({
-          content: data.errorMsg || data.errMsg // errMsg兼容gateway错误
+          content: data.errMsg || data.errorMsg // errMsg兼容gateway错误
         })
       }
     }).catch(error => {
@@ -104,23 +104,20 @@ export function fetchPost(path, params = {}) {
   return Promise.race([fetchPromise, timeoutPromsie])
 }
 
-export function reqGet(path, params = {}, isWhole) {
+export function reqGet(path, params = {}) {
   Loading.show()
   return new Promise((resovle, reject) => {
     let url = urlBase.urlBase + path;
-    if (isWhole) {
-      url = path
-    }
     axios.get(url, {
       params: params
     }).then((response) => {
       Loading.hide()
       let data = response.data
-      if (data.errorCode === 0) {
+      if (data.errCode === 0 || data.errorCode === 0) { // errCode是gateway报错，errorCode是业务方报错需要统一
         resovle(data)
       } else {
         Modal.info({
-          content: data.errorMsg || data.errMsg // errMsg兼容gateway错误
+          content: data.errMsg || data.errorMsg // errMsg兼容gateway错误
         })
       }
     }
@@ -149,11 +146,11 @@ export function reqPost(path, params = {}, ContentType) {
       }).then((response) => {
         Loading.hide()
         let data = response.data
-        if (data.errorCode === 0) {
+        if (data.errCode === 0 || data.errorCode === 0) { // errCode是gateway报错，errorCode是业务方报错需要统一
           resovle(data)
         } else {
           Modal.info({
-            content: data.errorMsg || data.errMsg // errMsg兼容gateway错误
+            content: data.errMsg || data.errorMsg // errMsg兼容gateway错误
           })
         }
       }).catch(() => {
