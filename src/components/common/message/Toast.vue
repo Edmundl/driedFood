@@ -1,5 +1,5 @@
 <style lang="less">
-@import "../../assets/css/base.less";
+@import "../../../assets/css/base.less";
 .ume-message {
   position: fixed;
   left: 0;

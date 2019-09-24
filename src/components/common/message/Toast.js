@@ -1,4 +1,4 @@
-import Toast from '../components/common/Toast.vue'
+import Toast from './Toast.vue'
 import Vue from 'Vue'
 Toast.newInstance = properties => {
   const _props = properties || {};

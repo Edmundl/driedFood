@@ -6,37 +6,38 @@ export default new VueRouter({
 	routes: [
 		{
 			path: '/',
-			redirect: '/app'
+			redirect: '/example'
 		},
-		{
-			path: '/app',
-			component: resolve => require(['../components/container/app.vue'], resolve),
-			meta: {
-				title: '首页'
-			}
-    },
     {
 			path: '/example',
-      component: resolve => require(['../components/container/example.vue'], resolve),
+      component: () => import(
+        /* webpackChunkName: "example" */
+        '../components/container/example.vue'),
       children: [
         {
           path: 'feedback',
-          component: resolve => require(['../components/container/feedback.vue'], resolve)
+          component: () => import(
+            /* webpackChunkName: "feedback" */
+            /* webpackPrefetch: true */
+           '../components/container/feedback.vue')
         },
         {
           path: 'form',
-          component: resolve => require(['../components/container/form.vue'], resolve)
+          component: () => import(
+            /* webpackChunkName: "form" */
+            /* webpackPrefetch: true */
+           '../components/container/form.vue')
+        },
+        {
+          path: 'upload',
+          component: () => import(
+            /* webpackChunkName: "upload" */
+            /* webpackPrefetch: true */
+           '../components/container/upload.vue')
         }
       ],
 			meta: {
 				title: '公用组件示例'
-			}
-    },
-    {
-			path: '/flexible',
-			component: resolve => require(['../components/container/flexible.vue'], resolve),
-			meta: {
-				title: '适配示例'
 			}
     }
 	]

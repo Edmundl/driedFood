@@ -62,7 +62,6 @@
     <a href="javascript:;" class="ume-btn ume-btn_default" @click="toButton">Button</a>
     <Modal :value.sync="modal1" okText="确定" title="自定义标题" content="自定义标题的alert" @onOk="onOk1" @onCancel="onCancel1"></Modal>
     <Modal :value.sync="modal2" okText="确定" cancelText="取消" title="自定义标题" content="自定义标题的confirm" @onOk="onOk2" @onCancel="onCancel2"></Modal>
-    <Toast :showToast.sync="showToast" text="操作成功" @close="showToast=false"></Toast>
     <Loading v-show="showLoading"></Loading>
     <Picker v-show="showPicker" :pick-list="pickList" :cur-value="curValue" @pickerCancel="pickerCancel" @pickerConfirm="pickerConfirm"></Picker>
     <DatePicker v-show="showDatePicker" :in-options="options" @pickerCancel="pickerCancel" @pickerConfirm="pickerConfirm"></DatePicker>
@@ -71,11 +70,10 @@
   </div>
 </template>
 <script>
-  import Modal from '../common/Modal.vue';
-  import Loading from '../common/Loading.vue';
+  import Modal from '../common/modal/Modal.vue';
+  import Loading from '../common/loading/Loading.vue';
   import Picker from '../common/Picker.vue';
   import DatePicker from '../common/DatePicker.vue';
-  import Toast from '../common/Toast.vue';
   import Tips from '../common/Tips.vue';
   import Btn from '../common/Btn.vue';
 	export default {
@@ -84,7 +82,6 @@
       Loading,
       Picker,
       DatePicker,
-      Toast,
       Tips,
       Btn
     },
@@ -92,7 +89,6 @@
 			return {
         modal1: false,
         modal2: false,
-        showToast: false,
         showLoading: false,
         showPicker: false,
         showDatePicker: false,
@@ -172,7 +168,10 @@
         this.modal2 = false
       },
       toToast() {
-        this.showToast = true
+        this.$Message.info({
+          content: '复制链接成功',
+          duration: 2
+        })
       },
       toLoading() {
         this.showLoading = true

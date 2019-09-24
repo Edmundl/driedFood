@@ -44,7 +44,6 @@
       <div :class="pageIndex === 2 ? 'ume-navbar_item active': 'ume-navbar_item'" @click="routeTo(2)">上传<span class="after"></span></div>
       <div :class="pageIndex === 3 ? 'ume-navbar_item active': 'ume-navbar_item'" @click="routeTo(3)">其他</div>
     </div>
-    <div @click="toast">toast</div>
     <div class="ume-tab_panel">
       <router-view></router-view>
     </div>
@@ -54,7 +53,8 @@
 	export default {
 		data () {
 			return {
-        pageIndex: 0
+        pageIndex: 0,
+        test: ''
 			}
 		},
     methods: {
@@ -64,13 +64,9 @@
           this.$router.push('/example/feedback')
         } else if (index === 1) {
           this.$router.push('/example/form')
+        } else if (index === 2) {
+          this.$router.push('/example/upload')
         }
-      },
-      toast() {
-        this.$Message.info({
-          content: 'test',
-          duration: 2
-        })
       }
     }
 	}

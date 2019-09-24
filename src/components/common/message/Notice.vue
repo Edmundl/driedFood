@@ -1,5 +1,5 @@
 <style lang="less">
-@import "../../assets/css/base.less";
+@import "../../../assets/css/base.less";
 .ume-message-notice {
   text-align: center;
 }
@@ -20,29 +20,29 @@
 }
 
 @keyframes umeMoveUpIn {
-    0% {
-        transform-origin: 0 0;
-        transform: translateY(-100%);
-        opacity: 0;
-    }
-    100% {
-        transform-origin: 0 0;
-        transform: translateY(0%);
-        opacity: 1;
-    }
+  0% {
+    transform-origin: 0 0;
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform-origin: 0 0;
+    transform: translateY(0%);
+    opacity: 1;
+  }
 }
 
 @keyframes umeMoveUpOut {
-    0% {
-        transform-origin: 0 0;
-        transform: translateY(0%);
-        opacity: 1;
-    }
-    100% {
-        transform-origin: 0 0;
-        transform: translateY(-100%);
-        opacity: 0;
-    }
+  0% {
+    transform-origin: 0 0;
+    transform: translateY(0%);
+    opacity: 1;
+  }
+  100% {
+    transform-origin: 0 0;
+    transform: translateY(-100%);
+    opacity: 0;
+  }
 }
 </style>
 
@@ -63,7 +63,8 @@ export default {
         default: ''
     },
     type: {
-      type: String
+      type: String,
+      default: ''
     },
     duration: {
       type: Number,
@@ -78,7 +79,8 @@ export default {
         default: ''
     },
     onClose: {
-      type: Function
+      type: Function,
+      default: function() {}
     },
     styles: {
       type: Object,
@@ -89,10 +91,12 @@ export default {
       }
     },
     className: {
-      type: String
+      type: String,
+      default: ''
     },
     transitionName: {
-      type: String
+      type: String,
+      default: ''
     }
   },
   computed: {

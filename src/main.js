@@ -7,8 +7,13 @@ import router from './router/index.js';
 import FastClick from 'fastclick'
 import './assets/js/umeH5Flexible.js';
 import './assets/css/umeH5Flexible.less';
-import Message from './utils/Message'
+import Message from './components/common/message'
+import Loading from './components/common/loading'
+import Modal from './components/common/modal'
+
 Vue.prototype.$Message = Message
+Vue.prototype.$Loading = Loading
+Vue.prototype.$Modal = Modal
 
 var VConsole = require('vconsole/dist/vconsole.min.js');
 var vConsole = new VConsole();
