@@ -20,29 +20,29 @@
 }
 
 @keyframes umeMoveUpIn {
-    0% {
-        transform-origin: 0 0;
-        transform: translateY(-100%);
-        opacity: 0;
-    }
-    100% {
-        transform-origin: 0 0;
-        transform: translateY(0%);
-        opacity: 1;
-    }
+  0% {
+    transform-origin: 0 0;
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform-origin: 0 0;
+    transform: translateY(0%);
+    opacity: 1;
+  }
 }
 
 @keyframes umeMoveUpOut {
-    0% {
-        transform-origin: 0 0;
-        transform: translateY(0%);
-        opacity: 1;
-    }
-    100% {
-        transform-origin: 0 0;
-        transform: translateY(-100%);
-        opacity: 0;
-    }
+  0% {
+    transform-origin: 0 0;
+    transform: translateY(0%);
+    opacity: 1;
+  }
+  100% {
+    transform-origin: 0 0;
+    transform: translateY(-100%);
+    opacity: 0;
+  }
 }
 </style>
 
