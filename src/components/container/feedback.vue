@@ -65,8 +65,8 @@
     <Loading v-show="showLoading"></Loading>
     <Picker v-show="showPicker" :pick-list="pickList" :cur-value="curValue" @pickerCancel="pickerCancel" @pickerConfirm="pickerConfirm"></Picker>
     <DatePicker v-show="showDatePicker" :in-options="options" @pickerCancel="pickerCancel" @pickerConfirm="pickerConfirm"></DatePicker>
-    <Tips v-show="showTips" :close="true">最新一期我的2018出炉啦,点击查看详情</Tips>
-    <Btn v-show="showButton" :bgType="bgType">{{ btnText }}</Btn>
+    <!-- <Tips v-show="showTips" :close="true">最新一期我的2018出炉啦,点击查看详情</Tips> -->
+    <!-- <Btn v-show="showButton" :bgType="bgType">{{ btnText }}</Btn> -->
   </div>
 </template>
 <script>
@@ -74,16 +74,16 @@
   import Loading from '../common/loading/Loading.vue';
   import Picker from '../common/Picker.vue';
   import DatePicker from '../common/DatePicker.vue';
-  import Tips from '../common/Tips.vue';
-  import Btn from '../common/Btn.vue';
+  // import Tips from '../common/Tips.vue';
+  // import Btn from '../common/Btn.vue';
 	export default {
     components: {
       Modal,
       Loading,
       Picker,
-      DatePicker,
-      Tips,
-      Btn
+      DatePicker
+      // Tips
+      // Btn
     },
 		data () {
 			return {
@@ -193,19 +193,21 @@
         console.log(index, item)
       },
       toTips() {
-        this.showTips = true
+        // this.showTips = true
+        this.$router.push('/example/tip')
       },
       toButton() {
-        this.bgType = (this.bgType + 1) % 6
-        if (this.bgType === 1 || this.bgType === 2) {
-          this.btnText = '立即抢购';
-        } else {
-          this.btnText = '尚未开放抢购';
-        }
-        this.showButton = true
-        if (this.bgType === 5) {
-          this.showButton = false
-        }
+        // this.bgType = (this.bgType + 1) % 6
+        // if (this.bgType === 1 || this.bgType === 2) {
+        //   this.btnText = '立即抢购';
+        // } else {
+        //   this.btnText = '尚未开放抢购';
+        // }
+        // this.showButton = true
+        // if (this.bgType === 5) {
+        //   this.showButton = false
+        // }
+        this.$router.push('/example/button')
       }
     }
 	}

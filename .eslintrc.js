@@ -33,7 +33,6 @@ module.exports = {
 		'vue/html-self-closing':0,
 		'vue/html-indent':0,
 		'vue/attributes-order':0,
-    'eqeqeq': 0,
 		'vue/singleline-html-element-content-newline': 0,
     'no-new': 0,
     'no-tabs':0,
