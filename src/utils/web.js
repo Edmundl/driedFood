@@ -116,7 +116,7 @@ export function reqGet(path, params = {}, isWhole) {
     }).then((response) => {
       Loading.hide()
       let data = response.data
-      if (data.errorCode === 0) {
+      if (data.errorCode === 0 || data.errCode === 0) {
         resovle(data)
       } else {
         Modal.info({
