@@ -34,13 +34,13 @@ export function fetchGet(path, params) {
         'Content-Type': 'application/json'
       }
     }).then(response => {
-      Loading.hide()
       if (response.status === 200) {
         return response.json() // response.json()返回的是一个promise
       } else {
         reject(response.statusText)
       }
     }).then(data => {
+      Loading.hide()
       if (data && data.errorCode === 0) {
         resolve(data)
       } else {
@@ -61,6 +61,7 @@ export function fetchGet(path, params) {
 }
 
 export function fetchPost(path, params = {}) {
+  Loading.show()
   var timeout = 60000
   let timeoutPromsie = new Promise((resolve, reject) => {
     setTimeout(() => {
@@ -85,6 +86,7 @@ export function fetchPost(path, params = {}) {
         reject(response.statusText)
       }
     }).then(data => {
+      Loading.hide()
       if (data && data.errorCode === 0) {
         resolve(data)
       } else {
