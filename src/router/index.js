@@ -34,6 +34,20 @@ export default new VueRouter({
             /* webpackChunkName: "upload" */
             /* webpackPrefetch: true */
            '../components/container/upload.vue')
+        },
+        {
+          path: 'button',
+          component: () => import(
+            /* webpackChunkName: "button" */
+            /* webpackPrefetch: true */
+           '../components/container/button.vue')
+        },
+        {
+          path: 'tip',
+          component: () => import(
+            /* webpackChunkName: "tip" */
+            /* webpackPrefetch: true */
+           '../components/container/tip.vue')
         }
       ],
 			meta: {
