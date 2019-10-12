@@ -19,7 +19,8 @@
     :name="notice.name"
     :styles="notice.styles"
     :transition-name="notice.transitionName"
-    :on-close="notice.onClose">
+    :on-close="notice.onClose"
+    >
     </Notice>
   </div>
 </template>
