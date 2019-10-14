@@ -56,7 +56,7 @@
         pageIndex: 0,
         test: ''
 			}
-		},
+    },
     methods: {
       routeTo(index) {
         this.pageIndex = index

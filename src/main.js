@@ -10,6 +10,7 @@ import './assets/css/umeH5Flexible.less';
 import Message from './components/common/message'
 import Loading from './components/common/loading'
 import Modal from './components/common/modal'
+import { record } from './utils/tools'
 
 Vue.prototype.$Message = Message
 Vue.prototype.$Loading = Loading
@@ -24,8 +25,10 @@ router.beforeEach((to, from, next) => {
   if (to.meta.title) {
     document.title = to.meta.title
   }
+  record()
   next()
 })
+
 new Vue({
   el: '#app',
   router,

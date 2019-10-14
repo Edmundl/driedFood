@@ -1,3 +1,6 @@
+import Countly from 'countly-sdk-web'
+import { callNative } from '@umetrip/jsapi'
+
 export function query(name) {
   // var params = location.search.substr(1);
   var params = location.href.split('?')[1] || ''
@@ -61,4 +64,41 @@ export function findIndex(array, key, value) {
       return i
     }
   }
+}
+
+export function countlyLog() {
+  Countly.init({
+    app_key: '7be1d0f3456cf1e88033017bb8d47da0c944fb2c',
+    url: 'https://analytics.umetrip.com'
+	});
+	// track sessions automatically
+	Countly.track_sessions();
+	// track pageviews automatically
+  Countly.track_pageview();
+  Countly.q.push(['track_sessions']);
+  Countly.q.push(['track_pageview']);
+  Countly.q.push(['track_errors']);
+}
+
+export function uploadH5Log() {
+  var p = {
+    ti: document.title,
+    ul: location.pathname + location.hash,
+    bt: ''
+  }
+  console.log(p)
+  callNative('uploadH5Log', {
+    't': Date.now(),
+    'p': p,
+    'e': 7
+  })
+}
+
+export function record() {
+  countlyLog()
+  uploadH5Log()
+  // window.addEventListener('hashchange', function() {
+  //   Countly.q.push(['track_pageview', location.pathname + location.hash]);
+  //   uploadH5Log()
+  // });
 }

@@ -118,7 +118,7 @@ module.exports = {
     new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
       title: '',
-      filename: 'smartQA.html',
+      filename: 'index.html',
       template: './index.html',
       chunks: ['commons', 'app'], // webpack不会自动注入splitChunks里面提取的公共包
       inject: true
