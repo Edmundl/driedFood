@@ -20,6 +20,7 @@
     bottom: 0;
     width: 100%;
     z-index: 101;
+    transition: all 0.3s ease;
   }
   .ume-picker-ht {
     display: flex;
@@ -103,9 +104,9 @@
 </style>
 
 <template>
-  <div class="pickerWrapper">
-    <div class="ume-mask"></div>
-    <div class="ume-picker">
+  <div v-show="visibilityControl" class="pickerWrapper">
+    <div class="ume-mask" @click="cancelFn"></div>
+    <div class="ume-picker" :style="translate">
       <div class="ume-picker-ht">
         <span class="ume-picker-cancel" @click="cancelFn">取消</span>
         <span class="ume-picker-confirm" @click="confirmFn">确定</span>
@@ -139,17 +140,25 @@ export default {
       default: function() {
         return []
       }
+    },
+    visibility: {
+      type: Boolean,
+      default: function() {
+        return false
+      }
     }
   },
   data () {
     return {
       curIndex: [],
+      visibilityControl: false,
       defaults: {
         isMulti: false,
         offset: 2,
         rowHeight: 1, // 单位是rem, 1rem = 100px
         bodyHeight: 5 * 1
-      }
+      },
+      translate: 'transform: translate3d(0, 100%, 0);'
     }
   },
   watch: {
@@ -164,6 +173,19 @@ export default {
           this.initTouch()
         })
       }
+    },
+    visibility: function(newVal, oldVal) {
+      if (newVal) {
+        this.visibilityControl = newVal;
+        setTimeout(() => {
+          this.translate = this.getTranslate(0)          
+        }, 50);
+      } else {
+        this.translate = this.getTranslate(100)
+        setTimeout(() => {
+          this.visibilityControl = newVal;
+        }, 300);
+      }
     }
   },
   created() {
@@ -171,8 +193,12 @@ export default {
   },
   mounted () {
     this.initTouch()
+    this.visibilityControl = this.visibility;
   },
   methods: {
+    getTranslate(x) {
+      return `transform: translate3d(0, ${x}%, 0);`
+    },
     getData() {
       this.pickList.forEach((item, index) => {
         let curIndex = findIndex(item, 'value', this.curValue[index])
