@@ -15,31 +15,31 @@ export function fetchGet(path, params) {
       reject(new Error('fetch timeout'))
     }, timeout)
   })
-  let fetchPromise = new Promise((resolve, reject) => {
-    let url = urlBase.urlBase + path
-    if (params) {
-      let paramsArray = [];
-      Object.keys(params).forEach(key => paramsArray.push(key + '=' + params[key]))
-      if (url.search(/\?/) === -1) {
-          url += '?' + paramsArray.join('&')
-      } else {
-          url += '&' + paramsArray.join('&')
-      }
+  let url = urlBase.urlBase + path
+  if (params) {
+    let paramsArray = [];
+    Object.keys(params).forEach(key => paramsArray.push(key + '=' + params[key]))
+    if (url.search(/\?/) === -1) {
+        url += '?' + paramsArray.join('&')
+    } else {
+        url += '&' + paramsArray.join('&')
     }
-    fetch(url, {
-      method: 'GET',
-      cache: 'no-cache',
-      credentials: 'same-origin', // cookie同域发送
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }).then(response => {
-      if (response.status === 200) {
-        return response.json() // response.json()返回的是一个promise
-      } else {
-        reject(response.statusText)
-      }
-    }).then(data => {
+  }
+  let fetchPromise = fetch(url, {
+    method: 'GET',
+    cache: 'no-cache',
+    credentials: 'same-origin', // cookie同域发送
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  }).then(response => {
+    if (response.status === 200) {
+      return response.json() // response.json()返回的是一个promise
+    }
+    throw new Error(response.statusText)
+  })
+  return new Promise((resolve, reject) => {
+    Promise.race([fetchPromise, timeoutPromsie]).then(data => {
       Loading.hide()
       if (data.errCode === 0 || data.errorCode === 0) {
         resolve(data)
@@ -57,7 +57,6 @@ export function fetchGet(path, params) {
       })
     })
   })
-  return Promise.race([fetchPromise, timeoutPromsie])
 }
 
 export function fetchPost(path, params = {}) {
@@ -69,24 +68,24 @@ export function fetchPost(path, params = {}) {
       Loading.hide()
     }, timeout)
   })
-  let fetchPromise = new Promise((resolve, reject) => {
-    let url = urlBase.urlBase + path
-    fetch(url, {
-      method: 'POST',
-      cache: 'no-cache',
-      credentials: 'same-origin',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(params)
-    }).then(response => {
-      if (response.status === 200) {
-        return response.json()
-      } else {
-        reject(response.statusText)
-      }
-    }).then(data => {
-      Loading.hide()
+  let url = urlBase.urlBase + path
+  let fetchPromise = fetch(url, {
+    method: 'POST',
+    cache: 'no-cache',
+    credentials: 'same-origin',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(params)
+  }).then(response => {
+    Loading.hide()
+    if (response.status === 200) {
+      return response.json()
+    }
+    throw new Error(response.statusText)
+  })
+  return new Promise((resolve, reject) => {
+    Promise.race([fetchPromise, timeoutPromsie]).then(data => {
       if (data.errCode === 0 || data.errorCode === 0) {
         resolve(data)
       } else {
@@ -103,7 +102,6 @@ export function fetchPost(path, params = {}) {
       })
     })
   })
-  return Promise.race([fetchPromise, timeoutPromsie])
 }
 
 export function reqGet(path, params = {}) {

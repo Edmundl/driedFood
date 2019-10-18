@@ -60,6 +60,7 @@
     <a href="javascript:;" class="ume-btn ume-btn_default" @click="toDatePicker">DatePicker</a>
     <a href="javascript:;" class="ume-btn ume-btn_default" @click="toTips">Tips</a>
     <a href="javascript:;" class="ume-btn ume-btn_default" @click="toButton">Button</a>
+     <a href="javascript:;" class="ume-btn ume-btn_default" @click="toTabs">Tabs</a>
     <Modal :value.sync="modal1" okText="确定" title="自定义标题" content="自定义标题的alert" @onOk="onOk1" @onCancel="onCancel1"></Modal>
     <Modal :value.sync="modal2" okText="确定" cancelText="取消" title="自定义标题" content="自定义标题的confirm" @onOk="onOk2" @onCancel="onCancel2"></Modal>
     <Loading v-show="showLoading"></Loading>
@@ -208,6 +209,9 @@
         //   this.showButton = false
         // }
         this.$router.push('/example/button')
+      },
+      toTabs() {
+        this.$router.push('/example/tabs')
       }
     }
 	}

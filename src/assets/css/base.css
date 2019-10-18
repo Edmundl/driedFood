@@ -82,3 +82,9 @@
   -webkit-line-clamp: 4;
   overflow: hidden;
 }
+.font-normal {
+  font-family: "PingFangSC-Regular", "Microsoft YaHei", Arial, sans-serif;
+}
+.font-medium {
+  font-family: 'PingFangSC-Medium', "Microsoft YaHei", Arial, sans-serif;
+}

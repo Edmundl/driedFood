@@ -48,6 +48,13 @@ export default new VueRouter({
             /* webpackChunkName: "tip" */
             /* webpackPrefetch: true */
            '../components/container/tip.vue')
+        },
+        {
+          path: 'tabs',
+          component: () => import(
+            /* webpackChunkName: "tip" */
+            /* webpackPrefetch: true */
+           '../components/container/tabs.vue')
         }
       ],
 			meta: {

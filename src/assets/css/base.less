@@ -1,7 +1,7 @@
 // 转rem
 @rem: 100;
 // 字体
-@UIFontFamilyCN: "PingFang SC";
+@UIFontFamilyCN: "PingFangSC-Regular";
 @UIFontFamilyEN: "San Fran";
 
 // 字号 转为rem
@@ -181,4 +181,10 @@
 }
 .line-clamp-4 {
   .ellipsis-mixin(4);
+}
+.font-normal {
+  font-family: @UIFontFamilyCN, "Microsoft YaHei", Arial, sans-serif;
+}
+.font-medium {
+  font-family: 'PingFangSC-Medium', "Microsoft YaHei", Arial, sans-serif;
 }

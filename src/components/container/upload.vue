@@ -30,6 +30,8 @@
     <a href="javascript:;" class="ume-btn ume-btn_default" @click="toPost">post请求</a>
     <a href="javascript:;" class="ume-btn ume-btn_default" @click="toFetchGet">fetch get</a>
     <a href="javascript:;" class="ume-btn ume-btn_default" @click="toFetchPost">fetch post</a>
+    <a href="javascript:;" class="ume-btn ume-btn_default" @click="toFetchGetSuccess">get Success</a>
+    <a href="javascript:;" class="ume-btn ume-btn_default" @click="toFetchPostSuccess">post Success</a>
   </div>
 </template>
 <script>
@@ -67,6 +69,26 @@ export default {
     toFetchPost() {
       let url = 'flightupgrade-gate/test'
       fetchPost(url).then(res => {
+        console.log(res)
+      })
+    },
+    toFetchGetSuccess() {
+      let url = 'flightupgrade-gate/queryorderlist'
+      let params = {
+        userId: '24435124',
+        token: 'VczLISdFA2antDd2IuxGzNEa'
+      }
+      fetchGet(url, params).then(res => {
+        console.log(res)
+      })
+    },
+    toFetchPostSuccess() {
+      let url = 'flightupgrade-gate/queryorderlist'
+      let params = {
+        userId: '24435124',
+        token: 'VczLISdFA2antDd2IuxGzNEa'
+      }
+      fetchPost(url, params).then(res => {
         console.log(res)
       })
     }
