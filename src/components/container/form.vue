@@ -18,7 +18,7 @@
     <div class="form_item">
       <List :list-type="listType" :list="list"></List>
     </div>
-    <Picker v-show="showPicker" :pick-list="pickList" :cur-value="[value2]" @pickerCancel="showPicker=false" @pickerConfirm="pickerConfirm"></Picker>
+    <Picker :visibility="showPicker" :pick-list="pickList" :cur-value="[value2]" @pickerCancel="showPicker=false" @pickerConfirm="pickerConfirm"></Picker>
   </div>
 </template>
 <script>
