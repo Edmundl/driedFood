@@ -1,8 +1,6 @@
 import axios from 'axios';
 import urlBase from '../../config/config.js';
-import Message from '../components/common/message/index'
-import Loading from '../components/common/loading/index'
-import Modal from '../components/common/modal/index'
+import { Message, Loading, Modal } from '@umetrip/ume-ui'
 
 axios.defaults.timeout = 50000;
 

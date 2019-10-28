@@ -14,7 +14,9 @@ module.exports = {
   output: {
     filename: '[name].js',
     chunkFilename: '[name].js',
-    path: path.resolve(__dirname, '../dist')
+    path: path.resolve(__dirname, '../dist'),
+    library: 'ume-ui',
+    libraryTarget: 'umd'
   },
 	resolve: {
     extensions: [".js", ".vue"],
@@ -85,7 +87,14 @@ module.exports = {
                 ['env', { 'modules': false }],
                 'stage-2'
               ],
-              'plugins': ['transform-runtime', 'syntax-dynamic-import'],
+              'plugins': ['transform-runtime', 'syntax-dynamic-import', ['import', {
+                libraryName: '@umetrip/ume-ui',
+                libraryDirectory: 'src/components/common',
+                camel2DashComponentName: false,
+                style: (name) => {
+                  return `${name}/index.less`
+                }
+              }]]
             }
           }
         ],

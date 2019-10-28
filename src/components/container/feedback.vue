@@ -60,31 +60,26 @@
     <a href="javascript:;" class="ume-btn ume-btn_default" @click="toDatePicker">DatePicker</a>
     <a href="javascript:;" class="ume-btn ume-btn_default" @click="toTips">Tips</a>
     <a href="javascript:;" class="ume-btn ume-btn_default" @click="toButton">Button</a>
-     <a href="javascript:;" class="ume-btn ume-btn_default" @click="toTabs">Tabs</a>
-    <Modal :value.sync="modal1" okText="确定" title="自定义标题" content="自定义标题的alert" @onOk="onOk1" @onCancel="onCancel1"></Modal>
-    <Modal :value.sync="modal2" okText="确定" cancelText="取消" title="自定义标题" content="自定义标题的confirm" @onOk="onOk2" @onCancel="onCancel2"></Modal>
-    <Loading v-show="showLoading"></Loading>
-    <Picker v-show="showPicker" :pick-list="pickList" :cur-value="curValue" @pickerCancel="pickerCancel" @pickerConfirm="pickerConfirm"></Picker>
-    <DatePicker v-show="showDatePicker" :in-options="options" @pickerCancel="pickerCancel" @pickerConfirm="pickerConfirm"></DatePicker>
-    <!-- <Tips v-show="showTips" :close="true">最新一期我的2018出炉啦,点击查看详情</Tips> -->
-    <!-- <Btn v-show="showButton" :bgType="bgType">{{ btnText }}</Btn> -->
+    <a href="javascript:;" class="ume-btn ume-btn_default" @click="toTabs">Tabs</a>
+    <ume-modal :value="modal1" okText="确定" title="自定义标题" content="自定义标题的alert" @on-ok="onOk1" @on-cancel="onCancel1"></ume-modal>
+    <ume-modal :value="modal2" okText="确定" cancelText="取消" title="自定义标题" content="自定义标题的confirm" @on-ok="onOk2" @on-cancel="onCancel2"></ume-modal>
+    <ume-loading v-show="showLoading"></ume-loading>
+    <ume-picker :visibility="showPicker" :pick-list="pickList" :cur-value="curValue" @pickerCancel="pickerCancel" @pickerConfirm="pickerConfirm"></ume-picker>
+    <ume-date-picker :visibility="showDatePicker" :in-options="options" @pickerCancel="pickerCancel" @pickerConfirm="pickerConfirm"></ume-date-picker>
   </div>
 </template>
 <script>
-  import Modal from '../common/modal/Modal.vue';
-  import Loading from '../common/loading/Loading.vue';
-  import Picker from '../common/Picker.vue';
-  import DatePicker from '../common/DatePicker.vue';
-  // import Tips from '../common/Tips.vue';
-  // import Btn from '../common/Btn.vue';
+  // import umeModal from '../common/modal/Modal.vue';
+  // import umeLoading from '../common/loading/Loading.vue';
+  // import Picker from '../common/picker/Picker.vue';
+  // import DatePicker from '../common/datePicker/DatePicker.vue';
+  import { clickEvent } from '../../utils/tools.js'
 	export default {
     components: {
-      Modal,
-      Loading,
-      Picker,
-      DatePicker
-      // Tips
-      // Btn
+      // umeModal,
+      // umeLoading,
+      // Picker,
+      // DatePicker
     },
 		data () {
 			return {
@@ -211,6 +206,9 @@
         this.$router.push('/example/button')
       },
       toTabs() {
+        clickEvent({
+          id: 'test12345'
+        })
         this.$router.push('/example/tabs')
       }
     }

@@ -34,7 +34,7 @@
   width: 0.26rem;
   height: 0.26rem;
 }
-.IconSizeClose {
+.IconSize40 {
   width: 0.4rem;
   height: 0.4rem;
 }
@@ -44,6 +44,10 @@
 }
 .IconArrow {
   background-image: url('../img/icon-rightArrow.png');
+  background-size: 100% 100%;
+}
+.IconTipArrow {
+  background-image: url('../img/icon-tip-rightArrow.png');
   background-size: 100% 100%;
 }
 .IconTip {
@@ -87,4 +91,26 @@
 }
 .font-medium {
   font-family: 'PingFangSC-Medium', "Microsoft YaHei", Arial, sans-serif;
+}
+.showUp-enter-active {
+  animation: showUp 0.3s;
+}
+.showUp-leave-active {
+  animation: leaveUp 0.3s;
+}
+@keyframes showUp {
+  0% {
+    transform: translate3d(0, 100%, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes leaveUp {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 100%, 0);
+  }
 }

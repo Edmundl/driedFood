@@ -41,6 +41,7 @@
 @UIColor15: #3da84a;
 @UIColor16: #fff7ea;
 @UIColor17: #ffb540;
+@UIColor18: #dddddd;
 
 // 文字颜色
 @UIColorSeparator: @UIColor6; // 分隔线颜色
@@ -97,7 +98,7 @@
 .IconSizeTips {
   .size-mixin(26, 26);
 }
-.IconSizeClose {
+.IconSize40 {
   .size-mixin(40, 40);
 }
 // 图片资源
@@ -108,6 +109,10 @@
 }
 .IconArrow {
   background-image: url('@{baseUrl}/icon-rightArrow.png');
+  background-size: 100% 100%;
+}
+.IconTipArrow {
+  background-image: url('@{baseUrl}/icon-tip-rightArrow.png');
   background-size: 100% 100%;
 }
 .IconTip {
@@ -187,4 +192,76 @@
 }
 .font-medium {
   font-family: 'PingFangSC-Medium', "Microsoft YaHei", Arial, sans-serif;
+}
+
+// 1px全边框
+.border-1px-before(@color) {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 200%;
+  height: 200%;
+  border: 1px solid @color;
+  transform: scale(0.5);
+  transform-origin: left top;
+  box-sizing: border-box;
+  z-index: -1; // 如果父元素没有z-index: 0，该子元素将在祖先元素的背景颜色之后导致无法正常显示
+}
+// 1px上边框
+.border-top-1px-before(@color: @UIColor18) {
+  &::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 1px;
+    background-color: @color;
+    transform: scaleY(0.5);
+    box-sizing: border-box;
+  }
+}
+// 1px下边框
+.border-bottom-1px-after(@color: @UIColor18) {
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: @color;
+    transform: scaleY(0.5);
+  }
+}
+.border-1px-before-btn(@size: 1rem; @color: @UIColor18) {
+  &::before {
+    border-radius: 1rem;
+    .border-1px-before(@color);
+  }
+}
+.showUp-enter-active {
+  animation: showUp 0.3s;
+}
+.showUp-leave-active {
+  animation: leaveUp 0.3s;
+}
+
+@keyframes showUp {
+  0% {
+    transform: translate3d(0, 100%, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes leaveUp {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(0, 100%, 0);
+  }
 }

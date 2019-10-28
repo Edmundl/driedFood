@@ -1,4 +1,5 @@
 <style lang="less" scoped>
+@import '../../assets/css/base.less';
 .button_example {
   background: #fff;
   .btn {
@@ -9,22 +10,22 @@
 
 <template>
   <div class="button_example">
-    <Btn :bgType="0">B1 一级常态按钮</Btn>
-    <Btn :bgType="1">B2 二级常态按钮</Btn>
-    <Btn :bgType="2">B3 三级常态按钮</Btn>
-    <Btn :bgType="3">B4 不可点击按钮置灰</Btn>
-    <Btn :bgType="4">B5 不可点击较弱状态</Btn>
+    <ume-btn :bgType="0">B1 一级常态按钮</ume-btn>
+    <ume-btn :bgType="1">B2 二级常态按钮</ume-btn>
+    <ume-btn :bgType="2">B3 三级常态按钮</ume-btn>
+    <ume-btn :bgType="3">B4 不可点击按钮置灰</ume-btn>
+    <ume-btn :bgType="4">B5 不可点击较弱状态</ume-btn>
     <div style="display: flex; justify-content: space-between; padding: 0 0.32rem;">
-      <Btn :bgType="5">取消订单</Btn>
-      <Btn :bgType="6">继续支付</Btn>
+      <ume-btn :bgType="5">取消订单</ume-btn>
+      <ume-btn :bgType="6">继续支付</ume-btn>
     </div>
   </div>
 </template>
 <script>
-import Btn from '../common/Btn.vue';
-export default {
-  components: {
-    Btn
-  }
-}
+// import Btn from '../common/button/Btn.vue';
+// export default {
+//   components: {
+//     Btn
+//   }
+// }
 </script>

@@ -9,17 +9,17 @@
 
 <template>
   <div class="tabs-demo">
-    <Tab :tabs-type=1 :tab-items="tabItems1"></Tab>
-    <Tab :tabs-type=2 :tab-items="tabItems2"></Tab>
-    <Tab :tabs-type=3 :tab-items="tabItems3"></Tab>
+    <ume-tab :tabs-type="1" :tab-items="tabItems1"></ume-tab>
+    <ume-tab :tabs-type="2" :tab-items="tabItems2"></ume-tab>
+    <ume-tab :tabs-type="3" :tab-items="tabItems3"></ume-tab>
   </div>
 </template>
 <script>
-import Tab from '../common/tab.vue'
+// import Tab from '../common/tab.vue'
 export default {
-  components: {
-    Tab
-  },
+  // components: {
+  //   Tab
+  // },
   data () {
     return {
       tabItems1: ['未成功', '已成功'],

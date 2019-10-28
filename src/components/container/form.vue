@@ -8,33 +8,40 @@
 <template>
   <div class="page_form">
     <div class="form_item">
-      <Input type="1" placeholder="请写下您对本机场的评审报告" name="出生日期" :value="value1"/>
-      <Input type="2" name="国籍/地区" :value="value2" @chooseItem="showPicker=true"/>
-      <Input type="2" name="国籍/地区" :value="value3" :optional="true" @chooseItem="showPicker=true"/>
+      <ume-input type="1" name="出生日期" placeholder="请写下您对本机场的评审报告" :value="value1"/>
+      <ume-input type="2" name="国籍/地区" :value="value2" @chooseItem="showPicker=true"/>
+      <ume-input type="2" name="居住地" :value="value3" :optional="true" @chooseItem="showPicker=true"/>
+      <ume-input type="1" name="详细地址" placeholder="填写街道名、门牌号、小区、楼号、单元、室等" :value="value4" :rows="2" />
     </div>
     <div class="form_item" style="padding:0.32rem">
-      <AutoTextarea placeholder="请写下您对本机场的评审报告" :value="reportWord" @onChange="getText2" :maxLength="maxLength"></AutoTextarea>
+      <ume-auto-textarea placeholder="请写下您对本机场的评审报告" :value="reportWord" @onChange="getText2" :maxLength="maxLength"></ume-auto-textarea>
     </div>
     <div class="form_item">
-      <List :list-type="listType" :list="list"></List>
+      <ume-list :list-type="1" :list=" noIconList"></ume-list>
     </div>
-    <Picker :visibility="showPicker" :pick-list="pickList" :cur-value="[value2]" @pickerCancel="showPicker=false" @pickerConfirm="pickerConfirm"></Picker>
+    <div class="form_item">
+      <ume-list :list-type="2" :list="iconList"></ume-list>
+    </div>
+    <div class="form_item">
+      <ume-list :list-type="3" :list="iconListWithTwo"></ume-list>
+    </div>
+    <ume-picker :visibility="showPicker" :pick-list="pickList" :cur-value="[value2]" @pickerCancel="showPicker=false" @pickerConfirm="pickerConfirm"></ume-picker>
   </div>
 </template>
 <script>
   import { reqGet } from '../../utils/web.js'
-  import AutoTextarea from '../common/AutoTextarea.vue';
-  import List from '../common/List.vue';
-  import Input from '../common/Input.vue';
-  import Picker from '../common/Picker.vue';
+  // import AutoTextarea from '../common/AutoTextarea.vue';
+  // import List from '../common/list/List.vue';
+  // import Input from '../common/input/Input.vue';
+  // import Picker from '../common/picker/Picker.vue';
   var iconMessage = require('../../assets/img/icon-message.png');
   var iconDelay = require('../../assets/img/icon-delay.png');
 	export default {
     components: {
-      AutoTextarea,
-      List,
-      Input,
-      Picker
+      // AutoTextarea,
+      // List,
+      // Input,
+      // Picker
     },
 		data () {
 			return {
@@ -42,6 +49,7 @@
         value1: '',
         value2: '中国大陆',
         value3: '',
+        value4: '',
         showPicker: false,
         pickList: [[
           {
@@ -66,7 +74,7 @@
         listType: 1,
         noIconList: [
           {
-            title: '主标题文案'
+            title: '主标题文案主标题文案主标题文案主标题文案'
           },
           {
             title: '主标题文案',
@@ -76,28 +84,38 @@
           {
             title: '主标题文案',
             subTitle: '可变色较弱文案',
+            subColor: '#ff801a',
             subType: 1
           }
         ],
         iconList: [
           {
             icon: iconMessage,
-            iconWidth: '0.6rem',
+            iconWidth: '0.4rem',
             title: '主标题文案'
           },
           {
             icon: iconMessage,
-            iconWidth: '0.6rem',
-            title: '主标题文案',
-            subTitle: '可变色副文案',
-            subType: 0
-          },
-          {
-            icon: iconMessage,
-            iconWidth: '0.6rem',
+            iconWidth: '0.4rem',
             title: '主标题文案',
             subTitle: '可变色较弱文案',
             subType: 1
+          },
+          {
+            icon: iconMessage,
+            iconWidth: '0.4rem',
+            title: '主标题文案',
+            subTitle: '可变色较弱文案',
+            subColor: '#ff801a',
+            subType: 1
+          },
+          {
+            icon: iconMessage,
+            iconWidth: '0.4rem',
+            title: '主标题文案',
+            subTitle: '默认较弱文案不加箭头',
+            subType: 1,
+            hideArrow: true
           }
         ],
         iconListWithTwo: [

@@ -45,14 +45,14 @@ export default new VueRouter({
         {
           path: 'tip',
           component: () => import(
-            /* webpackChunkName: "tip" */
+            /* webpackChunkName: "tips" */
             /* webpackPrefetch: true */
-           '../components/container/tip.vue')
+           '../components/container/tips.vue')
         },
         {
           path: 'tabs',
           component: () => import(
-            /* webpackChunkName: "tip" */
+            /* webpackChunkName: "tabs" */
             /* webpackPrefetch: true */
            '../components/container/tabs.vue')
         }
