@@ -36,39 +36,52 @@
 </template>
 <script>
 import { reqGet, reqPost, fetchGet, fetchPost } from '../../utils/web'
+const userId = '24435124'
+const clientId = '98b9ef73af77b4fcfb68cb428dd6c31dc'
+const token = 'sJHqpAkG1SvvV9EW0EDXNsEa'
 export default {
   methods: {
     toGet() {
-      let url = 'flightupgrade-gate/createorder' // 'flightupgrade-gate/getupgradedetail'
+      let url = 'getguide'
       let params = {
-        token: '',
-        price: 198,
-        seatNoUpgrade: '11A'
+        userId,
+        token,
+        clientId
       }
       reqGet(url, params).then(res => {
         console.log(res)
       })
     },
     toPost() {
-      let url = 'flightupgrade-gate/test'
-      reqPost(url).then(res => {
+      let url = 'getguide'
+      let params = {
+        userId,
+        token,
+        clientId
+      }
+      reqPost(url, params, 'application/json').then(res => {
         console.log(res)
       })
     },
     toFetchGet() {
-      let url = 'flightupgrade-gate/createorder' // 'flightupgrade-gate/getupgradedetail'
+      let url = 'getguide'
       let params = {
-        token: '',
-        price: 198,
-        seatNoUpgrade: '11A'
+        userId,
+        token,
+        clientId
       }
       fetchGet(url, params).then(res => {
         console.log(res)
       })
     },
     toFetchPost() {
-      let url = 'flightupgrade-gate/test'
-      fetchPost(url).then(res => {
+      let url = 'test'
+      let params = {
+        userId,
+        token,
+        clientId
+      }
+      fetchPost(url, params).then(res => {
         console.log(res)
       })
     },

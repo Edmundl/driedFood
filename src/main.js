@@ -7,7 +7,7 @@ import router from './router/index.js';
 import FastClick from 'fastclick'
 import './assets/js/umeH5Flexible.js';
 import './assets/css/umeH5Flexible.less';
-import { record } from './utils/tools'
+import { record, changeTitle } from './utils/tools'
 
 import umeUI from '@umetrip/ume-ui'
 import '@umetrip/ume-ui/dist/ume-ui.css'
@@ -30,8 +30,8 @@ Vue.use(umeUI)
 // Vue.prototype.$Loading = Loading
 // Vue.prototype.$Modal = Modal
 
-// var VConsole = require('vconsole/dist/vconsole.min.js');
-// var vConsole = new VConsole();
+var VConsole = require('vconsole/dist/vconsole.min.js');
+var vConsole = new VConsole();
 
 FastClick.attach(document.body)
 router.beforeEach((to, from, next) => {

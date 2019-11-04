@@ -4,7 +4,7 @@ import { Message, Loading, Modal } from '@umetrip/ume-ui'
 
 axios.defaults.timeout = 50000;
 
-export function fetchGet(path, params) {
+export function fetchGet(path, params = {}) {
   Loading.show()
   var timeout = 50000
   let timeoutPromsie = new Promise((resolve, reject) => {
@@ -23,36 +23,84 @@ export function fetchGet(path, params) {
         url += '&' + paramsArray.join('&')
     }
   }
-  let fetchPromise = fetch(url, {
-    method: 'GET',
-    cache: 'no-cache',
-    credentials: 'same-origin', // cookie同域发送
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  }).then(response => {
-    if (response.status === 200) {
-      return response.json() // response.json()返回的是一个promise
-    }
-    throw new Error(response.statusText)
-  })
-  return new Promise((resolve, reject) => {
-    Promise.race([fetchPromise, timeoutPromsie]).then(data => {
-      Loading.hide()
-      if (data.errCode === 0 || data.errorCode === 0) {
-        resolve(data)
-      } else {
-        Modal.info({
-          content: data.errMsg || data.errorMsg // errMsg兼容gateway错误
-        })
+  if (window.fetch) {
+    let fetchPromise = fetch(url, {
+      method: 'GET',
+      cache: 'no-cache',
+      credentials: 'same-origin', // cookie同域发送
+      headers: {
+        'Content-Type': 'application/json'
       }
-    }).catch(error => {
-      Loading.hide()
-      console.error(error.toString())
-      Message.info({
-        content: '网络错误，请稍后再试！',
-        duration: 2
+    }).then(response => {
+      if (response.status === 200) {
+        return response.json() // response.json()返回的是一个promise
+      }
+      throw new Error(response.statusText)
+    })
+    return new Promise((resolve, reject) => {
+      Promise.race([fetchPromise, timeoutPromsie]).then(data => {
+        Loading.hide()
+        if (data.errCode === 0 || data.errorCode === 0) {
+          resolve(data)
+        } else {
+          Modal.info({
+            content: data.errMsg || data.errorMsg // errMsg兼容gateway错误
+          })
+        }
+      }).catch(error => {
+        Loading.hide()
+        console.error(error.toString())
+        Message.info({
+          content: '网络错误，请稍后再试！',
+          duration: 2
+        })
       })
+    })
+  } else {
+    return hackFetch('GET', url, params)
+  }
+}
+
+function hackFetch(type, url, params) {
+  return new Promise((resolve, reject) => {
+    let requestObj, sendData = ''
+    if (type === 'POST') {
+      sendData = JSON.stringify(params)
+    }
+    if (window.XMLHttpRequest) {
+      requestObj = new XMLHttpRequest()
+    } else {
+      requestObj = new ActiveXObject('Microsoft.XMLHTTP') // eslint-disable-line
+    }
+    requestObj.open(type, url, true)
+    requestObj.setRequestHeader('Content-type', 'application/json')
+    requestObj.send(sendData)
+    requestObj.onreadystatechange = () => {
+      if (requestObj.readyState === 4) {
+        Loading.hide()
+        if (requestObj.status === 200) {
+          let data = requestObj.response
+          if (typeof data !== 'object') {
+            data = JSON.parse(data)
+          }
+          if (data.errCode === 0 || data.errorCode === 0) {
+            resolve(data)
+          } else {
+            Modal.info({
+              content: data.errMsg || data.errorMsg // errMsg兼容gateway错误
+            })
+          }
+        } else {
+          reject(requestObj)
+        }
+      }
+    }
+  }).catch(error => {
+    Loading.hide()
+    console.error(error.toString())
+    Message.info({
+      content: '网络错误，请稍后再试！',
+      duration: 2
     })
   })
 }
@@ -67,39 +115,43 @@ export function fetchPost(path, params = {}) {
     }, timeout)
   })
   let url = urlBase.urlBase + path
-  let fetchPromise = fetch(url, {
-    method: 'POST',
-    cache: 'no-cache',
-    credentials: 'same-origin',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(params)
-  }).then(response => {
-    Loading.hide()
-    if (response.status === 200) {
-      return response.json()
-    }
-    throw new Error(response.statusText)
-  })
-  return new Promise((resolve, reject) => {
-    Promise.race([fetchPromise, timeoutPromsie]).then(data => {
-      if (data.errCode === 0 || data.errorCode === 0) {
-        resolve(data)
-      } else {
-        Modal.info({
-          content: data.errMsg || data.errorMsg // errMsg兼容gateway错误
-        })
-      }
-    }).catch(error => {
+  if (window.fetch) {
+    let fetchPromise = fetch(url, {
+      method: 'POST',
+      cache: 'no-cache',
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(params)
+    }).then(response => {
       Loading.hide()
-      console.error(error.toString())
-      Message.info({
-        content: '网络错误，请稍后再试！',
-        duration: 2
+      if (response.status === 200) {
+        return response.json()
+      }
+      throw new Error(response.statusText)
+    })
+    return new Promise((resolve, reject) => {
+      Promise.race([fetchPromise, timeoutPromsie]).then(data => {
+        if (data.errCode === 0 || data.errorCode === 0) {
+          resolve(data)
+        } else {
+          Modal.info({
+            content: data.errMsg || data.errorMsg // errMsg兼容gateway错误
+          })
+        }
+      }).catch(error => {
+        Loading.hide()
+        console.error(error.toString())
+        Message.info({
+          content: '网络错误，请稍后再试！',
+          duration: 2
+        })
       })
     })
-  })
+  } else {
+    return hackFetch('POST', url, params)
+  }
 }
 
 export function reqGet(path, params = {}) {
