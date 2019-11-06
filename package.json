@@ -8,7 +8,7 @@
     "build": "NODE_ENV=production webpack --config ./build/webpack.build.js --progress --profile --color"
   },
   "dependencies": {
-    "@umetrip/jsapi": "^1.0.7",
+    "@umetrip/jsapi": "^1.0.9",
     "@umetrip/ume-ui": "0.0.4",
     "countly-sdk-web": "^19.8.0",
     "fastclick": "^1.0.6",

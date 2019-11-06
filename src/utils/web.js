@@ -4,7 +4,7 @@ import { Message, Loading, Modal } from '@umetrip/ume-ui'
 
 axios.defaults.timeout = 50000;
 
-export function fetchGet(path, params = {}) {
+export function fetchGet(path, params = {}, headers = {}) {
   Loading.show()
   var timeout = 50000
   let timeoutPromsie = new Promise((resolve, reject) => {
@@ -29,7 +29,8 @@ export function fetchGet(path, params = {}) {
       cache: 'no-cache',
       credentials: 'same-origin', // cookie同域发送
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        ...headers
       }
     }).then(response => {
       if (response.status === 200) {
@@ -61,6 +62,56 @@ export function fetchGet(path, params = {}) {
   }
 }
 
+export function fetchPost(path, params = {}, headers = {}) {
+  Loading.show()
+  var timeout = 60000
+  let timeoutPromsie = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      reject(new Error('fetch timeout'))
+      Loading.hide()
+    }, timeout)
+  })
+  let url = urlBase.urlBase + path
+  if (window.fetch) {
+    let fetchPromise = fetch(url, {
+      method: 'POST',
+      cache: 'no-cache',
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json',
+        ...headers
+      },
+      body: JSON.stringify(params)
+    }).then(response => {
+      if (response.status === 200) {
+        return response.json()
+      }
+      throw new Error(response.statusText)
+    })
+    return new Promise((resolve, reject) => {
+      Promise.race([fetchPromise, timeoutPromsie]).then(data => {
+        Loading.hide()
+        if (data.errCode === 0 || data.errorCode === 0) {
+          resolve(data)
+        } else {
+          Modal.info({
+            content: data.errMsg || data.errorMsg // errMsg兼容gateway错误
+          })
+        }
+      }).catch(error => {
+        Loading.hide()
+        console.error(error.toString())
+        Message.info({
+          content: '网络错误，请稍后再试！',
+          duration: 2
+        })
+      })
+    })
+  } else {
+    return hackFetch('POST', url, params)
+  }
+}
+
 function hackFetch(type, url, params) {
   return new Promise((resolve, reject) => {
     let requestObj, sendData = ''
@@ -72,13 +123,19 @@ function hackFetch(type, url, params) {
     } else {
       requestObj = new ActiveXObject('Microsoft.XMLHTTP') // eslint-disable-line
     }
+    requestObj.timeout = 5000
     requestObj.open(type, url, true)
     requestObj.setRequestHeader('Content-type', 'application/json')
+    // requestObj.onprogress = function(event) {
+    //   if (event.lengthComputable) {
+    //     console.log(`received ${event.loaded} in ${event.total} bytes`)
+    //   }
+    // }
     requestObj.send(sendData)
     requestObj.onreadystatechange = () => {
       if (requestObj.readyState === 4) {
-        Loading.hide()
         if (requestObj.status === 200) {
+          Loading.hide()
           let data = requestObj.response
           if (typeof data !== 'object') {
             data = JSON.parse(data)
@@ -105,53 +162,21 @@ function hackFetch(type, url, params) {
   })
 }
 
-export function fetchPost(path, params = {}) {
-  Loading.show()
-  var timeout = 60000
-  let timeoutPromsie = new Promise((resolve, reject) => {
-    setTimeout(() => {
-      reject(new Error('fetch timeout'))
-      Loading.hide()
-    }, timeout)
-  })
-  let url = urlBase.urlBase + path
-  if (window.fetch) {
-    let fetchPromise = fetch(url, {
-      method: 'POST',
-      cache: 'no-cache',
-      credentials: 'same-origin',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(params)
-    }).then(response => {
-      Loading.hide()
-      if (response.status === 200) {
-        return response.json()
+export function fetchStream(response) { // response.body是个ReadableStream
+  const contentLength = response.headers.get('Content-Length')
+  const reader = response.body.getReader() // 原始数据流
+  let received = 0
+  return reader.read().then(
+    function pump({ done, value }) {
+      if (done) {
+        console.log('Stream complete')
+        return
       }
-      throw new Error(response.statusText)
-    })
-    return new Promise((resolve, reject) => {
-      Promise.race([fetchPromise, timeoutPromsie]).then(data => {
-        if (data.errCode === 0 || data.errorCode === 0) {
-          resolve(data)
-        } else {
-          Modal.info({
-            content: data.errMsg || data.errorMsg // errMsg兼容gateway错误
-          })
-        }
-      }).catch(error => {
-        Loading.hide()
-        console.error(error.toString())
-        Message.info({
-          content: '网络错误，请稍后再试！',
-          duration: 2
-        })
-      })
-    })
-  } else {
-    return hackFetch('POST', url, params)
-  }
+      received += value.byteLength
+      console.log(`received ${received} in ${contentLength} bytes`)
+      return reader.read().then(pump)
+    }
+  )
 }
 
 export function reqGet(path, params = {}) {

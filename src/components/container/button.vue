@@ -10,9 +10,9 @@
 
 <template>
   <div class="button_example">
-    <ume-btn :bgType="0">B1 一级常态按钮</ume-btn>
-    <ume-btn :bgType="1">B2 二级常态按钮</ume-btn>
-    <ume-btn :bgType="2">B3 三级常态按钮</ume-btn>
+    <ume-btn :bgType="0" @click="clickEvent('一级')">B1 一级常态按钮</ume-btn>
+    <ume-btn :bgType="1" @click="clickEvent('二级')">B2 二级常态按钮</ume-btn>
+    <ume-btn :bgType="2" @click="clickEvent('三级')">B3 三级常态按钮</ume-btn>
     <ume-btn :bgType="3">B4 不可点击按钮置灰</ume-btn>
     <ume-btn :bgType="4">B5 不可点击较弱状态</ume-btn>
     <div style="display: flex; justify-content: space-between; padding: 0 0.32rem;">
@@ -22,10 +22,13 @@
   </div>
 </template>
 <script>
-// import Btn from '../common/button/Btn.vue';
-// export default {
-//   components: {
-//     Btn
-//   }
-// }
+import { clickEvent } from '../../utils/tools.js'
+export default {
+  methods: {
+    clickEvent(key) {
+      console.log('hihdowec')
+      clickEvent(key)
+    }
+  }
+}
 </script>

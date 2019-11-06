@@ -2,7 +2,7 @@ var env = process.env.NODE_ENV || 'development';
 
 var config = {
   'development': {
-    urlBase: 'http://119.254.233.175/gateway/api/web/umebotweb/xhqa/'
+    urlBase: 'http://119.254.233.174/gateway/api/web/umebotweb/xhqa/'
   },
 
   'production': {

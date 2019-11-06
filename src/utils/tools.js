@@ -69,8 +69,8 @@ export function findIndex(array, key, value) {
 export function countlyLog() {
   if (!Countly.app_key) {
     Countly.init({
-      app_key: 'a4cf64ed5bebc726f389b9e0f3c5b79e8406b210',
-      url: 'http://10.5.150.36/'
+      app_key: 'c26126fe92d792b01f266b6d5cdcd87320644863', // 'a4cf64ed5bebc726f389b9e0f3c5b79e8406b210'
+      url: 'https://analytics.umetrip.com/'
     });
     // track sessions automatically
     Countly.track_sessions();
@@ -86,11 +86,21 @@ export function hashLog() {
   Countly.track_pageview();
 }
 
-export function clickEvent(ob) {
+export function clickEvent(key) {
+  var p = {
+    ti: document.title,
+    ul: location.pathname + location.hash,
+    bt: key
+  }
+  callNative('uploadH5Log', {
+    't': Date.now(),
+    'p': p,
+    'e': 7
+  })
   Countly.add_event({
-    key: 'asyncButtonClick', 
+    key: key, 
     segmentation: {
-      id: ob.id
+      ti: document.title
     }
   });
 }
