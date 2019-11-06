@@ -118,6 +118,20 @@ export function uploadH5Log() {
   })
 }
 
+export function uploadH5LogBtn(bt) {
+  var p = {
+    ti: document.title,
+    ul: location.pathname + location.hash,
+    bt: bt
+  }
+  // console.log(p)
+  callNative('uploadH5Log', {
+    't': Date.now(),
+    'p': p,
+    'e': 7
+  })
+}
+
 export function record() {
   countlyLog()
   uploadH5Log()

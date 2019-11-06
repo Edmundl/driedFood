@@ -5,7 +5,7 @@
   "main": "dist/webpack-numbers.js",
   "scripts": {
     "dev": "webpack-dev-server --colors --inline --hot --host 0.0.0.0 --port 8000 --config ./build/webpack.dev.js",
-    "build": "NODE_ENV=production webpack --config ./build/webpack.build.js --progress --profile --color"
+    "build": "webpack --config ./build/webpack.build.js --progress --profile --color"
   },
   "dependencies": {
     "@umetrip/jsapi": "^1.0.9",
@@ -18,6 +18,7 @@
     "vue": "^2.6.10"
   },
   "devDependencies": {
+    "appcache-webpack-plugin": "^1.4.0",
     "autoprefixer": "^9.4.7",
     "axios": "^0.18.0",
     "babel-core": "^6.26.3",

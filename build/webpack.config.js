@@ -4,6 +4,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const StyleLintPlugin = require('stylelint-webpack-plugin');
+const AppCachePlugin = require('appcache-webpack-plugin');
 // build时,设置NODE_ENV=production 打出process.env.NODE_ENV = production
 const devMode = process.env.NODE_ENV !== 'production'
 
@@ -110,6 +111,14 @@ module.exports = {
     }
   },
   plugins: [
+    new AppCachePlugin({
+      cache: [],
+      network: ['*'],
+      fallback: [],
+      settings: [],
+      exclude: [/.*\.map$/],
+      output: 'manifest.appcache'
+    }),
     new StyleLintPlugin({
       configFile: '.stylelintrc.js',
       files:['**/*.vue','**/*.css','**/*.less','**/*.sass']
