@@ -86,22 +86,12 @@ export function hashLog() {
   Countly.track_pageview();
 }
 
-export function clickEvent(key) {
-  var p = {
-    ti: document.title,
-    ul: location.pathname + location.hash,
-    bt: key
-  }
-  callNative('uploadH5Log', {
-    't': Date.now(),
-    'p': p,
-    'e': 7
-  })
+export function clickEvent(key, ua) {  // key:事件属性(二级目录),ua:浏览器类型(三级目录)
+  let obj = {};
+  obj[key] = ua;
   Countly.add_event({
-    key: key, 
-    segmentation: {
-      ti: document.title
-    }
+    key: '',  // Tag名称，需自定义
+    segmentation: obj
   });
 }
 
