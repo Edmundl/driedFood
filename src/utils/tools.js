@@ -1,15 +1,17 @@
 import Countly from 'countly-sdk-web'
-import { callNative } from '@umetrip/jsapi'
+import {
+  callNative
+} from '@umetrip/jsapi'
 
 export function query(name) {
   // var params = location.search.substr(1);
   var params = location.href.split('?')[1] || ''
-	var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
-	var value = params.match(reg)
-	if (value) {
-		return decodeURIComponent(value[2])
-	}
-	return null
+  var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+  var value = params.match(reg)
+  if (value) {
+    return decodeURIComponent(value[2])
+  }
+  return null
 }
 export function getFirstProperty(obj) {
   for (let key in obj) { // for in 循环是有序的
@@ -21,8 +23,8 @@ export function changeTitle(title) {
   let iframe = document.createElement('iframe')
   iframe.style.display = 'none'
   iframe.setAttribute('src', '/favicon.ico')
-  let d = function() {
-    setTimeout(function() {
+  let d = function () {
+    setTimeout(function () {
       iframe.removeEventListener('load', d)
       document.body.removeChild(iframe)
     }, 0)
@@ -66,7 +68,7 @@ export function findIndex(array, key, value) {
   }
 }
 
-export function countlyLog() {
+export function countlyLog(hashPath) {
   if (!Countly.app_key) {
     Countly.init({
       app_key: 'c26126fe92d792b01f266b6d5cdcd87320644863', // 'a4cf64ed5bebc726f389b9e0f3c5b79e8406b210'
@@ -75,30 +77,30 @@ export function countlyLog() {
     // track sessions automatically
     Countly.track_sessions();
     // track pageviews automatically
-    Countly.track_pageview();
+    Countly.track_pageview(`${location.pathname}#${hashPath}`);
     Countly.track_errors();
   } else {
-    hashLog()
+    hashLog(`${location.pathname}#${hashPath}`)
   }
 }
 
-export function hashLog() {
-  Countly.track_pageview();
+export function hashLog(path) {
+  Countly.track_pageview(path);
 }
 
-export function clickEvent(key, ua) {  // key:事件属性(二级目录),ua:浏览器类型(三级目录)
+export function clickEvent(key, ua) { // key:事件属性(二级目录),ua:浏览器类型(三级目录)
   let obj = {};
   obj[key] = ua;
   Countly.add_event({
-    key: '',  // Tag名称，需自定义
+    key: '', // Tag名称，需自定义
     segmentation: obj
   });
 }
 
-export function uploadH5Log() {
+export function uploadH5Log(hashPath) {
   var p = {
     ti: document.title,
-    ul: location.pathname + location.hash,
+    ul: `${location.pathname}#${hashPath}`,
     bt: ''
   }
   callNative('uploadH5Log', {
@@ -122,9 +124,9 @@ export function uploadH5LogBtn(bt) {
   })
 }
 
-export function record() {
-  countlyLog()
-  uploadH5Log()
+export function record(hash) {
+  countlyLog(hash)
+  uploadH5Log(hash)
   // window.addEventListener('hashchange', function() {
   //   Countly.q.push(['track_pageview', location.pathname + location.hash]);
   //   uploadH5Log()
