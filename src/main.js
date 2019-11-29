@@ -7,7 +7,10 @@ import router from './router/index.js';
 import FastClick from 'fastclick'
 import './assets/js/umeH5Flexible.js';
 import './assets/css/umeH5Flexible.less';
-import { record, changeTitle } from './utils/tools'
+import {
+  record,
+  changeTitle
+} from './utils/tools'
 
 import umeUI from '@umetrip/ume-ui'
 import '@umetrip/ume-ui/dist/ume-ui.css'
@@ -43,7 +46,7 @@ router.beforeEach((to, from, next) => {
       document.title = to.meta.title
     }
   }
-  record()
+  record(to.path)
   next()
 })
 
