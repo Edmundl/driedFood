@@ -8,8 +8,8 @@
     "build": "webpack --config ./build/webpack.build.js --progress --profile --color"
   },
   "dependencies": {
-    "@umetrip/jsapi": "^1.0.9",
-    "@umetrip/ume-ui": "0.0.4",
+    "@umetrip/jsapi": "^1.1.1",
+    "@umetrip/ume-ui": "0.0.7",
     "countly-sdk-web": "^19.8.0",
     "fastclick": "^1.0.6",
     "glob-all": "^3.1.0",

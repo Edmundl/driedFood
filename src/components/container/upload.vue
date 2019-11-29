@@ -33,12 +33,15 @@
   </div>
 </template>
 <script>
-import { reqGet, reqPost, fetchGet, fetchPost } from '../../utils/web'
+import { fetchHeader, axiosHeader } from '../../utils/web'
 import { clickEvent } from '../../utils/tools.js'
-const userId = '24435124'
-const clientId = '98b9ef73af77b4fcfb68cb428dd6c31dc'
-const token = 'sJHqpAkG1SvvV9EW0EDXNsEa'
+const userId = '1343'
+const clientId = 'qwelhqlwehque'
+const token = 'RJot5HqLNXWDXLG2uOdu1QEa'
 export default {
+  created() {
+    this.toFetchGet()
+  },
   methods: {
     toGet() {
       let url = 'getguide'
@@ -47,7 +50,7 @@ export default {
         token,
         clientId
       }
-      reqGet(url, params).then(res => {
+      axiosHeader('get', url, params).then(res => {
         console.log(res)
       })
     },
@@ -58,31 +61,31 @@ export default {
         token,
         clientId
       }
-      reqPost(url, params, 'application/json').then(res => {
+      axiosHeader('post', url, params).then(res => {
         console.log(res)
       })
     },
     toFetchGet() {
       clickEvent('toFetchGet')
-      let url = 'getrecords'
+      let url = 'getguide'
       let params = {
         userId,
         token,
         clientId
       }
-      fetchGet(url, params).then(res => {
+      fetchHeader('get', url, params).then(res => {
         console.log(res)
       })
     },
     toFetchPost() {
       clickEvent('toFetchPost')
-      let url = 'getrecords'
+      let url = 'getguide'
       let params = {
         userId,
         token,
         clientId
       }
-      fetchPost(url, params).then(res => {
+      fetchHeader('post', url, params).then(res => {
         console.log(res)
       })
     }

@@ -1,11 +1,4 @@
 /* eslint-disable */
-var user_agent = navigator.userAgent.toLowerCase();
-// var platform = navigator.platform.toLowerCase();
-// match 匹配字符串返回的就是[0] = 字符串的数组                                             
-// var desktop = !(!platform.match("mac") && !platform.match("win")); // => 等同于 platform.match("mac") || platform.match("win")                                    // => v
-// var IS_UMETRIP = -1 != user_agent.indexOf("umetrip");
-var IS_ANDROID = -1 != user_agent.indexOf("android");
-var IS_IOS = -1 != user_agent.indexOf("iphone") || -1 != user_agent.indexOf("ipad");
 
 function setupWebViewJavascriptBridge(callback) {
   if (window.WebViewJavascriptBridge) {
@@ -25,11 +18,16 @@ function setupWebViewJavascriptBridge(callback) {
 }
 
 function callHandler(api_name, conf, callback) {
+  var user_agent = navigator.userAgent.toLowerCase();
+  var IS_ANDROID = -1 != user_agent.indexOf("android");
+  var IS_IOS = -1 != user_agent.indexOf("iphone") || -1 != user_agent.indexOf("ipad");
   if (IS_ANDROID) {
     try {
       if (window.WebViewJavascriptBridge) {
         WebViewJavascriptBridge.callHandler(api_name, conf, function(result) {
-          var result = JSON.parse(result)
+          if (result && typeof result === 'string') {
+            var result = JSON.parse(result)
+          }
           callback(result)
         })
       } else {
@@ -37,6 +35,9 @@ function callHandler(api_name, conf, callback) {
           'WebViewJavascriptBridgeReady',
           function() {
             WebViewJavascriptBridge.callHandler(api_name, conf, function(result) {
+              if (result && typeof result === 'string') {
+                var result = JSON.parse(result)
+              }
               callback(result)
             })
           },
@@ -45,16 +46,19 @@ function callHandler(api_name, conf, callback) {
       }
     } catch (error) {
       alert('WebViewJavascriptBridgeReady初始化错误')
-    }    
+    }
+    
   } else if (IS_IOS) {
-    try {
+     try {
       setupWebViewJavascriptBridge(function(bridge) {
         bridge.callHandler(api_name, conf, function(result) {
-          var result = JSON.parse(result)
+          if (result && typeof result === 'string') {
+            var result = JSON.parse(result)
+          }
           callback(result)
         })
       })
-    } catch (error) {
+     } catch (error) {
       alert('WebViewJavascriptBridgeReady初始化错误')
     }
   } else {
@@ -62,78 +66,168 @@ function callHandler(api_name, conf, callback) {
   }
 }
 
-// match匹配正则表达式，数组[1] 获取的是子表达式内容，也就是(\d+\.\d+\.\d+)版本号内容
-var client_version = function() { // => z
-  var a = user_agent.match(/safari\/(\d+\.\d+\.\d+)/) || user_agent.match(/safari\/(\d+\.\d+)/);
-  return a ? a[1] : ""
-}();
-
-// export function webViewApi(name, conf = {}, callback) {
-//   callHandler(name, conf, callback)
-// }
-
-export function chooseContact(conf = {}, callback) {
-  callHandler('chooseContact', conf, callback)
+function registerHandler(api_name, callback) {
+  var user_agent = navigator.userAgent.toLowerCase();
+  var IS_ANDROID = -1 != user_agent.indexOf("android");
+  var IS_IOS = -1 != user_agent.indexOf("iphone") || -1 != user_agent.indexOf("ipad");
+  if (IS_ANDROID) {
+    try {
+      if (window.WebViewJavascriptBridge) {
+        WebViewJavascriptBridge.registerHandler(api_name, function(result, responseCallback) {
+          callback(result, responseCallback)
+        })
+      } else {
+        document.addEventListener(
+          'WebViewJavascriptBridgeReady',
+          function() {
+            WebViewJavascriptBridge.registerHandler(api_name, function(result, responseCallback) {
+              callback(result, responseCallback)
+            })
+          },
+          false
+        );
+      }
+    } catch (error) {
+      alert('WebViewJavascriptBridgeReady初始化错误')
+    }
+    
+  } else if (IS_IOS) {
+     try {
+      setupWebViewJavascriptBridge(function(bridge) {
+        bridge.registerHandler(api_name, function(result, responseCallback) {
+          callback(result, responseCallback)
+        })
+      })
+     } catch (error) {
+      alert('WebViewJavascriptBridgeReady初始化错误')
+    }
+  } else {
+    alert("请在航旅纵横中打开链接")
+  }
 }
 
-export function getLocation(conf = {}, callback) {
-  callHandler('getLocation', conf, callback)
+function validArgs (name, params) {
+   if(params.length === 0) {
+    alert("请检查参数，参数不能为空")
+   } else if (params.length === 1) {
+    if(typeof(params[0]) === 'function'){
+      callHandler(name, {}, params[0])
+    } else {
+      alert("请检查参数是否正确")
+    }
+  } else {
+    if(typeof(params[0]) === 'object' && typeof(params[1]) === 'function'){
+      callHandler(name, params[0], params[1])
+    } else {
+      alert("请检查参数是否正确")
+    }
+  }
 }
 
-export function getNetworkType(conf = {}, callback) {
-  callHandler('getNetworkType', conf, callback)
+export function chooseContact() {
+  validArgs("chooseContact", arguments)
 }
 
-export function getReqHeader(conf = {}, callback) {
-  callHandler('getReqHeader', conf, callback)
+export function getLocation() {
+  validArgs("getLocation", arguments)
 }
 
-export function getUserInfo(conf = {}, callback) {
-  callHandler('getUserInfo', conf, callback)
+export function getNetworkType() {
+  validArgs("getNetworkType", arguments)
 }
 
-export function clearCache(conf = {}, callback) {
-  callHandler('clearCache', conf, callback)
+export function getReqHeader() {
+  validArgs("getReqHeader", arguments)
 }
 
-export function onRefresh(conf = {}, callback) {
-  callHandler('onRefresh', conf, callback)
+export function getUserInfo() {
+  validArgs("getUserInfo", arguments)
 }
 
-export function onReturn(conf = {}, callback) {
-  callHandler('onReturn', conf, callback)
+export function clearCache() {
+  validArgs("clearCache", arguments)
 }
 
-export function onClosed(conf = {}, callback) {
-  callHandler('onClosed', conf, callback)
+export function onRefresh() {
+  validArgs("onRefresh", arguments)
 }
-export function getGuestCard(conf = {}, callback) {
-  callHandler('getGuestCard', conf, callback)
+
+export function onReturn() {
+  validArgs("onReturn", arguments)
 }
-export function noSlider(conf = {}, callback) {
-  callHandler('noSlider', conf, callback)
+
+export function onClosed() {
+  validArgs("onClosed", arguments)
 }
-export function getAirportList(conf = {}, callback) {
-  callHandler('getAirportList', conf, callback)
+
+export function getGuestCard() {
+  validArgs("getGuestCard", arguments)
 }
-export function getAirlineList(conf = {}, callback) {
-  callHandler('getAirlineList', conf, callback)
+
+export function noSlider() {
+  validArgs("noSlider", arguments)
 }
-export function getCertInfo(conf = {}, callback) {
-  callHandler('getCertInfo', conf, callback)
+
+export function getAirportList() {
+  validArgs("getAirportList", arguments)
 }
-export function commonPay(conf = {}, callback) {
-  callHandler('commonPay', conf, callback)
+
+export function getAirlineList() {
+  validArgs("getAirlineList", arguments)
 }
-export function getBluetooth(conf = {}, callback) {
-  callHandler('getBluetooth', conf, callback)
+
+export function getCertInfo() {
+  validArgs("getCertInfo", arguments)
 }
-export function Accelerated(conf = {}, callback) {
-  callHandler('Accelerated', conf, callback)
+
+export function commonPay() {
+  validArgs("commonPay", arguments)
 }
-export function getPhoto(conf, callback) {
-  callHandler('getPhoto', conf, callback)
+
+export function getBluetooth() {
+  validArgs("getBluetooth", arguments)
 }
-export function getTemp(conf = {}, callback) {
-  callHandler('getTemp', callback)
+
+export function Accelerated() {
+  validArgs("Accelerated", arguments)
+}
+
+export function getPhoto() {
+  validArgs("getPhoto", arguments)
+}
+
+export function finishWebView() {
+  validArgs("finishWebView", arguments)
+}
+
+export function callNative(api_name, conf = {}, callback) {
+  callHandler('getReqHeader', {}, function(result) {
+    if (typeof result === 'string') {
+      result = JSON.parse(result)
+    }
+    if (result.status === 11111) {
+      try {
+        var rcver = result.data.rcver // 'IOS_i03_05.09.1018', 'AND_a01_05.09.1010'
+        var version = rcver.split('_')[2] // '05.09.1018
+        version = Number(version.split('.').slice(0, 2).join('')) // number: 509
+        if (version > 510) {
+          var newConf = conf
+          newConf.methodName = api_name
+          callHandler('callNative', newConf, callback) // 为配合客户端兼容weex
+        } else {
+          callHandler(api_name, conf, callback)
+        }
+      } catch (error) {
+        alert(error)
+      }
+    }
+  })
+}
+
+export function registerService(api_name, callback) {
+  registerHandler(api_name, callback)
+}
+
+export default {
+  callNative
 }

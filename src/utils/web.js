@@ -1,8 +1,79 @@
 import axios from 'axios';
 import urlBase from '../../config/config.js';
 import { Message, Loading, Modal } from '@umetrip/ume-ui'
+import { callNative } from '@umetrip/jsapi'
 
 axios.defaults.timeout = 50000;
+var sessionid = '', rcuuid = ''
+function getHeader() {
+  let p1 = new Promise((resolve, reject) => {
+    if (sessionid && rcuuid) {
+      resolve({
+        sessionid,
+        rcuuid
+      })
+    } else {
+      callNative('getUserInfo', {}, (result) => { // 经测试，这个异步api一般在100ms以内
+        if (typeof result === 'string') {
+          result = JSON.parse(result)
+        }
+        if (result.status === 11111) {
+          sessionid = result.data.sessionId
+          rcuuid = result.data.rcuuid
+        }
+        resolve({
+          sessionid,
+          rcuuid
+        })
+      })
+    }
+  })
+  let p2 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve({
+        sessionid,
+        rcuuid
+      })
+    }, 2000)
+  })
+  return Promise.race([p1, p2])
+}
+
+export async function fetchHeader(method, path, params = {}, headers = {}) {
+  let data = await getHeader(), promise
+  if (/get/i.test(method)) {
+    promise = fetchGet(path, params = {}, {
+      sessionid: data.sessionid,
+      rcuuid: data.rcuuid,
+      ...headers
+    })
+  } else {
+    promise = fetchPost(path, params, {
+      sessionid: data.sessionid,
+      rcuuid: data.rcuuid,
+      ...headers
+    })
+  }
+  return promise
+}
+
+export async function axiosHeader(method, path, params = {}, headers = {}) {
+  let data = await getHeader(), promise
+  if (/get/i.test(method)) {
+    promise = reqGet(path, params, {
+      sessionid: data.sessionid,
+      rcuuid: data.rcuuid,
+      ...headers
+    })
+  } else {
+    promise = reqPost(path, params, {
+      sessionid: data.sessionid,
+      rcuuid: data.rcuuid,
+      ...headers
+    })
+  }
+  return promise
+}
 
 export function fetchGet(path, params = {}, headers = {}) {
   Loading.show()
@@ -58,7 +129,7 @@ export function fetchGet(path, params = {}, headers = {}) {
       })
     })
   } else {
-    return hackFetch('GET', url, params)
+    return hackFetch('GET', url, params, headers)
   }
 }
 
@@ -108,11 +179,11 @@ export function fetchPost(path, params = {}, headers = {}) {
       })
     })
   } else {
-    return hackFetch('POST', url, params)
+    return hackFetch('POST', url, params, headers)
   }
 }
 
-function hackFetch(type, url, params) {
+function hackFetch(type, url, params, headers) {
   return new Promise((resolve, reject) => {
     let requestObj, sendData = ''
     if (type === 'POST') {
@@ -126,6 +197,9 @@ function hackFetch(type, url, params) {
     requestObj.timeout = 5000
     requestObj.open(type, url, true)
     requestObj.setRequestHeader('Content-type', 'application/json')
+    for (let key in headers) {
+      requestObj.setRequestHeader(key, headers[key])
+    }   
     // requestObj.onprogress = function(event) {
     //   if (event.lengthComputable) {
     //     console.log(`received ${event.loaded} in ${event.total} bytes`)
@@ -179,12 +253,16 @@ export function fetchStream(response) { // response.body是个ReadableStream
   )
 }
 
-export function reqGet(path, params = {}) {
+export function reqGet(path, params = {}, headers = {}) {
   Loading.show()
   return new Promise((resovle, reject) => {
     let url = urlBase.urlBase + path;
-    axios.get(url, {
-      params: params
+    axios({
+      url: url,
+      params: params,
+      headers: {
+        ...headers
+      }
     }).then((response) => {
       Loading.hide()
       let data = response.data
@@ -206,16 +284,17 @@ export function reqGet(path, params = {}) {
   })
 }
 
-export function reqPost(path, params = {}, ContentType) {
+export function reqPost(path, params = {}, headers = {}) {
   Loading.show()
   return new Promise((resovle, reject) => {
       let url = urlBase.urlBase + path;
       axios({
           method: 'POST',
           url: url,
-          data: ContentType ? params : qs(params),
+          data: params,
           headers: {
-             'Content-type': ContentType || 'application/x-www-form-urlencoded'
+             'Content-type': 'application/json',
+              ...headers
           },
           responseType: 'json'
       }).then((response) => {
@@ -237,13 +316,4 @@ export function reqPost(path, params = {}, ContentType) {
       }
     );
   })
-}
-
-function qs(data) {
-  // Do whatever you want to transform the data
-  var ret = ''
-  for (var it in data) {
-      ret += it + '=' + data[it] + '&'
-  }
-  return ret
 }

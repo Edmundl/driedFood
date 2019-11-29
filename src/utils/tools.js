@@ -67,23 +67,21 @@ export function findIndex(array, key, value) {
 }
 
 export function countlyLog() {
-  if (!Countly.app_key) {
-    Countly.init({
-      app_key: 'c26126fe92d792b01f266b6d5cdcd87320644863', // 'a4cf64ed5bebc726f389b9e0f3c5b79e8406b210'
-      url: 'https://analytics.umetrip.com/'
-    });
-    // track sessions automatically
-    Countly.track_sessions();
-    // track pageviews automatically
-    Countly.track_pageview();
-    Countly.track_errors();
-  } else {
-    hashLog()
-  }
+  Countly.init({
+    app_key: '0ff9608b68551e60f2b0cfcf747f280f35cfc6d3',
+    url: 'https://analytics.umetrip.com/'
+  });
+  // Countly.track_sessions();
+  // Countly.track_pageview(location.pathname + location.hash);
+  // Countly.track_errors();
+  Countly.q.push(['track_sessions']);
+  Countly.q.push(['track_pageview', location.pathname + location.hash]);
+  Countly.q.push(['track_errors']);
 }
 
 export function hashLog() {
-  Countly.track_pageview();
+  // Countly.track_pageview(location.pathname + location.hash);
+  Countly.q.push(['track_pageview', location.pathname + location.hash]);
 }
 
 export function clickEvent(key) {
@@ -96,6 +94,8 @@ export function clickEvent(key) {
     't': Date.now(),
     'p': p,
     'e': 7
+  }, function(result) {
+    console.log(result)
   })
   Countly.add_event({
     key: key, 
@@ -115,6 +115,8 @@ export function uploadH5Log() {
     't': Date.now(),
     'p': p,
     'e': 6
+  }, function(result) {
+    console.log(result)
   })
 }
 
@@ -129,6 +131,8 @@ export function uploadH5LogBtn(bt) {
     't': Date.now(),
     'p': p,
     'e': 7
+  }, function(result) {
+    console.log(result)
   })
 }
 
