@@ -42,7 +42,7 @@ function getHeader() {
 export async function fetchHeader(method, path, params = {}, headers = {}) {
   let data = await getHeader(), promise
   if (/get/i.test(method)) {
-    promise = fetchGet(path, params = {}, {
+    promise = fetchGet(path, params, {
       sessionid: data.sessionid,
       rcuuid: data.rcuuid,
       ...headers
