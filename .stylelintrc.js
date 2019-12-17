@@ -10,6 +10,7 @@ module.exports = {
         "no-descending-specificity": null,
         "rule-empty-line-before": null,
         "at-rule-empty-line-before": null,
-        "color-hex-length": null
+        "color-hex-length": null,
+        "comment-empty-line-before": null
     }
 }

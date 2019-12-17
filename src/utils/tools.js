@@ -3,15 +3,11 @@ import {
   callNative
 } from '@umetrip/jsapi'
 
-export function query(name) {
-  // var params = location.search.substr(1);
-  var params = location.href.split('?')[1] || ''
-  var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
-  var value = params.match(reg)
-  if (value) {
-    return decodeURIComponent(value[2])
-  }
-  return null
+export function query(key) {
+  let url = location.href
+  const reg = new RegExp(`[?|&]${key}=([^&]+)`)
+  const match = url.match(reg)
+  return match && match[1]
 }
 export function getFirstProperty(obj) {
   for (let key in obj) { // for in 循环是有序的

@@ -111,14 +111,14 @@ module.exports = {
     }
   },
   plugins: [
-    new AppCachePlugin({
-      cache: [],
-      network: ['*'],
-      fallback: [],
-      settings: [],
-      exclude: [/.*\.map$/],
-      output: 'manifest.appcache'
-    }),
+    // new AppCachePlugin({
+    //   cache: [],
+    //   network: ['*'],
+    //   fallback: [],
+    //   settings: [],
+    //   exclude: [/.*\.map$/],
+    //   output: 'manifest.appcache'
+    // }),
     new StyleLintPlugin({
       configFile: '.stylelintrc.js',
       files:['**/*.vue','**/*.css','**/*.less','**/*.sass']

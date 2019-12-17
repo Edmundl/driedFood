@@ -1,11 +1,8 @@
 @charset "utf-8";
-
 /* viewport的设置在js文件umetripH5.js中 */
-
 * {
   -webkit-overflow-scrolling: touch;
 }
-
 /* html随设备变大而变大，永远100% */
 html {
   height: 100%;
@@ -13,7 +10,6 @@ html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 }
-
 /* adjust具有继承性，设置html下的内容或字体不要随意改变 */
 html * {
   outline: none;
@@ -21,14 +17,12 @@ html * {
   text-size-adjust: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
-
 body {
   height: 100%;
   width: 100%;
   font-family: "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
   overflow-y: scroll;
 }
-
 /* 内外边距通常让各个浏览器样式的表现位置不同，统一初始化 */
 body,
 div,
@@ -71,26 +65,22 @@ section {
   margin: 0;
   padding: 0;
 }
-
 /* 通过父元素控制表单标签的字体 */
 input,
 select,
 textarea {
   font-size: 100%;
 }
-
 /* 去掉各 Table  cell 的边距并让其边重合 */
 table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-
 /* 去掉列表前的标识, li 会继承 */
 ol,
 ul {
   list-style: none;
 }
-
 /* 去除某些区域点击的时候会出现的阴影 */
 a,
 button,
@@ -101,16 +91,13 @@ textarea,
 div {
   -webkit-tap-highlight-color: transparent;
 }
-
 /* 盒子模型，规定width = border+padding+content */
 div {
   box-sizing: border-box;
 }
-
 .relative {
   position: relative;
 }
-
 /* input输入框取消默认样式 */
 input {
   -webkit-appearance: none;
@@ -121,14 +108,12 @@ input {
   outline: none;
   border: 0;
 }
-
 /* 文本超出宽度部分以省略号代替 */
 .elipsis {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
 /* absolute实现全居中,水平居中，垂直居中，要求其父元素是absolute或relative */
 .allCenter {
   position: absolute;
@@ -139,7 +124,6 @@ input {
   -o-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
-
 .horizontal_center {
   position: absolute;
   left: 50%;
@@ -148,7 +132,6 @@ input {
   -o-transform: translateX(-50%);
   transform: translateX(-50%);
 }
-
 .vertical_center {
   position: absolute;
   top: 50%;
@@ -157,7 +140,6 @@ input {
   -o-transform: translateY(-50%);
   transform: translateY(-50%);
 }
-
 /* 兼容低android版本的flex垂直布局 */
 .flex_column {
   display: -webkit-box;
@@ -171,10 +153,8 @@ input {
   -o-flex-direction: column;
   flex-direction: column;
 }
-
 /*   -webkit-box-orient: vertical;
   box-orient: vertical; */
-
 /* 兼容低android版本的flex水平布局 */
 .flex_flex {
   display: -webkit-box;
@@ -185,7 +165,6 @@ input {
   display: flex;
   position: relative;
 }
-
 /* 清楚浮动 */
 .clearfix::after {
   content: "";
@@ -194,81 +173,65 @@ input {
   height: 0;
   visibility: hidden;
 }
-
 /* 1px全边框 */
-.border-1px-before {
-  &::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 200%;
-    height: 200%;
-    border: 1px solid #eee;
-    transform: scale(0.5);
-    transform-origin: left top;
-    box-sizing: border-box;
-    z-index: -1; // 如果父元素没有z-index: 0，该子元素将在祖先元素的背景颜色之后导致无法正常显示
-  }
+.border-1px-before::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 200%;
+  height: 200%;
+  border: 1px solid #eee;
+  transform: scale(0.5);
+  transform-origin: left top;
+  box-sizing: border-box;
+  z-index: -1;
 }
-
 /* 1px上边框 */
-.border-top-1px-before {
-  &::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 1px;
-    background-color: #eee;
-    transform: scaleY(0.5);
-    box-sizing: border-box;
-  }
+.border-top-1px-before::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #eee;
+  transform: scaleY(0.5);
+  box-sizing: border-box;
 }
-
 /* 1px下边框 */
-.border-bottom-1px-after {
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background-color: #eee;
-    transform: scaleY(0.5);
-  }
+.border-bottom-1px-after::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #eee;
+  transform: scaleY(0.5);
 }
-
 /* 1px右边框 */
-.border-right-1px-after {
-  &::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 1px;
-    height: 100%;
-    background-color: #eee;
-    transform: scaleX(0.5);
-  }
+.border-right-1px-after::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 1px;
+  height: 100%;
+  background-color: #eee;
+  transform: scaleX(0.5);
 }
-
 /* 1px左边框 */
-.border-left-1px-after {
-  &::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 1px;
-    height: 100%;
-    background-color: #eee;
-    transform: scaleX(0.5);
-  }
+.border-left-1px-after::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1px;
+  height: 100%;
+  background-color: #eee;
+  transform: scaleX(0.5);
 }
-
 /* 宽为1px的div(无定位情况) */
 .width-1px-line {
   height: 100%;
@@ -276,7 +239,6 @@ input {
   background-color: #eee;
   transform: scaleX(0.5);
 }
-
 /* .类名::after{
   content: '';
   position: absolute; (.类名 要提前设置position为非静态定位)
@@ -289,13 +251,8 @@ input {
   -webkit-transform: scaleY(0.5);
   transform: scaleY(0.5);
 } */
-
 /* H5监听屏幕横屏竖屏的旋转事件并处理相应样式 */
-
 /* 横屏时干啥干啥 */
-
 /* @media (orientation: landscape) {} */
-
 /* 竖屏时干啥干啥 */
-
 /* @media (orientation: portrait) {}  */

@@ -33,8 +33,8 @@ Vue.use(umeUI)
 // Vue.prototype.$Loading = Loading
 // Vue.prototype.$Modal = Modal
 
-var VConsole = require('vconsole/dist/vconsole.min.js');
-var vConsole = new VConsole();
+// var VConsole = require('vconsole/dist/vconsole.min.js');
+// var vConsole = new VConsole();
 
 FastClick.attach(document.body)
 router.beforeEach((to, from, next) => {
