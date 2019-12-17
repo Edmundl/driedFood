@@ -5,7 +5,7 @@ import {
 
 export function query(key) {
   let url = location.href
-  const reg = new RegExp(`[?|&]${key}=([^&]+)`)
+  const reg = new RegExp(`[?|&|#]${key}=([^&#]+)`)
   const match = url.match(reg)
   return match && match[1]
 }
