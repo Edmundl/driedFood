@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@umetrip/jsapi": "^1.1.2",
-    "@umetrip/ume-ui": "0.0.8",
+    "@umetrip/ume-ui": "0.0.9",
     "countly-sdk-web": "^19.8.0",
     "fastclick": "^1.0.6",
     "glob-all": "^3.1.0",

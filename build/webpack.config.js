@@ -88,7 +88,11 @@ module.exports = {
                 ['env', { 'modules': false }],
                 'stage-2'
               ],
-              'plugins': ['transform-runtime', 'syntax-dynamic-import']
+              'plugins': ['transform-runtime', 'syntax-dynamic-import', ['import', {
+                libraryName: '@umetrip/ume-ui',
+                libraryDirectory: 'src/components/common',
+                camel2DashComponentName: false,
+              }]]
             }
           }
         ],
