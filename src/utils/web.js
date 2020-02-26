@@ -4,12 +4,12 @@ import { Message, Loading, Modal } from '@umetrip/ume-ui'
 import { callNative } from '@umetrip/jsapi'
 
 axios.defaults.timeout = 50000;
-var sessionid = '', rcuuid = ''
+var rsid = '', rcuuid = ''
 function getHeader() {
   let p1 = new Promise((resolve, reject) => {
-    if (sessionid && rcuuid) {
+    if (rsid && rcuuid) {
       resolve({
-        sessionid,
+        rsid,
         rcuuid
       })
     } else {
@@ -18,11 +18,11 @@ function getHeader() {
           result = JSON.parse(result)
         }
         if (result.status === 11111) {
-          sessionid = result.data.sessionId
+          rsid = result.data.sessionId
           rcuuid = result.data.rcuuid
         }
         resolve({
-          sessionid,
+          rsid,
           rcuuid
         })
       })
@@ -31,7 +31,7 @@ function getHeader() {
   let p2 = new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve({
-        sessionid,
+        rsid,
         rcuuid
       })
     }, 2000)
@@ -43,13 +43,13 @@ export async function fetchHeader(method, path, params = {}, headers = {}) {
   let data = await getHeader(), promise
   if (/get/i.test(method)) {
     promise = fetchGet(path, params, {
-      sessionid: data.sessionid,
+      rsid: data.rsid,
       rcuuid: data.rcuuid,
       ...headers
     })
   } else {
     promise = fetchPost(path, params, {
-      sessionid: data.sessionid,
+      rsid: data.rsid,
       rcuuid: data.rcuuid,
       ...headers
     })
@@ -61,13 +61,13 @@ export async function axiosHeader(method, path, params = {}, headers = {}) {
   let data = await getHeader(), promise
   if (/get/i.test(method)) {
     promise = reqGet(path, params, {
-      sessionid: data.sessionid,
+      rsid: data.rsid,
       rcuuid: data.rcuuid,
       ...headers
     })
   } else {
     promise = reqPost(path, params, {
-      sessionid: data.sessionid,
+      rsid: data.rsid,
       rcuuid: data.rcuuid,
       ...headers
     })

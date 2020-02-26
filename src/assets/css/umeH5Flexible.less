@@ -166,6 +166,8 @@ input {
   display: -moz-flex;
   display: -o-flex;
   display: flex;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
   -webkit-flex-direction: column;
   -moz-flex-direction: column;
   -o-flex-direction: column;
@@ -186,6 +188,38 @@ input {
   position: relative;
 }
 
+.flex_1 {
+  -webkit-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  -webkit-box-flex: 1;
+  -moz-box-flex: 1;
+}
+
+.flex_shrink_0 {
+  -webkit-flex: 0 0 auto;
+  flex: 0 0 auto;
+}
+
+.flex_justify_content_center {
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.flex_align_items_center {
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.flex_justify_content_between {
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
 /* 清楚浮动 */
 .clearfix::after {
   content: "";
@@ -205,7 +239,9 @@ input {
     width: 200%;
     height: 200%;
     border: 1px solid #eee;
+    -webkit-transform: scale(0.5);
     transform: scale(0.5);
+    -webkit-transform-origin: left top;
     transform-origin: left top;
     box-sizing: border-box;
     z-index: -1; // 如果父元素没有z-index: 0，该子元素将在祖先元素的背景颜色之后导致无法正常显示
@@ -222,6 +258,7 @@ input {
     width: 100%;
     height: 1px;
     background-color: #eee;
+    -webkit-transform: scaleY(0.5);
     transform: scaleY(0.5);
     box-sizing: border-box;
   }
@@ -237,6 +274,7 @@ input {
     width: 100%;
     height: 1px;
     background-color: #eee;
+    -webkit-transform: scaleY(0.5);
     transform: scaleY(0.5);
   }
 }
@@ -251,6 +289,7 @@ input {
     width: 1px;
     height: 100%;
     background-color: #eee;
+    -webkit-transform: scaleX(0.5);
     transform: scaleX(0.5);
   }
 }
@@ -265,6 +304,7 @@ input {
     width: 1px;
     height: 100%;
     background-color: #eee;
+    -webkit-transform: scaleX(0.5);
     transform: scaleX(0.5);
   }
 }
@@ -274,6 +314,7 @@ input {
   height: 100%;
   width: 1px;
   background-color: #eee;
+  -webkit-transform: scaleX(0.5);
   transform: scaleX(0.5);
 }
 

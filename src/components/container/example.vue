@@ -7,10 +7,12 @@
     background: #fff;
   }
   .ume-navbar {
-    display: flex;
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     .ume-navbar_item {
+      -webkit-box-flex: 1;
+      -moz-box-flex: 1;
       flex-grow: 1;
+      width: 25%;
       text-align: center;
       font-size: @UIFontTitleSize1;
       height: 1rem;
@@ -38,7 +40,7 @@
 </style>
 <template>
   <div class="mainWrapper">
-    <div class="ume-navbar">
+    <div class="ume-navbar flex_flex">
       <div :class="pageIndex === 0 ? 'ume-navbar_item active': 'ume-navbar_item'" @click="routeTo(0)">反馈<span class="after"></span></div>
       <div :class="pageIndex === 1 ? 'ume-navbar_item active': 'ume-navbar_item'" @click="routeTo(1)">表单<span class="after"></span></div>
       <div :class="pageIndex === 2 ? 'ume-navbar_item active': 'ume-navbar_item'" @click="routeTo(2)">上传<span class="after"></span></div>
@@ -66,6 +68,8 @@
           this.$router.push('/example/form')
         } else if (index === 2) {
           this.$router.push('/example/upload')
+        } else if (index === 3) {
+          this.$router.push('/example/others')
         }
       }
     }

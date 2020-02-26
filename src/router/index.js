@@ -55,6 +55,13 @@ export default new VueRouter({
             /* webpackChunkName: "tabs" */
             /* webpackPrefetch: true */
            '../components/container/tabs.vue')
+        },
+        {
+          path: 'others',
+          component: () => import(
+            /* webpackChunkName: "others" */
+            /* webpackPrefetch: true */
+           '../components/container/others.vue')
         }
       ],
 			meta: {

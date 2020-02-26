@@ -90,8 +90,11 @@ module.exports = {
               ],
               'plugins': ['transform-runtime', 'syntax-dynamic-import', ['import', {
                 libraryName: '@umetrip/ume-ui',
-                libraryDirectory: 'src/components/common',
+                libraryDirectory: 'dist',
                 camel2DashComponentName: false,
+                style: (name) => {
+                  return `${name}/index.css`
+                }
               }]]
             }
           }

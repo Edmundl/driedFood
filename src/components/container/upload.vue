@@ -1,10 +1,6 @@
 <style lang="less" scoped>
 @import "../../assets/css/base.less";
   .page_upload {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
     background: #fff;
   }
   .ume-btn {
@@ -25,7 +21,7 @@
 </style>
 
 <template>
-  <div class="page_upload">
+  <div class="page_upload flex_column flex_justify_content_center flex_align_items_center">
     <a href="javascript:;" class="ume-btn ume-btn_default" @click="toGet">get请求</a>
     <a href="javascript:;" class="ume-btn ume-btn_default" @click="toPost">post请求</a>
     <a href="javascript:;" class="ume-btn ume-btn_default" @click="toFetchGet">fetch get</a>

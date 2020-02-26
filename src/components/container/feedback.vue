@@ -1,9 +1,13 @@
 <style lang="less">
   @import "../../assets/css/base.less";
   .page_feedback {
-    display: flex;
-    flex-direction: column;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
     justify-content: center;
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
     align-items: center;
     background: #fff;
   }
@@ -51,7 +55,7 @@
   }
 </style>
 <template>
-  <div class="page_feedback">
+  <div class="page_feedback flex_column">
     <a href="javascript:;" class="ume-btn ume-btn_default" @click="toModal1">Alert</a>
     <a href="javascript:;" class="ume-btn ume-btn_default" @click="toModal2">Confirm</a>
     <a href="javascript:;" class="ume-btn ume-btn_default" @click="toToast">Toast</a>

@@ -148,6 +148,8 @@ input {
   display: -moz-flex;
   display: -o-flex;
   display: flex;
+  -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
   -webkit-flex-direction: column;
   -moz-flex-direction: column;
   -o-flex-direction: column;

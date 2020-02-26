@@ -5,6 +5,9 @@
   .btn {
     margin-top: 0.3rem;
   }
+  .small_btn {
+    padding: 0 0.32rem;
+  }
 }
 </style>
 
@@ -15,7 +18,7 @@
     <ume-btn :bgType="2" @click="clickEvent('三级')">B3 三级常态按钮</ume-btn>
     <ume-btn :bgType="3">B4 不可点击按钮置灰</ume-btn>
     <ume-btn :bgType="4">B5 不可点击较弱状态</ume-btn>
-    <div style="display: flex; justify-content: space-between; padding: 0 0.32rem;">
+    <div class="small_btn flex_flex flex_justify_content_between">
       <ume-btn :bgType="5">取消订单</ume-btn>
       <ume-btn :bgType="6">继续支付</ume-btn>
     </div>
