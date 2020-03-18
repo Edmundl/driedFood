@@ -1,5 +1,6 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 var path = require('path')
+var config = require('./config')
 
 module.exports = {
   build: {
@@ -15,7 +16,7 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/gateway': {
-        target: 'http://119.254.233.175/',
+        target: config.host,
         changeOrigin: true
       }
     },

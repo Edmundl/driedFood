@@ -1,15 +1,19 @@
 var env = process.env.NODE_ENV || 'development';
 
-var config = {
-  'development': {
-    urlBase: 'http://119.254.233.175/gateway/api/web/umebotweb/xhqa/'
-  },
+// 以下是网络层代理和路径的处理
+var host = 'http://119.254.233.175' // 要代理到的地址，当开发环境启用本地代理时，本配置才起作用
+var middleUrl = '/gateway/api/web/umebotweb/xhqa/' // 接口公共部分路径
 
-  'production': {
-    urlBase: 'http://119.254.233.175/gateway/api/web/umebotweb/xhqa/' // 测试地址
-    // urlBase: 'http://119.254.233.174/gateway/api/web/umebotweb/xhqa/' // 接口灰度地址
-    // urlBase: 'https://cloud.umetrip.com/gateway/api/web/umebotweb/xhqa/' // 线上地址
-  }
+var config = {
+  'development': host + middleUrl, // 不起用代理
+  // 'development': middleUrl, // 启动代理
+
+  'production': 'http://119.254.233.175' + middleUrl // 测试地址
+  // 'production': 'https://gray.umetrip.com' + middleUrl // 接口灰度地址
+  // 'production': 'https://cloud.umetrip.com' + middleUrl // 线上地址
 };
 
-module.exports = config[env];
+export default {
+  host,
+  urlBase: config[env]
+}

@@ -1,18 +1,27 @@
 import axios from 'axios';
 import urlBase from '../../config/config.js';
 import { Message, Loading, Modal } from '@umetrip/ume-ui'
+import { isUmeApp, query } from './tools.js'
 import { callNative } from '@umetrip/jsapi'
 
 axios.defaults.timeout = 50000;
-var rsid = '', rcuuid = ''
+var rsid = '', rcuuid = '';
+var isInUmeApp = isUmeApp(); // 当前页面是否在航旅app内
 function getHeader() {
   let p1 = new Promise((resolve, reject) => {
-    if (rsid && rcuuid) {
+    if (!!rsid && !!rcuuid) { // 全局已有，适合单页面，首页获取，则其他页也可复用
       resolve({
         rsid,
         rcuuid
       })
-    } else {
+    } else if (!!query('rsid') && !!query('rcuuid')) { // 适合多页面，每页从链接上获取一次
+      rsid = query('rsid')
+      rcuuid = query('rcuuid')
+      resolve({
+        rsid,
+        rcuuid
+      })
+    } else if (isInUmeApp) { // 在航旅app里
       callNative('getUserInfo', {}, (result) => { // 经测试，这个异步api一般在100ms以内
         if (typeof result === 'string') {
           result = JSON.parse(result)
@@ -112,11 +121,18 @@ export function fetchGet(path, params = {}, headers = {}) {
     return new Promise((resolve, reject) => {
       Promise.race([fetchPromise, timeoutPromsie]).then(data => {
         Loading.hide()
-        if (data.errCode === 0 || data.errorCode === 0) {
-          resolve(data)
+        if (data) {
+          if (data.errCode === 0 || data.errorCode === 0) {
+            resolve(data)
+          } else {
+            Modal.info({
+              content: data.errMsg || data.errorMsg // errMsg兼容gateway错误
+            })
+          }
         } else {
-          Modal.info({
-            content: data.errMsg || data.errorMsg // errMsg兼容gateway错误
+          Message.info({
+            content: '获取数据失败，请稍后再试！',
+            duration: 2
           })
         }
       }).catch(error => {
@@ -162,11 +178,18 @@ export function fetchPost(path, params = {}, headers = {}) {
     return new Promise((resolve, reject) => {
       Promise.race([fetchPromise, timeoutPromsie]).then(data => {
         Loading.hide()
-        if (data.errCode === 0 || data.errorCode === 0) {
-          resolve(data)
+        if (data) {
+          if (data.errCode === 0 || data.errorCode === 0) {
+            resolve(data)
+          } else {
+            Modal.info({
+              content: data.errMsg || data.errorMsg // errMsg兼容gateway错误
+            })
+          }
         } else {
-          Modal.info({
-            content: data.errMsg || data.errorMsg // errMsg兼容gateway错误
+          Message.info({
+            content: '获取数据失败，请稍后再试！',
+            duration: 2
           })
         }
       }).catch(error => {
@@ -211,14 +234,21 @@ function hackFetch(type, url, params, headers) {
         if (requestObj.status === 200) {
           Loading.hide()
           let data = requestObj.response
-          if (typeof data !== 'object') {
-            data = JSON.parse(data)
-          }
-          if (data.errCode === 0 || data.errorCode === 0) {
-            resolve(data)
+          if (data) {
+            if (typeof data !== 'object') {
+              data = JSON.parse(data)
+            }
+            if (data.errCode === 0 || data.errorCode === 0) {
+              resolve(data)
+            } else {
+              Modal.info({
+                content: data.errMsg || data.errorMsg // errMsg兼容gateway错误
+              })
+            }
           } else {
-            Modal.info({
-              content: data.errMsg || data.errorMsg // errMsg兼容gateway错误
+            Message.info({
+              content: '获取数据失败，请稍后再试！',
+              duration: 2
             })
           }
         } else {
@@ -255,6 +285,9 @@ export function fetchStream(response) { // response.body是个ReadableStream
 
 export function reqGet(path, params = {}, headers = {}) {
   Loading.show()
+  // get请求，加一个时间戳，避免接口缓存
+  var timestamp = new Date().getTime()
+  params.timestamp = timestamp 
   return new Promise((resovle, reject) => {
     let url = urlBase.urlBase + path;
     axios({
@@ -265,12 +298,20 @@ export function reqGet(path, params = {}, headers = {}) {
       }
     }).then((response) => {
       Loading.hide()
-      let data = response.data
-      if (data.errorCode === 0 || data.errCode === 0) {
-        resovle(data)
+      if (response && response.data) {
+        let data = response.data
+        if (data.errCode === 0 || data.errorCode === 0 || data.code === 0) { 
+          // 注意，虽然兼容了三套状态码，但是新接口一律要求中台统一，用errCode和errMsg
+          resovle(data)
+        } else {
+          Modal.info({
+            content: data.errMsg || data.errorMsg || data.message
+          })
+        }
       } else {
-        Modal.info({
-          content: data.errMsg || data.errorMsg // errMsg兼容gateway错误
+        Message.info({
+          content: '获取数据失败，请稍后再试！',
+          duration: 2
         })
       }
     }
@@ -299,12 +340,20 @@ export function reqPost(path, params = {}, headers = {}) {
           responseType: 'json'
       }).then((response) => {
         Loading.hide()
-        let data = response.data
-        if (data.errCode === 0 || data.errorCode === 0) { // errCode是gateway报错，errorCode是业务方报错需要统一
-          resovle(data)
+        if (response && response.data) {
+          let data = response.data
+          if (data.errCode === 0 || data.errorCode === 0 || data.code === 0) {
+            // 注意，虽然兼容了三套状态码，但是新接口一律要求中台统一，用errCode和errMsg
+            resovle(data)
+          } else {
+            Modal.info({
+              content: data.errMsg || data.errorMsg || data.message
+            })
+          }
         } else {
-          Modal.info({
-            content: data.errMsg || data.errorMsg // errMsg兼容gateway错误
+          Message.info({
+            content: '获取数据失败，请稍后再试！',
+            duration: 2
           })
         }
       }).catch(() => {
