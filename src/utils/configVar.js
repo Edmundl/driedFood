@@ -11,7 +11,10 @@ var configDot = {
   
   uploadLogOpen: isInUmeApp ? 1 : 0, // 用户行为分析打点功能是否打开，默认如果页面在航旅app内则打开
 
-  consoleOpen: false // 是否统一关掉console.log: false：打开日志；true: 关掉日志
+  vConsoleOpen: 0, // vConsole是否打开，默认关闭，1: 打开vConsole工具，0：关闭vConsole工具，上线前一定要关闭！！
+  consoleOpen: 0, // 是否打开console.log，默认关闭， 1：打开日志；0: 关闭日志
+  onBack: 0 // 监控左上角返回的功能是否打开:1打开，0关闭；默认关闭，有业务需求再打开；
+  // 使用方案见http://172.16.101.1:2158/pages/viewpage.action?pageId=16195992
 }
 
 export default {

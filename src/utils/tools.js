@@ -134,3 +134,20 @@ export function record(hash) {
   countlyLog(hash)
   uploadH5Log(hash)
 }
+
+export function initH5Service() {
+  let p1 = new Promise((resolve, reject) => {
+    callNative('h5Service', {
+      serviceName: []
+    }, result => {
+      console.log('beforeEach h5Service回调执行了', result)
+      resolve(result)
+    })
+  })
+  let p2 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(true)
+    }, 1000)
+  })
+  return Promise.race([p1, p2])
+}

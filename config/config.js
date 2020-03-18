@@ -13,7 +13,7 @@ var config = {
   // 'production': 'https://cloud.umetrip.com' + middleUrl // 线上地址
 };
 
-export default {
+module.exports = {
   host,
   urlBase: config[env]
 }

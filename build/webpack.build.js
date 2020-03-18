@@ -1,6 +1,7 @@
 var utils = require('./utils')
 var webpack = require('webpack')
 var config = require('../config')
+var configVar = require('../src/utils/configVar')
 var merge = require('webpack-merge')
 var UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 var baseWebpackConfig = require('./webpack.config');
@@ -48,7 +49,9 @@ var webpackConfig = merge(baseWebpackConfig, {
         sourceMap: true,
         // exclude: /iview/,
         uglifyOptions: {
-          warnings: false
+          warnings: false,
+          drop_debugger: configVar.consoleOpen ? false : true,
+          drop_console: configVar.consoleOpen ? false : true
         }
       }),
       new OptimizeCSSAssetsPlugin({}) // overrides the defaults provided by webpack
