@@ -1,6 +1,6 @@
 import Countly from 'countly-sdk-web'
 import { callNative } from '@umetrip/jsapi'
-import configVar from './configVar.js'; 
+import { configVar } from './configVar.js'; 
 
 export function query(key) {
   let url = location.href
@@ -95,7 +95,8 @@ export function clickEvent(bt) {
 }
 
 export function uploadH5Log() {
-  if (configVar.uploadLogOpen) {
+  var isInUmeApp = isUmeApp()
+  if (configVar.uploadLogOpen && isInUmeApp) {
     let hashPath = location.hash.split('?')[0]
     var p = {
       ti: document.title,
@@ -113,7 +114,8 @@ export function uploadH5Log() {
 }
 
 export function uploadH5LogBtn(bt) {
-  if (configVar.uploadLogOpen) {
+  var isInUmeApp = isUmeApp()
+  if (configVar.uploadLogOpen && isInUmeApp) {
     let hashPath = location.hash.split('?')[0]
     var p = {
       ti: document.title,

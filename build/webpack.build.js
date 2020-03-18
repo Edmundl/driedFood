@@ -11,6 +11,8 @@ var PurifyCSSPlugin = require('purifycss-webpack');
 var path = require('path')
 var glob = require('glob-all');
 
+console.log(configVar.configVar.consoleOpen)
+
 var webpackConfig = merge(baseWebpackConfig, {
   mode: 'production',
   module: {
@@ -49,9 +51,11 @@ var webpackConfig = merge(baseWebpackConfig, {
         sourceMap: true,
         // exclude: /iview/,
         uglifyOptions: {
-          warnings: false,
-          drop_debugger: configVar.consoleOpen ? false : true,
-          drop_console: configVar.consoleOpen ? false : true
+          compress: {
+            warnings: false,
+            drop_debugger: configVar.configVar.consoleOpen ? false : true,
+            drop_console: configVar.configVar.consoleOpen ? false : true
+          }
         }
       }),
       new OptimizeCSSAssetsPlugin({}) // overrides the defaults provided by webpack
