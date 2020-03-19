@@ -1,7 +1,7 @@
 var configDot = {
   countlyOpen: 1, // countly页面打点是否打开,1打开，0关闭
   countly_appKey: '0ff9608b68551e60f2b0cfcf747f280f35cfc6d3', // countly打点的appKey,默认打到h5embeddedInApp里
-  countly_eventKey: '打点测试', // 打点事件的key名，注意替换成自己的！！！,原则上一个项目只需要一个key名，具体事件打到二级目录里
+  countly_eventKey: '打点测试', // 打点事件的key名，注意替换成自己的！！！原则上一个项目只需要一个key名，具体事件打到二级目录里
   
   uploadLogOpen: 1, // 用户行为分析打点功能是否打开，设为1时如果页面在航旅app内则打开，在app外部则关闭；设为0则全部关闭
 

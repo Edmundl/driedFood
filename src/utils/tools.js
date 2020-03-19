@@ -138,13 +138,18 @@ export function record(hash) {
 }
 
 export function initH5Service() {
+  var isInUmeApp = isUmeApp()
   let p1 = new Promise((resolve, reject) => {
-    callNative('h5Service', {
-      serviceName: []
-    }, result => {
-      console.log('beforeEach h5Service回调执行了', result)
-      resolve(result)
-    })
+    if (isInUmeApp) {
+      callNative('h5Service', {
+        serviceName: []
+      }, result => {
+        console.log('beforeEach h5Service回调执行了', result)
+        resolve(result)
+      })
+    } else {
+      resolve(true)
+    }
   })
   let p2 = new Promise((resolve, reject) => {
     setTimeout(() => {
