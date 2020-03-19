@@ -35,6 +35,11 @@ function getHeader() {
           rcuuid
         })
       })
+    } else {
+      resolve({
+        rsid,
+        rcuuid
+      })
     }
   })
   let p2 = new Promise((resolve, reject) => {
