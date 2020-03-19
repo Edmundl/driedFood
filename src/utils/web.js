@@ -112,11 +112,17 @@ export function fetchGet(path, params = {}, headers = {}) {
     return new Promise((resolve, reject) => {
       Promise.race([fetchPromise, timeoutPromsie]).then(data => {
         Loading.hide()
-        if (data.errCode === 0 || data.errorCode === 0) {
-          resolve(data)
+        if (data) {
+          if (data.errCode === 0 || data.errorCode === 0) {
+            resolve(data)
+          } else {
+            Modal.info({
+              content: data.errMsg || data.errorMsg // errMsg兼容gateway错误
+            })
+          }
         } else {
-          Modal.info({
-            content: data.errMsg || data.errorMsg // errMsg兼容gateway错误
+          Message.info({
+            content: '数据获取失败，请稍后再试！'
           })
         }
       }).catch(error => {
@@ -162,11 +168,17 @@ export function fetchPost(path, params = {}, headers = {}) {
     return new Promise((resolve, reject) => {
       Promise.race([fetchPromise, timeoutPromsie]).then(data => {
         Loading.hide()
-        if (data.errCode === 0 || data.errorCode === 0) {
-          resolve(data)
+        if (data) {
+          if (data.errCode === 0 || data.errorCode === 0) {
+            resolve(data)
+          } else {
+            Modal.info({
+              content: data.errMsg || data.errorMsg // errMsg兼容gateway错误
+            })
+          }
         } else {
-          Modal.info({
-            content: data.errMsg || data.errorMsg // errMsg兼容gateway错误
+          Message.info({
+            content: '数据获取失败，请稍后再试！'
           })
         }
       }).catch(error => {
@@ -265,12 +277,19 @@ export function reqGet(path, params = {}, headers = {}) {
       }
     }).then((response) => {
       Loading.hide()
-      let data = response.data
-      if (data.errorCode === 0 || data.errCode === 0) {
-        resovle(data)
+      if (response && response.data) {
+        let data = response.data
+        if (data.errorCode === 0 || data.errCode === 0) {
+          resovle(data)
+        } else {
+          Modal.info({
+            content: data.errMsg || data.errorMsg // errMsg兼容gateway错误
+          })
+        }
       } else {
-        Modal.info({
-          content: data.errMsg || data.errorMsg // errMsg兼容gateway错误
+        Message.info({
+          content: '数据获取失败，请稍后再试！',
+          duration: 2
         })
       }
     }
@@ -299,12 +318,19 @@ export function reqPost(path, params = {}, headers = {}) {
           responseType: 'json'
       }).then((response) => {
         Loading.hide()
-        let data = response.data
-        if (data.errCode === 0 || data.errorCode === 0) { // errCode是gateway报错，errorCode是业务方报错需要统一
-          resovle(data)
+        if (response && response.data) {
+          let data = response.data
+          if (data.errCode === 0 || data.errorCode === 0) { // errCode是gateway报错，errorCode是业务方报错需要统一
+            resovle(data)
+          } else {
+            Modal.info({
+              content: data.errMsg || data.errorMsg // errMsg兼容gateway错误
+            })
+          }
         } else {
-          Modal.info({
-            content: data.errMsg || data.errorMsg // errMsg兼容gateway错误
+          Message.info({
+            content: '数据获取失败，请稍后再试！',
+            duration: 2
           })
         }
       }).catch(() => {
