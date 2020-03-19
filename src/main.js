@@ -9,8 +9,11 @@ import './assets/js/umeH5Flexible.js';
 import './assets/css/umeH5Flexible.less';
 import {
   record,
-  changeTitle
+  changeTitle,
+  initH5Service,
+  isUmeApp
 } from './utils/tools'
+import { configVar } from './utils/configVar.js'; 
 
 // import umeUI from '@umetrip/ume-ui'
 // import '@umetrip/ume-ui/dist/ume-ui.css'
@@ -33,21 +36,32 @@ Vue.prototype.$Message = Message
 Vue.prototype.$Loading = Loading
 Vue.prototype.$Modal = Modal
 
-var VConsole = require('vconsole/dist/vconsole.min.js');
-var vConsole = new VConsole();
+if (configVar.vConsoleOpen) {
+  var VConsole = require('vconsole/dist/vconsole.min.js');
+  var vConsole = new VConsole();
+}
 
 FastClick.attach(document.body)
 router.beforeEach((to, from, next) => {
-  /* 路由发生变化修改页面title */
-  if (to.meta.title) {
-    if (/[iphone|ipad]/i.test(navigator.userAgent)) {
+  var isInUmeApp = isUmeApp()
+  record(to.path)
+  if (/(iphone|ipad)/i.test(navigator.userAgent)) {
+    if (to.meta.title) {
       changeTitle(to.meta.title) // 解决ios标题不改变的问题，通过iframe hack
+    }
+    if (configVar.onBack && isInUmeApp) { // 有监控左上角返回或关闭按钮的需求 且 当前在航旅APP环境里
+      initH5Service().then(data => { // 接下来要进入的页面可能会再次调用h5Service，两个异步操作，所以需要保证顺序
+        next()
+      })
     } else {
+      next()
+    }
+  } else {
+    if (to.meta.title) {
       document.title = to.meta.title
     }
+    next()
   }
-  record(to.path)
-  next()
 })
 
 new Vue({

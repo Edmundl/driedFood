@@ -1,6 +1,6 @@
 import Countly from 'countly-sdk-web'
 import { callNative } from '@umetrip/jsapi'
-import configVar from './configVar.js'; 
+import { configVar } from './configVar.js'; 
 
 export function query(key) {
   let url = location.href
@@ -95,7 +95,8 @@ export function clickEvent(bt) {
 }
 
 export function uploadH5Log() {
-  if (configVar.uploadLogOpen) {
+  var isInUmeApp = isUmeApp()
+  if (configVar.uploadLogOpen && isInUmeApp) {
     let hashPath = location.hash.split('?')[0]
     var p = {
       ti: document.title,
@@ -113,7 +114,8 @@ export function uploadH5Log() {
 }
 
 export function uploadH5LogBtn(bt) {
-  if (configVar.uploadLogOpen) {
+  var isInUmeApp = isUmeApp()
+  if (configVar.uploadLogOpen && isInUmeApp) {
     let hashPath = location.hash.split('?')[0]
     var p = {
       ti: document.title,
@@ -133,4 +135,26 @@ export function uploadH5LogBtn(bt) {
 export function record(hash) {
   countlyLog(hash)
   uploadH5Log(hash)
+}
+
+export function initH5Service() {
+  var isInUmeApp = isUmeApp()
+  let p1 = new Promise((resolve, reject) => {
+    if (isInUmeApp) {
+      callNative('h5Service', {
+        serviceName: []
+      }, result => {
+        console.log('beforeEach h5Service回调执行了', result)
+        resolve(result)
+      })
+    } else {
+      resolve(true)
+    }
+  })
+  let p2 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve(true)
+    }, 1000)
+  })
+  return Promise.race([p1, p2])
 }

@@ -16,8 +16,7 @@ module.exports = {
     filename: '[name].js',
     chunkFilename: '[name].js',
     path: path.resolve(__dirname, '../dist'),
-    library: 'ume-ui',
-    libraryTarget: 'umd'
+    globalObject: 'this' // 添加这个选项
   },
 	resolve: {
     extensions: [".js", ".vue"],

@@ -1,6 +1,7 @@
 var utils = require('./utils')
 var webpack = require('webpack')
 var config = require('../config')
+var configVar = require('../src/utils/configVar')
 var merge = require('webpack-merge')
 var UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 var baseWebpackConfig = require('./webpack.config');
@@ -9,6 +10,8 @@ var MiniCssExtractPlugin = require("mini-css-extract-plugin");
 var PurifyCSSPlugin = require('purifycss-webpack');
 var path = require('path')
 var glob = require('glob-all');
+
+console.log(configVar.configVar.consoleOpen)
 
 var webpackConfig = merge(baseWebpackConfig, {
   mode: 'production',
@@ -48,7 +51,11 @@ var webpackConfig = merge(baseWebpackConfig, {
         sourceMap: true,
         // exclude: /iview/,
         uglifyOptions: {
-          warnings: false
+          compress: {
+            warnings: false,
+            drop_debugger: configVar.configVar.consoleOpen ? false : true,
+            drop_console: configVar.configVar.consoleOpen ? false : true
+          }
         }
       }),
       new OptimizeCSSAssetsPlugin({}) // overrides the defaults provided by webpack
