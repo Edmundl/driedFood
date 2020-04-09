@@ -12,7 +12,7 @@ export function query(key) {
 export function isUmeApp() {
   var userAgent = navigator.userAgent.toLowerCase();
   var hasUmeAgent = userAgent.indexOf('umetrip') !== -1;
-  return (query('source') && query('source') === 'app') || hasUmeAgent
+  return (query('sourceFrom') && query('sourceFrom') === 'app') || hasUmeAgent
 }
 
 export function getFirstProperty(obj) {

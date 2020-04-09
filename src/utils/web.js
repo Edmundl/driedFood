@@ -15,8 +15,8 @@ function getHeader() {
         rcuuid
       })
     } else if (!!query('rsid') && !!query('rcuuid')) { // 适合多页面，每页从链接上获取一次
-      rsid = query('rsid')
-      rcuuid = query('rcuuid')
+      rsid = decodeURIComponent(query('rsid'))
+      rcuuid = decodeURIComponent(query('rcuuid'))
       resolve({
         rsid,
         rcuuid
