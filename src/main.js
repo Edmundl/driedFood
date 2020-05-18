@@ -5,6 +5,7 @@ import Vue from 'vue';
 import App from './App.vue';
 import router from './router/index.js';
 import FastClick from 'fastclick'
+import 'babel-polyfill';
 import './assets/js/umeH5Flexible.js';
 import './assets/css/umeH5Flexible.less';
 import {
