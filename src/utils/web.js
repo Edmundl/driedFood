@@ -1,10 +1,31 @@
 import axios from 'axios';
 import urlBase from '../../config/config.js';
 import { Message, Loading, Modal } from '@umetrip/ume-ui'
-import { isUmeApp, query } from './tools.js'
+import { isUmeApp, query, xlogUp } from './tools.js'
 import { callNative } from '@umetrip/jsapi'
 
 axios.defaults.timeout = 50000;
+axios.interceptors.request.use(
+  config => {
+    xlogUp('I', 'axios接口请求', '入参', JSON.stringify(config))
+    return config;
+  },
+  error => {
+    xlogUp('E', 'axios接口请求', '入参', JSON.stringify(error))
+    return Promise.error(error);
+  }
+);
+axios.interceptors.response.use(
+  response => {
+    xlogUp('I', 'axios接口请求', '出参', JSON.stringify(response))
+    return response
+  },
+  error => {
+    xlogUp('E', 'axios接口请求', '出参', error.toString())
+    return error
+  }
+);
+
 var rsid = '', rcuuid = '';
 var isInUmeApp = isUmeApp(); // 当前页面是否在航旅app内
 function getHeader() {
@@ -55,36 +76,32 @@ function getHeader() {
 
 export async function fetchHeader(method, path, params = {}, headers = {}) {
   let data = await getHeader(), promise
+  let headersX = {
+    rsid: data.rsid,
+    rcuuid: data.rcuuid,
+    ...headers
+  }
+  // console.log(JSON.stringify(headersX) + '----' + JSON.stringify(params))
+  xlogUp('I', 'fetch接口请求', path, JSON.stringify(headersX) + '----' + JSON.stringify(params))
   if (/get/i.test(method)) {
-    promise = fetchGet(path, params, {
-      rsid: data.rsid,
-      rcuuid: data.rcuuid,
-      ...headers
-    })
+    promise = fetchGet(path, params, headersX)
   } else {
-    promise = fetchPost(path, params, {
-      rsid: data.rsid,
-      rcuuid: data.rcuuid,
-      ...headers
-    })
+    promise = fetchPost(path, params, headersX)
   }
   return promise
 }
 
 export async function axiosHeader(method, path, params = {}, headers = {}) {
   let data = await getHeader(), promise
+  let headersX = {
+    rsid: data.rsid,
+    rcuuid: data.rcuuid,
+    ...headers
+  }
   if (/get/i.test(method)) {
-    promise = reqGet(path, params, {
-      rsid: data.rsid,
-      rcuuid: data.rcuuid,
-      ...headers
-    })
+    promise = reqGet(path, params, headersX)
   } else {
-    promise = reqPost(path, params, {
-      rsid: data.rsid,
-      rcuuid: data.rcuuid,
-      ...headers
-    })
+    promise = reqPost(path, params, headersX)
   }
   return promise
 }
@@ -126,6 +143,8 @@ export function fetchGet(path, params = {}, headers = {}) {
     return new Promise((resolve, reject) => {
       Promise.race([fetchPromise, timeoutPromsie]).then(data => {
         Loading.hide()
+        // console.log(JSON.stringify(data))
+        xlogUp('I', 'fetchGET接口出参', path, JSON.stringify(data))
         if (data) {
           if (data.errCode === 0 || data.errorCode === 0) {
             resolve(data)
@@ -142,6 +161,7 @@ export function fetchGet(path, params = {}, headers = {}) {
         }
       }).catch(error => {
         Loading.hide()
+        xlogUp('E', 'fetchGET接口出错', path, error.toString())
         console.error(error.toString())
         Message.info({
           content: '网络错误，请稍后再试！',
@@ -183,6 +203,7 @@ export function fetchPost(path, params = {}, headers = {}) {
     return new Promise((resolve, reject) => {
       Promise.race([fetchPromise, timeoutPromsie]).then(data => {
         Loading.hide()
+        xlogUp('I', 'fetchPOST接口出参', path, JSON.stringify(data))
         if (data) {
           if (data.errCode === 0 || data.errorCode === 0) {
             resolve(data)
@@ -199,6 +220,7 @@ export function fetchPost(path, params = {}, headers = {}) {
         }
       }).catch(error => {
         Loading.hide()
+        xlogUp('E', 'fetchPOST接口出错', path, error.toString())
         console.error(error.toString())
         Message.info({
           content: '网络错误，请稍后再试！',
@@ -239,6 +261,7 @@ function hackFetch(type, url, params, headers) {
         if (requestObj.status === 200) {
           Loading.hide()
           let data = requestObj.response
+          xlogUp('I', 'hackFetch接口出参', url, JSON.stringify(data))
           if (data) {
             if (typeof data !== 'object') {
               data = JSON.parse(data)
@@ -263,6 +286,7 @@ function hackFetch(type, url, params, headers) {
     }
   }).catch(error => {
     Loading.hide()
+    xlogUp('E', 'hackFetch接口出错', url, error.toString())
     console.error(error.toString())
     Message.info({
       content: '网络错误，请稍后再试！',
@@ -320,7 +344,7 @@ export function reqGet(path, params = {}, headers = {}) {
         })
       }
     }
-    ).catch(() => {
+    ).catch((error) => {
       Loading.hide()
       Message.info({
         content: '网络错误，请稍后再试！',

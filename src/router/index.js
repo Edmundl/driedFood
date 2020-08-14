@@ -62,6 +62,13 @@ export default new VueRouter({
             /* webpackChunkName: "others" */
             /* webpackPrefetch: true */
            '../components/container/others.vue')
+        },
+        {
+          path: 'getDatas',
+          component: () => import(
+            /* webpackChunkName: "others" */
+            /* webpackPrefetch: true */
+           '../components/container/getDatas.vue')
         }
       ],
 			meta: {
