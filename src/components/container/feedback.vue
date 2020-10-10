@@ -58,18 +58,24 @@
   <div class="page_feedback flex_column">
     <a href="javascript:;" class="ume-btn ume-btn_default" @click="toModal1">Alert</a>
     <a href="javascript:;" class="ume-btn ume-btn_default" @click="toModal2">Confirm</a>
-    <a href="javascript:;" class="ume-btn ume-btn_default" @click="toToast">Toast</a>
+    <a href="javascript:;" class="ume-btn ume-btn_default" @click="toToast(1)">Toast</a>
+    <a href="javascript:;" class="ume-btn ume-btn_default" @click="toToast(2)">Toast</a>
     <a href="javascript:;" class="ume-btn ume-btn_default" @click="toLoading">Loading</a>
     <a href="javascript:;" class="ume-btn ume-btn_default" @click="toPicker">Picker</a>
     <a href="javascript:;" class="ume-btn ume-btn_default" @click="toDatePicker">DatePicker</a>
     <a href="javascript:;" class="ume-btn ume-btn_default" @click="toTips">Tips</a>
     <a href="javascript:;" class="ume-btn ume-btn_default" @click="toButton">Button</a>
     <a href="javascript:;" class="ume-btn ume-btn_default" @click="toTabs">Tabs</a>
+    <a href="javascript:;" class="ume-btn ume-btn_default" @click="toAirportList('airport', 1)">airportList</a>
+    <a href="javascript:;" class="ume-btn ume-btn_default" @click="toAirportList('city', 1)">cityList</a>
+    <a href="javascript:;" class="ume-btn ume-btn_default" @click="toAirportList('airport', 2)">airportList</a>
+    <a href="javascript:;" class="ume-btn ume-btn_default" @click="toAirportList('city', 2)">cityList</a>
     <ume-modal :value="modal1" okText="确定" title="自定义标题" content="自定义标题的alert" @on-ok="onOk1" @on-cancel="onCancel1"></ume-modal>
     <ume-modal :value="modal2" okText="确定" cancelText="取消" title="自定义标题" content="自定义标题的confirm" @on-ok="onOk2" @on-cancel="onCancel2"></ume-modal>
     <ume-loading v-show="showLoading"></ume-loading>
     <ume-picker :visibility="showPicker" :pick-list="pickList" :cur-value="curValue" @pickerCancel="pickerCancel" @pickerConfirm="pickerConfirm"></ume-picker>
     <ume-date-picker :visibility="showDatePicker" :in-options="options" @pickerCancel="pickerCancel" @pickerConfirm="pickerConfirm"></ume-date-picker>
+    <ume-airport-list :visibility="showAirportList" :showInternal="true" :lines="airportLines" :name="airportName" @cancel="showAirportList=false" @confirm="getAirport"></ume-airport-list>
   </div>
 </template>
 <script>
@@ -101,7 +107,10 @@
         options: {
           start: 1990,
           end: 2030
-        }
+        },
+        showAirportList: false,
+        airportLines: 1,
+        airportName: 'airport'
 			}
 		},
 		created: function () {
@@ -167,11 +176,18 @@
         console.log('点击了取消')
         this.modal2 = false
       },
-      toToast() {
-        this.$Message.info({
-          content: '复制链接成功',
-          duration: 2
-        })
+      toToast(tag) {
+        if (tag === 1) {
+          this.$Message.info({
+            content: '保存失败',
+            duration: 2.7
+          })
+        } else {
+          this.$Message.info({
+            content: '保存失败！请在系统中开启访问相册权限',
+            duration: 2.7
+          })
+        }
       },
       toLoading() {
         this.showLoading = true
@@ -214,6 +230,15 @@
           id: 'test12345'
         })
         this.$router.push('/example/tabs')
+      },
+      toAirportList(name, lines) {
+        this.airportName = name
+        this.airportLines = lines
+        this.showAirportList = true
+      },
+      getAirport(item) {
+        console.log('选择的机场:', item)
+        this.showAirportList = false
       }
     }
 	}
