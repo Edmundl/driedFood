@@ -158,3 +158,21 @@ export function initH5Service() {
   })
   return Promise.race([p1, p2])
 }
+
+export function xlogUp(level, submid, func, content) {
+  // level 表示等级，可选'I','W','E','F',分别代表Info,Warn,Error,Fatal
+  // func 表示当前报错的方法名，方便自己定位的
+  // mid 表示大业务类型，21表示jsapi；这里写死21就行
+  // submid 表示业务块名称，比如'机票','客服'等，或者'接口请求'这种代表功能的意义也可以，自己知道就行
+  // content 表示具体要上传的log内容
+  var isInUmeApp = isUmeApp()
+  if (isInUmeApp) {
+    callNative('jsUploadXlog', {
+      level: level,
+      func: func,
+      mid: '21',
+      submid: submid,
+      content: content
+    }, () => {})
+  }
+}

@@ -60,7 +60,8 @@
     <a href="javascript:;" class="ume-btn ume-btn_default" @click="toModal2">Confirm</a>
     <a href="javascript:;" class="ume-btn ume-btn_default" @click="toToast(1)">Toast</a>
     <a href="javascript:;" class="ume-btn ume-btn_default" @click="toToast(2)">Toast</a>
-    <a href="javascript:;" class="ume-btn ume-btn_default" @click="toLoading">Loading</a>
+    <!-- <a href="javascript:;" class="ume-btn ume-btn_default" @click="toLoading(1)">Loading</a> -->
+    <a href="javascript:;" class="ume-btn ume-btn_default" @click="toLoading(2)">Loading</a>
     <a href="javascript:;" class="ume-btn ume-btn_default" @click="toPicker">Picker</a>
     <a href="javascript:;" class="ume-btn ume-btn_default" @click="toDatePicker">DatePicker</a>
     <a href="javascript:;" class="ume-btn ume-btn_default" @click="toTips">Tips</a>
@@ -189,11 +190,18 @@
           })
         }
       },
-      toLoading() {
-        this.showLoading = true
-        setTimeout(() => {
-          this.showLoading = false
-        }, 2000)
+      toLoading(tag) {
+        if (tag === 1) {
+          this.showLoading = true
+          setTimeout(() => {
+            this.showLoading = false
+          }, 2000)
+        } else {
+          this.$Loading.show()
+          setTimeout(() => {
+            this.$Loading.hide()
+          }, 5000)
+        }
       },
       toPicker() {
         this.showPicker = true
