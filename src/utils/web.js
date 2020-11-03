@@ -345,6 +345,7 @@ export function reqGet(path, params = {}, headers = {}) {
       }
     }
     ).catch((error) => {
+      console.log(error)
       Loading.hide()
       Message.info({
         content: '网络错误，请稍后再试！',
