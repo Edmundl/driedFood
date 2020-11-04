@@ -76,6 +76,7 @@ export function countlyLog() {
     Countly.init({
       app_key: configVar.countly_appKey,
       url: 'https://analytics.umetrip.com/'
+      // url: 'http://10.5.150.36/'
     });
     Countly.q.push(['track_sessions']);
     Countly.q.push(['track_pageview', location.pathname + hashPath]);
