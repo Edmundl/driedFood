@@ -72,8 +72,19 @@ export default new VueRouter({
         }
       ],
 			meta: {
-				title: '公用组件示例'
+        title: '公用组件示例',
+        keepAlive: false // 不需要被缓存的组件
 			}
+    },
+    {
+      path: '/keepALiveTest',
+      component: () => import(
+        /* webpackChunkName: "example" */
+        '../components/container/keepALiveTest.vue'),
+      meta: {
+        title: 'keep-alive例子',
+        keepAlive: true // 需要被缓存的组件
+      }
     }
 	]
 })
