@@ -84,12 +84,12 @@ export function countlyLog() {
   }
 }
 
-export function clickEvent(bt) {
+export function clickEvent(bt, bu=1) {
   if (configVar.countlyOpen) {
     Countly.add_event({
       key: configVar.countly_eventKey, // Tag名称，需自定义
       segmentation: {
-        [bt]: 1
+        [bt]: bu
       }
     });
   }
