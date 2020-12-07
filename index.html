@@ -12,19 +12,13 @@
     <div id='app'>
     </div>
     <script type="text/javascript">
-      function setFontSize() {
-        var deviceWidth = document.documentElement.clientWidth;
-        if (deviceWidth === 0) {
-          setTimeout(function () {
-            setFontSize();
-          },100)
-        }
-        if(deviceWidth > 750) deviceWidth = 750;
-        document.documentElement.style.fontSize = deviceWidth / 7.5 + 'px';
+      window.onload = function() {
+        console.log('执行onload回调')
+        var meta = document.createElement('meta')
+        meta.setAttribute('name', 'viewport')
+        meta.setAttribute('content', '"width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover')
+        document.getElementsByTagName('head')[0].appendChild(meta);
       }
-      function shareInfo() {
-      }
-      setFontSize();
     </script>
     <!-- <script type="text/javascript">
       shareInfo = function(){}

@@ -20,7 +20,7 @@ import { configVar } from './utils/configVar.js';
 // import '@umetrip/ume-ui/dist/ume-ui.css'
 // Vue.use(umeUI)
 
-import { Modal, Message, Loading, Picker, DatePicker, Tip, Tab, Input, AutoTextarea, List, Button } from '@umetrip/ume-ui'
+import { Modal, Message, Loading, Picker, DatePicker, Tip, Tab, Input, AutoTextarea, List, Button, AirportList, AirlineList } from '@umetrip/ume-ui'
 Vue.component(Modal.name, Modal)
 Vue.component(Message.name, Message)
 Vue.component(Loading.name, Loading)
@@ -32,15 +32,17 @@ Vue.component(Input.name, Input)
 Vue.component(AutoTextarea.name, AutoTextarea)
 Vue.component(List.name, List)
 Vue.component(Button.name, Button)
+Vue.component(AirportList.name, AirportList)
+Vue.component(AirlineList.name, AirlineList)
 
 Vue.prototype.$Message = Message
 Vue.prototype.$Loading = Loading
 Vue.prototype.$Modal = Modal
 
-if (configVar.vConsoleOpen) {
-  var VConsole = require('vconsole/dist/vconsole.min.js');
-  var vConsole = new VConsole();
-}
+// if (configVar.vConsoleOpen) {
+//   var VConsole = require('vconsle/dist/vconsole.min.js');
+//   var vConsole = new VConsole();
+// }
 
 FastClick.attach(document.body)
 router.beforeEach((to, from, next) => {
