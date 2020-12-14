@@ -6,7 +6,7 @@ export default new VueRouter({
 	routes: [
 		{
 			path: '/',
-			redirect: '/pdf'
+			redirect: '/example'
     },
     {
 			path: '/example',
