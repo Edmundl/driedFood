@@ -9,10 +9,6 @@ export default new VueRouter({
 			redirect: '/pdf'
     },
     {
-<<<<<<< HEAD
-      path: '/pdf',
-      component: () => import('../components/container/pdf.vue')
-=======
 			path: '/example',
       component: () => import(
         /* webpackChunkName: "example" */
@@ -89,7 +85,6 @@ export default new VueRouter({
         title: 'keep-alive例子',
         keepAlive: true // 需要被缓存的组件
       }
->>>>>>> e3944b30158d375b21d14fec10949a875a7c495c
     }
     // {
 		// 	path: '/example',
