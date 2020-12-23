@@ -95,18 +95,23 @@ export function clickEvent(bt, bu = 1) {
   }
 }
 
-export function uploadH5Log() {
+// e为6时，可以表示两个事件：
+// 表示页面浏览事件时，只需要传ti和ul，页面浏览事件在路由切换时统一上报，业务不需要处理
+// 表示曝光事件时，sv表示曝光事件名称（必须传），ps里可以放曝光时长lt和业务标识st，不是必须的
+// 示例：http://172.16.101.17:8090/pages/viewpage.action?pageId=6652811
+export function uploadH5Log(sv = '', ps = {}) {
   var isInUmeApp = isUmeApp()
   if (configVar.uploadLogOpen && isInUmeApp) {
     let hashPath = location.hash.split('?')[0]
     var p = {
       ti: document.title,
       ul: location.pathname + hashPath,
-      bt: ''
+      sv: sv
     }
     callNative('uploadH5Log', {
       't': Date.now(),
       'p': p,
+      'ps': ps,
       'e': 6
     }, function(result) {
       console.log(result)
@@ -114,18 +119,22 @@ export function uploadH5Log() {
   }
 }
 
-export function uploadH5LogBtn(bt) {
+// e为7表示点击事件
+// 2020.12.23打点事件的变量名也改成sv了，必须传
+// ps里可以带业务标识st，看产品需求，不是必须的
+export function uploadH5LogBtn(bt, ps = {}) {
   var isInUmeApp = isUmeApp()
   if (configVar.uploadLogOpen && isInUmeApp) {
     let hashPath = location.hash.split('?')[0]
     var p = {
       ti: document.title,
       ul: location.pathname + hashPath,
-      bt: bt
+      sv: bt
     }
     callNative('uploadH5Log', {
       't': Date.now(),
       'p': p,
+      'ps': ps,
       'e': 7
     }, function(result) {
       console.log(result)
