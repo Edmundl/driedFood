@@ -6,11 +6,11 @@ var merge = require('webpack-merge')
 var UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 var baseWebpackConfig = require('./webpack.config');
 var OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const FileManagerPlugin = require('filemanager-webpack-plugin');
 var MiniCssExtractPlugin = require("mini-css-extract-plugin");
 var PurifyCSSPlugin = require('purifycss-webpack');
 var path = require('path')
 var glob = require('glob-all');
-
 console.log(configVar.configVar.consoleOpen)
 
 var webpackConfig = merge(baseWebpackConfig, {
@@ -32,6 +32,35 @@ var webpackConfig = merge(baseWebpackConfig, {
       filename: utils.assetsPath('css/[name].[contenthash].css'),
       chunkFilename: utils.assetsPath('css/[name].[hash].css')
     }),
+    new FileManagerPlugin({
+      events: {
+        onStart: {
+          delete: [`./${configVar.configVar.projectName}.zip`, `./dist`],
+        },
+        onEnd: [
+          {
+            mkdir: [`./temp/${configVar.configVar.projectName}`],
+            copy: [
+              {
+                source: `./dist/static`,
+                destination: `./temp/${configVar.configVar.projectName}/static`
+              },
+              {
+                source: `./dist/index.html`,
+                destination: `./temp/${configVar.configVar.projectName}/index.html`
+              }
+            ],
+            archive: [
+              {
+                source: `./temp`,
+                destination: `./${configVar.configVar.projectName}.zip`
+              }
+            ],
+            delete: [`./temp`]
+          }
+        ]
+      }
+    })
     // Make sure this is after ExtractTextPlugin!
     // new PurifyCSSPlugin({
     //   // Give paths to parse for rules. These should be absolute!
