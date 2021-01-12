@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "webpack-dev-server --colors --inline --hot --host 0.0.0.0 --port 8000 --config ./build/webpack.dev.js",
     "build": "webpack --config ./build/webpack.build.js --progress --profile --color",
-    "build:prod": "webpack --config ./build/webpack.build.zip.js --progress --profile --color"
+    "build:zip": "webpack --config ./build/webpack.build.zip.js --progress --profile --color"
   },
   "dependencies": {
     "@umetrip/jsapi": "^1.1.3",
