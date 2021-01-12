@@ -39,10 +39,10 @@ Vue.prototype.$Message = Message
 Vue.prototype.$Loading = Loading
 Vue.prototype.$Modal = Modal
 
-if (configVar.vConsoleOpen) {
-  var VConsole = require('vconsle/dist/vconsole.min.js');
-  var vConsole = new VConsole();
-}
+// if (configVar.vConsoleOpen) {
+//   var VConsole = require('vconsle/dist/vconsole.min.js');
+//   var vConsole = new VConsole();
+// }
 
 FastClick.attach(document.body)
 router.beforeEach((to, from, next) => {
