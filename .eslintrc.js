@@ -57,6 +57,7 @@ module.exports = {
 		'no-trailing-spaces': 0,
     'vue/attribute-hyphenation': 0,
     'vue/html-closing-bracket-spacing': 0,
-    'prefer-promise-reject-errors': 0
+    'prefer-promise-reject-errors': 0,
+    'no-throw-literal': 0
 	}
 };

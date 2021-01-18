@@ -1,4 +1,5 @@
 笔记
+https://blog.csdn.net/weixin_44238796/article/details/103159716
 同步：就是上一段的模式，后一个任务等待前一个任务结束，然后再执行，程序的执行顺序与任务的排列顺序是一致的、同步的；
 异步：每一个任务有一个或多个回调函数（callback），前一个任务结束后，不是执行后一个任务，而是执行回调函数，后一个任务则是不等前一个任务结束就执行，所以程序的执行顺序与任务的排列顺序是不一致的、异步的。
 function a() {
@@ -51,9 +52,12 @@ function b() {
             }
         })
         回调地狱的问题：回调地狱使得我们的代码非常的难以阅读, 同时导致代码可维护性大大降低
+        解决方案：后面会说
         
 Promise介绍
-Promise 实际上是ES6提供的一个新的构造函数，我们需要用new构造Promise实例, 同时在Promise上有一些原型方法和一些静态方法供我们更加精准的来控制和处理异步任务
+第一种解释：Promise 实际上是ES6提供的一个新的构造函数，我们需要用new构造Promise实例, 同时在Promise上有一些原型方法和一些静态方法供我们更加精准的来控制和处理异步任务
+第二种解释：Promise 是异步编程的一种解决方案：从语法上讲，promise是一个对象，从它可以获取异步操作的消息；从本意上讲，它是承诺，承诺它过一段时间会给你一个结果。promise有三种状态： pending(等待态)，fulfiled(成功态)，rejected(失败态)；状态一旦改变，就不会再变。创造promise实例后，它会立即执行。
+promise 是一个类；在使用的时候需要new Promise();
 ES6提出的异步模型；啥是模型: 模型粗浅的理解你可以认为是解决方案
     1）es官方认为, 任何一件可能发生异步操作的事情, 都会分为两个阶段: Unsettled和Settled
         1.Unsettled: 未决阶段, 表示事情还在进行前期的处理（比如网络请求还在请求的过程中, dom事件绑定但是用户还未进行点击）, 在处理中也就意味着这个事情还没有发生通向结果的那件事,就是还没有结果呗（事情正在发生的过程）
@@ -118,3 +122,44 @@ ES6提出的异步模型；啥是模型: 模型粗浅的理解你可以认为是
     race就是竞争的意思，数组内的Promise实例，谁执行的快，就返回谁的执行结果，不管是成功还是失败，其他慢的就终止执行
     finally
     finally方法用于指定不管 Promise 对象最后状态如何，都会执行的操作。
+
+2、async 与 await
+https://www.cnblogs.com/jiangweichen88/p/13528218.html
+解决方法：链式调用（串联，通过多个.then来解决）
+终极解决方法：async/await，用同步的写法处理异步的操作
+async function request() {
+    try {
+        const result = await doSomething()
+        const newResult = await doSomethingElse(result)
+        const finalResult = await doThirdThing(newResult)
+        console.log('Got the final result: ' + finalResult)
+    } catch (error) {
+        failureCallback(error)
+    }
+}
+
+Async/await 实际上只是一种基于 promises 的糖衣语法糖，Async/await 和 promises 一样，都是非堵塞式的，Async/await 让异步代码更具同步代码风格，这也是其优势所在。
+
+async function 用来定义一个返回 AsyncFunction 对象的异步函数。异步函数是指通过事件循环异步执行的函数，它会通过一个隐式的 Promise 返回其结果，。如果你在代码中使用了异步函数，就会发现它的语法和结构会更像是标准的同步函数。
+
+await 操作符用于等待一个 Promise 对象。它只能在异步函数 async function 中使用。
+
+async函数的await命令后面，可以是 Promise 对象和原始类型的值（数值、字符串和布尔值，但这时会自动转成立即 resolved 的 Promise 对象）。
+
+1）async函数
+    1.async 函数的返回值为 Promise 对象，async 函数返回的 Promise 的结果由函数执行的结果决定
+    2.既然是 Promise 对象，那么我们用 then 来调用，并抛出错误，执行 onRejected() 且 reason 为错误信息为“我是错误”
+    报错：Expected an object to be thrown
+    解决：在.eslintrc.js中配置'no-throw-literal': 0
+2）await表达式
+    await 右侧的表达式一般为 promise 对象, 但也可以是其它的值
+    1、如果表达式是 promise 对象, await 返回的是 promise 成功的值
+    2、如果表达式是其它值, 直接将此值作为 await 的返回值
+
+await 必须写在 async 函数中, 但 async 函数中可以没有 await，如果 await 的 Promise 失败了, 就会抛出异常, 需要通过 try...catch 捕获处理。
+
+总结：
+Async/await 比 Promise 更优越的表现
+1、简洁干净，使用 async/await 能省去写多少行代码
+2、错误处理，async/wait 能用相同的结构和好用的经典 try/catch 处理同步和异步错误，错误堆栈能指出包含错误的函数。
+3、调试，async/await 的一个极大优势是它更容易调试，使用 async/await 则无需过多箭头函数，并且能像正常的同步调用一样直接跨过 await 调用。

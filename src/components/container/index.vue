@@ -16,15 +16,27 @@
           // 2、Promise的静态方法还可以串联
           // this.promiseB()
           // 3、Promise.all
-          // this.promiseC()
+          this.promiseC()
           // 4、Promise.race
           // this.promiseD()
           // 5、Promise.finally
-          this.promiseE()
+          // this.promiseE()
+          // 6、async
+          // const result = this.fn1()
+          // console.log(result)
+          // 7、async函数使用.then来进行回调，并抛出错误，执行 onRejected() 且 reason 为错误信息为“我是错误”
+          // this.fn2().then(
+          //     value => { console.log('onResolved()', value) },
+          //     reason => { console.log('onRejected()', reason) } // onRejected() 我是错误
+          // )
+          // 8、await表达式
+          // this.fn5()
+          // 9、await 必须写在 async 函数中, 但 async 函数中可以没有 await，如果 await 的 Promise 失败了, 就会抛出异常, 需要通过 try...catch 捕获处理。
+          // this.fn7()
       },
       methods: {
           testA() {
-              setTimeout(function() {
+              setTimeout(function () {
                   // 这个函数就是callback回调函数
                   console.log('setTimeout回调函数')
               }, 1000)
@@ -153,10 +165,57 @@
                   // reject('11')
               })
               P1.then(res => console.log(res))
-                .catch(err => console.log(err))
-                .finally(() => {
-                    console.log('finally的执行与状态无关')
-                });
+                  .catch(err => console.log(err))
+                  .finally(() => {
+                      console.log('finally的执行与状态无关')
+                  });
+          },
+          // 6、async
+          async fn1() {
+              return 1
+          },
+          // 7、async函数使用.then来进行回调，并抛出错误，执行 onRejected() 且 reason 为错误信息为“我是错误”
+          async fn2() {
+              // 直接return值和return Promise.resolve(1)结果一致，都进入到value中
+              // return 1
+              // return Promise.resolve(1)
+              // return Promise.reject(2)和throw的效果一致，都进入到reason中
+              // return Promise.reject(2)
+              throw '我是错误'
+          },
+          // 8、await表达式
+          fn3() {
+              return new Promise((resolve, reject) => {
+                  setTimeout(() => {
+                      resolve(1000)
+                  }, 1000);
+              })
+          },
+          fn4() {
+              return 6
+          },
+          async fn5() {
+              // const value = await this.fn3() // await 右侧表达式为Promise，得到的结果就是Promise成功的value
+              // const value = await '还可以这样'
+              const value = await this.fn4()
+              console.log('value', value)
+          },
+          // 9、await 必须写在 async 函数中, 但 async 函数中可以没有 await，如果 await 的 Promise 失败了, 就会抛出异常, 需要通过 try...catch 捕获处理。
+          fn6() {
+              return new Promise((resolve, reject) => {
+                  setTimeout(() => {
+                      // resolve(1000)
+                      reject(1000)
+                  }, 1000);
+              })
+          },
+          async fn7() {
+              try {
+                  const value = await this.fn6()
+                  console.log('成功的结果：', value)
+              } catch (error) {
+                  console.log('失败的结果：', error)
+              }
           }
       }
   }
