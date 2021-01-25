@@ -16,7 +16,7 @@
           // 2、Promise的静态方法还可以串联
           // this.promiseB()
           // 3、Promise.all
-          this.promiseC()
+          // this.promiseC()
           // 4、Promise.race
           // this.promiseD()
           // 5、Promise.finally
@@ -33,6 +33,8 @@
           // this.fn5()
           // 9、await 必须写在 async 函数中, 但 async 函数中可以没有 await，如果 await 的 Promise 失败了, 就会抛出异常, 需要通过 try...catch 捕获处理。
           // this.fn7()
+          // 10、await和async例子
+          this.useTest()
       },
       methods: {
           testA() {
@@ -216,6 +218,22 @@
               } catch (error) {
                   console.log('失败的结果：', error)
               }
+          },
+          // 10、await和async
+          test1() {
+              return new Promise((resolve, reject) => {
+                  console.log('test1')
+                  // 不写resolve或者reject就会阻塞;reject之后不会进入正常流程会进入catch中
+                  resolve('成功返回')
+                  // reject('失败返回')
+              })
+          },
+          async useTest() {
+              // 如果不写async，那await就会报错
+              this.test1().then(res => {
+                  console.log(res)
+              })
+              console.log(111)
           }
       }
   }

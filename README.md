@@ -1,4 +1,4 @@
-笔记
+****__笔记
 https://blog.csdn.net/weixin_44238796/article/details/103159716
 同步：就是上一段的模式，后一个任务等待前一个任务结束，然后再执行，程序的执行顺序与任务的排列顺序是一致的、同步的；
 异步：每一个任务有一个或多个回调函数（callback），前一个任务结束后，不是执行后一个任务，而是执行回调函数，后一个任务则是不等前一个任务结束就执行，所以程序的执行顺序与任务的排列顺序是不一致的、异步的。
@@ -52,7 +52,7 @@ function b() {
             }
         })
         回调地狱的问题：回调地狱使得我们的代码非常的难以阅读, 同时导致代码可维护性大大降低
-        解决方案：后面会说
+        解决方案：使用promise
         
 Promise介绍
 第一种解释：Promise 实际上是ES6提供的一个新的构造函数，我们需要用new构造Promise实例, 同时在Promise上有一些原型方法和一些静态方法供我们更加精准的来控制和处理异步任务
@@ -77,7 +77,7 @@ ES6提出的异步模型；啥是模型: 模型粗浅的理解你可以认为是
 // 关闭eslint校验'prefer-promise-reject-errors': 0
 1、Promise的基本了解和使用
     Promise的原型上常用方法: （1）then    （2）catch
-    Promise的常用静态方法: （1）all
+    Promise的常用静态方法: （1）all      （2）race     （3）finally
     then:接收两个参数, 一个thenable,意为绑定Promise成功的回调 一个catchable,意为Promise失败的回调 注册的两个函数何时执行由Promise的状态决定, 一旦Promise的状态走向已决的resolved状态则thenable函数执行, 走向rejected状态则catchabale执行
     catch:接收一个参数, 意为绑定Promise任务失败的回调, 一旦整个Promise的实例走向了rejected, catchable一定会执行,
     const myPromise = new Promise((resolve, reject) => {
@@ -162,4 +162,4 @@ await 必须写在 async 函数中, 但 async 函数中可以没有 await，如�
 Async/await 比 Promise 更优越的表现
 1、简洁干净，使用 async/await 能省去写多少行代码
 2、错误处理，async/wait 能用相同的结构和好用的经典 try/catch 处理同步和异步错误，错误堆栈能指出包含错误的函数。
-3、调试，async/await 的一个极大优势是它更容易调试，使用 async/await 则无需过多箭头函数，并且能像正常的同步调用一样直接跨过 await 调用。
+3、调试，async/await 的一个极大优势是它更容易调试，使用 async/await 则无需过多箭头函数，并且能像正常的同步调用一样直接跨过 await 调用。****__

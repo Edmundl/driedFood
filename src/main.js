@@ -14,7 +14,7 @@ import {
   initH5Service,
   isUmeApp
 } from './utils/tools'
-import { configVar } from './utils/configVar.js'; 
+import { configVar } from './utils/configVar.js';
 
 // import umeUI from '@umetrip/ume-ui'
 // import '@umetrip/ume-ui/dist/ume-ui.css'
@@ -47,7 +47,7 @@ Vue.prototype.$Modal = Modal
 FastClick.attach(document.body)
 router.beforeEach((to, from, next) => {
   var isInUmeApp = isUmeApp()
-  record(to.path)
+  // record(to.path)
   if (/(iphone|ipad)/i.test(navigator.userAgent)) {
     if (to.meta.title) {
       changeTitle(to.meta.title) // 解决ios标题不改变的问题，通过iframe hack
