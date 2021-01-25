@@ -163,3 +163,7 @@ Async/await 比 Promise 更优越的表现
 1、简洁干净，使用 async/await 能省去写多少行代码
 2、错误处理，async/wait 能用相同的结构和好用的经典 try/catch 处理同步和异步错误，错误堆栈能指出包含错误的函数。
 3、调试，async/await 的一个极大优势是它更容易调试，使用 async/await 则无需过多箭头函数，并且能像正常的同步调用一样直接跨过 await 调用。****__
+
+
+aaa函数和bbb函数中如果都有异步，不一定哪个会先回来；这样的话就会有顺序问题；
+Async/await就可以解决这个问题，await aaa()就会先等aaa函数中的内容执行完再去执行bbb函数中的内容

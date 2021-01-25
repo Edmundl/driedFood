@@ -34,7 +34,9 @@
           // 9、await 必须写在 async 函数中, 但 async 函数中可以没有 await，如果 await 的 Promise 失败了, 就会抛出异常, 需要通过 try...catch 捕获处理。
           // this.fn7()
           // 10、await和async例子
-          this.useTest()
+          // this.useTest()
+          // 11、await和async例子
+          this.useTest2()
       },
       methods: {
           testA() {
@@ -234,6 +236,32 @@
                   console.log(res)
               })
               console.log(111)
+          },
+          // 11、await和async执行
+          test2() {
+              return new Promise((resolve) => {
+                  setTimeout(() => {
+                      console.log(3000)
+                      resolve()
+                  }, 3000)
+              })
+          },
+          test3() {
+              return new Promise((resolve) => {
+                  setTimeout(() => {
+                      console.log(1000)
+                      resolve()
+                  }, 1000)
+              })
+          },
+          async useTest2() {
+              // test2方法明明比test3方法慢，却现输出
+              // await this.test2()
+              // await this.test3()
+              // 同时执行
+              this.test2()
+              this.test3()
+              // 解决调接口是需要等上一个接口的数据回来后，使用调用下一个接口的情况
           }
       }
   }
