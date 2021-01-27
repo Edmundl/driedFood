@@ -12,7 +12,7 @@
       mounted() {
           // this.testA()
           // 1、Promise的基本了解和使用
-          // this.promiseA()
+          this.promiseA()
           // 2、Promise的静态方法还可以串联
           // this.promiseB()
           // 3、Promise.all
@@ -36,7 +36,7 @@
           // 10、await和async例子
           // this.useTest()
           // 11、await和async例子
-          this.useTest2()
+          // this.useTest2()
       },
       methods: {
           testA() {
@@ -97,7 +97,12 @@
                   // 上方触发了reject, 这里却没有相对应的处理catchable函数
                   // 所以会将错误直接抛给下一个Promise并触发下一个Promise的rejected状态
               }).catch(error => {
-                  console.log(error);
+                  console.log('error:', error);
+                  return new Promise((resolve, reject) => {
+                      reject('helloWorld reject');
+                  });
+              }).catch(res => {
+                  console.log('test:', res)
               })
           },
           // 3、Promise.all
