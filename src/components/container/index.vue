@@ -12,7 +12,7 @@
       mounted() {
           // this.testA()
           // 1、Promise的基本了解和使用
-          this.promiseA()
+          // this.promiseA()
           // 2、Promise的静态方法还可以串联
           // this.promiseB()
           // 3、Promise.all
@@ -37,6 +37,7 @@
           // this.useTest()
           // 11、await和async例子
           // this.useTest2()
+          this.aaa()
       },
       methods: {
           testA() {
@@ -58,7 +59,7 @@
                   resolve和reject都可以传递最多一个参数, 表示推向状态的数据
                   */
                   // 执行完resolve就跳出函数了，不会执行reject了
-                  resolve('resolveData');
+                  // resolve('resolveDa/**/ta');
                   reject('rejectData');
               })
 
@@ -76,18 +77,18 @@
           },
           // 2、Promise的静态方法还可以串联
           promiseB() {
-              const myPromise = new Promise((resolve, reject) => {
-                  resolve('helloWorld');
-              })
-
-              myPromise.then(resp => {
-                  console.log(resp); // 这个后续处理没出错, 所以下面的then会拿到这个处理函数的返回值
-                  return 1;
-              }).then(resp => {
-                  // 这是上一个Promise的then方法返回的新的Promise
-                  console.log(resp); // 输出1
-              })
-
+              // const myPromise = new Promise((resolve, reject) => {
+              //     resolve('helloWorld');
+              // })
+              //
+              // myPromise.then(resp => {
+              //     console.log(resp); // 这个后续处理没出错, 所以下面的then会拿到这个处理函数的返回值
+              //     return 1;
+              // }).then(resp => {
+              //     // 这是上一个Promise的then方法返回的新的Promise
+              //     console.log(resp); // 输出1
+              // })
+              //
               const myPromise2 = new Promise((resolve, reject) => {
                   reject('helloWorld reject');
               })
@@ -98,10 +99,11 @@
                   // 所以会将错误直接抛给下一个Promise并触发下一个Promise的rejected状态
               }).catch(error => {
                   console.log('error:', error);
-                  return new Promise((resolve, reject) => {
-                      reject('helloWorld reject');
-                  });
-              }).catch(res => {
+                  // return new Promise((resolve, reject) => {
+                  //     resolve('helloWorld reject');
+                  // });
+                  return 1;
+              }).then(res => {
                   console.log('test:', res)
               })
           },
@@ -124,8 +126,8 @@
 
               const getTrdGirlResponse = new Promise((resolve, reject) => {
                   setTimeout(() => {
-                      resolve(Math.random() > 0.5 ? '3同意了' : '3拒绝表白');
-                      // reject(Math.random() > 0.5 ? '3同意了' : '3拒绝表白');
+                      // resolve(Math.random() > 0.5 ? '3同意了' : '3拒绝表白');
+                      reject(Math.random() > 0.5 ? '3同意了' : '3拒绝表白');
                   }, 1000)
               })
 
@@ -151,7 +153,7 @@
                   setTimeout(() => {
                       resolve('test2')
                       // reject()
-                  }, 1000)
+                  }, 5000)
               })
               const P3 = new Promise((resolve, reject) => {
                   setTimeout(() => {
@@ -168,20 +170,20 @@
                   })
           },
           // 5、Promise.finally
-          promiseE() {
-              const P1 = new Promise((resolve, reject) => {
-                  resolve('test1')
-                  // reject('11')
-              })
-              P1.then(res => console.log(res))
-                  .catch(err => console.log(err))
-                  .finally(() => {
-                      console.log('finally的执行与状态无关')
-                  });
-          },
+          // promiseE() {
+          //     const P1 = new Promise((resolve, reject) => {
+          //         resolve('test1')
+          //         // reject('11')
+          //     })
+          //     P1.then(res => console.log(res))
+          //         .catch(err => console.log(err))
+          //         .finally(() => {
+          //             console.log('finally的执行与状态无关')
+          //         });
+          // },
           // 6、async
           async fn1() {
-              return 1
+              // return 1
           },
           // 7、async函数使用.then来进行回调，并抛出错误，执行 onRejected() 且 reason 为错误信息为“我是错误”
           async fn2() {
@@ -196,18 +198,20 @@
           fn3() {
               return new Promise((resolve, reject) => {
                   setTimeout(() => {
-                      resolve(1000)
-                  }, 1000);
+                      resolve(5000)
+                  }, 5000);
               })
           },
           fn4() {
               return 6
           },
           async fn5() {
-              // const value = await this.fn3() // await 右侧表达式为Promise，得到的结果就是Promise成功的value
-              // const value = await '还可以这样'
-              const value = await this.fn4()
+              const value = await this.fn3() // await 右侧表达式为Promise，得到的结果就是Promise成功的value
               console.log('value', value)
+              const value2 = await '还可以这样'
+              const value3 = await this.fn4()
+              console.log(value2)
+              console.log(value3)
           },
           // 9、await 必须写在 async 函数中, 但 async 函数中可以没有 await，如果 await 的 Promise 失败了, 就会抛出异常, 需要通过 try...catch 捕获处理。
           fn6() {
@@ -261,12 +265,21 @@
           },
           async useTest2() {
               // test2方法明明比test3方法慢，却现输出
-              // await this.test2()
-              // await this.test3()
+              await this.test2()
+              await this.test3()
               // 同时执行
-              this.test2()
-              this.test3()
+              // this.test2()
+              // this.test3()
               // 解决调接口是需要等上一个接口的数据回来后，使用调用下一个接口的情况
+          },
+          async aaa() {
+              await this.test2()
+              let self = this
+              async function a() {
+                  console.log('fdsfd')
+                  await self.test3()
+              }
+              await a()
           }
       }
   }
